@@ -1,0 +1,47 @@
+package com.myscp.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="category_books")
+public class CategoryBook {
+
+	@ManyToOne
+	@JoinColumn(name = "id_category",referencedColumnName = "id")
+	private Category category;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_book",referencedColumnName = "id")
+	private Book book;
+
+	public CategoryBook() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CategoryBook(Category category, Book book) {
+		super();
+		this.category = category;
+		this.book = book;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+	
+}

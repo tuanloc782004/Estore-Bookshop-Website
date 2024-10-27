@@ -1,0 +1,5 @@
+package com.myscp.respository;
+
+public interface UserRespository {
+
+}

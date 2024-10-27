@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<item key="replaceBarOpen" value="true"/>
+	<list key="searchhistory">
+		<item value="assets"/>
+		<item value="src=&quot;asse"/>
+		<item value="href=&quot;ass"/>
+		<item value="&quot;@{as"/>
+		<item value="src=&quot;as"/>
+		<item value="favicon"/>
+		<item value=".css&quot;"/>
+		<item value="href=&quot;as"/>
+		<item value="th:style"/>
+	</list>
+	<list key="replacehistory">
+		<item value="fe"/>
+		<item value="th:src=&quot;@{asse"/>
+		<item value="th:href=&quot;@{ass"/>
+		<item value="&quot;@{/as"/>
+		<item value="th:src=&quot;@{as"/>
+		<item value=".css}&quot;"/>
+		<item value="th:href=&quot;@{as"/>
+	</list>
+</section>

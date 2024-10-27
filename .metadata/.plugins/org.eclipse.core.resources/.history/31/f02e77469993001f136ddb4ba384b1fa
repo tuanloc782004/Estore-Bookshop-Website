@@ -1,0 +1,10 @@
+package com.myscp.repository;
+
+public class Snippet {
+	@PrePersist
+	    protected void onCreate() {
+	        createdAt = LocalDateTime.now(); // Thiết lập thời gian tạo
+	        enabled = true; // Mặc định là true nếu cần
+	    }
+}
+
