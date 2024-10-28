@@ -1,0 +1,38 @@
+package com.myscp.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.myscp.model.Category;
+import com.myscp.repository.CategoryRepository;
+import com.myscp.service.CategoryService;
+
+@Service
+public class CategoryServiceImpl implements CategoryService {
+
+	@Autowired
+	CategoryRepository categoryRepository;
+	
+	public Category createCategory(Category category) {
+		return categoryRepository.save(category);
+	}
+	
+	public List<Category> getAllCategories() {
+		return this.categoryRepository.findAll();
+	}
+	
+	public Category getCategoryById(Long id) {
+		return this.categoryRepository.findById(id).orElse(null);
+	}
+	
+	public Category updateCategory(Category category) {
+		return this.categoryRepository.save(category);
+	}
+	
+	public void deleteCategory(Long id) {
+		this.categoryRepository.deleteById(id);
+	}
+	
+}

@@ -24,7 +24,7 @@ public class Category {
 	@Column(name = "category_name", nullable = false, unique = true, length = 100)
 	private String categoryName;
 	
-	@Column(name = "create_at", nullable = false)
+	@Column(name = "create_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime createdAt;
 	
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)

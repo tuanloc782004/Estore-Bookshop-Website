@@ -1,0 +1,5 @@
+package com.myscp.controller;
+
+public class LanguageController {
+
+}

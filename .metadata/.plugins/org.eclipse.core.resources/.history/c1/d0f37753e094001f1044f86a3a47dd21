@@ -1,0 +1,22 @@
+package com.myscp.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myscp.model.Language;
+import com.myscp.service.LanguageService;
+
+@Controller
+@RequestMapping("/admin")
+public class LanguageController {
+
+	@Autowired
+	private LanguageService languageService;
+	
+	@PostMapping
+	public Language createLanguage(@ModelAttribute("language") Language language)
+	
+}

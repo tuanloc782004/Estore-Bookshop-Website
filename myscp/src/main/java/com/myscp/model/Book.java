@@ -56,11 +56,14 @@ public class Book {
 	@Column(name = "discount", nullable = false, precision = 4, scale = 2)
 	private BigDecimal discount;
 	
-	@Column(name = "create_at", nullable = false)
+	@Column(name = "create_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime createdAt;
 	
 	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
 	private Set<CategoryBook> bookCategories;
+	
+	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+	private Set<Image> images;
 
 	public Book() {
 		super();
@@ -69,7 +72,7 @@ public class Book {
 
 	public Book(Long id, Language language, String title, String author, String pusblisher, Year year,
 			String description, Long numOfPages, Long quantity, BigDecimal price, BigDecimal discount,
-			LocalDateTime createdAt, Set<CategoryBook> bookCategories) {
+			LocalDateTime createdAt, Set<CategoryBook> bookCategories, Set<Image> images) {
 		super();
 		this.id = id;
 		this.language = language;
@@ -84,6 +87,7 @@ public class Book {
 		this.discount = discount;
 		this.createdAt = createdAt;
 		this.bookCategories = bookCategories;
+		this.images = images;
 	}
 
 	public Long getId() {
@@ -188,6 +192,14 @@ public class Book {
 
 	public void setBookCategories(Set<CategoryBook> bookCategories) {
 		this.bookCategories = bookCategories;
+	}
+
+	public Set<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(Set<Image> images) {
+		this.images = images;
 	}
 
 }

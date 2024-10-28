@@ -1,0 +1,15 @@
+package com.myscp.service;
+
+import java.util.List;
+
+import com.myscp.model.Language;
+
+public interface LanguageService {
+
+	public Language createLanguage(Language language);
+	public List<Language> getAllLanguages();
+	public Language getLanguageById(Integer id);
+	public Language updateLanguage(Integer id, Language language);
+	public void deleteLanguage(Integer id);
+	
+}

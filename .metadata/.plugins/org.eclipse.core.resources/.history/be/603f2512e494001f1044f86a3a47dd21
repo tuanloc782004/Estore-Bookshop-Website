@@ -1,0 +1,52 @@
+package com.myscp.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myscp.model.Language;
+import com.myscp.service.LanguageService;
+
+@Controller
+@RequestMapping("/admin")
+public class LanguageController {
+
+	@Autowired
+	private LanguageService languageService;
+	
+	@PostMapping
+	public Language createLanguage(@ModelAttribute("language") Language language) {
+		return languageService.createLanguage(language);
+	}
+	
+    @RequestMapping("/language")
+    public String language(Model model) {
+    	List<Language> languages = this.languageService.getAllLanguages();
+    	model.addAttribute("languages", languages);
+    }
+    
+    @GetMapping("/{id}")
+    public Language getLanguageById(@PathVariable Long id) {
+    	return languageService.getLanguageById(id);
+    }
+    
+    @PutMapping("/{id}")
+    public Language updateLanguage(@PathVariable Long id, @ModelAttribute("language") Language language) {
+    	return languageService.updateLanguage(id, language);
+    }
+    
+    @DeleteMapping("/{id}")
+    public void deleteLanguage(@PathVariable Long id) {
+    	languageService.deleteLanguage(id);
+    }
+
+}

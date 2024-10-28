@@ -1,0 +1,5 @@
+package com.myscp.repository;
+
+public interface LanguageRepository {
+
+}

@@ -1,0 +1,57 @@
+package com.myscp.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myscp.model.Language;
+import com.myscp.service.LanguageService;
+
+@Controller
+@RequestMapping("/admin/language")
+public class LanguageController {
+
+	@Autowired
+	private LanguageService languageService;
+	
+//	@PostMapping
+//	public Language createLanguage(@ModelAttribute("language") Language language) {
+//		return languageService.createLanguage(language);
+//	}
+	
+    @RequestMapping("")
+    public String language(Model model) {
+    	List<Language> languages = this.languageService.getAllLanguages();
+    	model.addAttribute("languages", languages);
+    	return "admin/language/language";
+    }
+    
+//    @GetMapping("/{id}")
+//    public Language getLanguageById(@PathVariable Long id) {
+//    	return languageService.getLanguageById(id);
+//    }
+//    
+//    @PutMapping("/{id}")
+//    public Language updateLanguage(@PathVariable Long id, @ModelAttribute("language") Language language) {
+//    	return languageService.updateLanguage(id, language);
+//    }
+//    
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
+    	if(this.languageService.deleteLanguage()) {
+    		return "redirect:/admin/language";
+    	} else {
+    		return "redirect:/admin/language";
+    	}
+    }
+
+}

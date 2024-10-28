@@ -3,6 +3,7 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="true"/>
 	<list key="searchhistory">
+		<item value="Long"/>
 		<item value="assets"/>
 		<item value="src=&quot;asse"/>
 		<item value="href=&quot;ass"/>
@@ -14,6 +15,7 @@
 		<item value="th:style"/>
 	</list>
 	<list key="replacehistory">
+		<item value="Integer"/>
 		<item value="fe"/>
 		<item value="th:src=&quot;@{asse"/>
 		<item value="th:href=&quot;@{ass"/>
@@ -22,4 +24,8 @@
 		<item value=".css}&quot;"/>
 		<item value="th:href=&quot;@{as"/>
 	</list>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="567"/>
+		<item key="DIALOG_Y_ORIGIN" value="314"/>
+	</section>
 </section>

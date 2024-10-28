@@ -39,7 +39,7 @@ public class User {
 	@Column(name = "enable", nullable = false)
 	private boolean enabled;
 	
-	@Column(name = "create_at", nullable = false)
+	@Column(name = "create_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime createdAt;
 
 	public User() {

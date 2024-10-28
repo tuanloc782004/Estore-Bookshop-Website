@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<head th:replace="~{admin/layout/head::head}"></head>
+
+<body>
+
+	<div class="wrapper">
+
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="card">
+								<div class="header">
+									<h4 class="title"
+										th:text="${language.id == null} ? 'Add Language' : 'Edit Language'"></h4>
+								</div>
+								<div class="content">
+									<form
+										th:action="|${language.id == null ? '/admin/language/add' : '/admin/language/edit'}|"
+										method="post" th:object="${language}">
+										<div class="row">
+											<div class="col-md-5">
+												<div class="form-group">
+													<input type="hidden"
+														class="form-control" placeholder="Enter ID"
+														th:value="${language.id}"
+														th:field="*{id}"> <label>Language
+														Name</label> <input type="text" class="form-control"
+														placeholder="Enter Language Name"
+														th:value="${language.languageName}"
+														th:field="*{languageName}">
+												</div>
+											</div>
+										</div>
+										<button type="submit" class="btn btn-info btn-fill pull-right"
+											th:text="${language.id == null} ? 'Create Language' : 'Edit Language'"></button>
+										<div class="clearfix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+package com.myscp.controller.admin;
+
+public class Snippet {
+	public static void main(String[] args) {
+		th:fragment="pagination"
+	}
+}
+
