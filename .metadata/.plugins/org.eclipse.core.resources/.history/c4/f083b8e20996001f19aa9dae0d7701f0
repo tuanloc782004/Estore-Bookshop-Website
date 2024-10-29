@@ -1,0 +1,5 @@
+package com.myscp.uploadingfiles.storage;
+
+public class StorageFileNotFoundException {
+
+}
