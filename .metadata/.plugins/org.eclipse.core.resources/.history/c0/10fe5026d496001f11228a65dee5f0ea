@@ -1,0 +1,5 @@
+package com.myscp.dto;
+
+public class UserDTO {
+
+}

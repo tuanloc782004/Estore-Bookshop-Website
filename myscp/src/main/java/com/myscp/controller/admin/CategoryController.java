@@ -47,7 +47,7 @@ public class CategoryController {
 	public String add(Model model) {
 		Category category = new Category();
 		model.addAttribute("category", category);
-		return "/admin/category/category-form";
+		return "admin/category/category-form";
 	}
 	
 	@PostMapping("/add")
@@ -63,7 +63,7 @@ public class CategoryController {
 	public String edit(Model model, @PathVariable("id") Long id) {
 		Category category = this.categoryService.getCategoryById(id);
 		model.addAttribute("category", category);
-		return "/admin/category/category-form";
+		return "admin/category/category-form";
 	}
 	
 	@PostMapping("/edit")

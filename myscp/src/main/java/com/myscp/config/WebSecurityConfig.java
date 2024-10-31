@@ -12,9 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 	
-//	@Autowired
-//	private CustomUserDetailsService customUserDetailService;
-	
 	@Bean
 	BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -45,7 +42,7 @@ public class WebSecurityConfig {
 	@Bean
 	WebSecurityCustomizer webSecurityCustomizer() {
 		
-		return (web)->web.ignoring().requestMatchers("/fe/**", "/assets/**");
+		return (web)->web.ignoring().requestMatchers("/fe/**", "/assets/**", "/upload-dir/**");
 		
 	}
 	

@@ -54,7 +54,7 @@
 													<td th:text="${category.id}"></td>
 													<td th:text="${category.categoryName}"></td>
 													<td
-														th:text="${category.createdAt}"></td>
+														th:text="${category.createdAt.toString().substring(0,10)}"></td>
 													<td>
 													<a th:href="@{|/admin/category/edit/${category.id}|}"
 														class="btn btn-primary">Edit</a>

@@ -21,9 +21,6 @@
 										<div class="col-md-6">
 											<h4 class="title mb-0">List of users</h4>
 										</div>
-										<div class="col-md-6 text-right">
-											<a class="btn btn-success" th:href="@{/admin/user/add}">Add</a>
-										</div>
 										<div class="align-items-center mb-3">
 											<div class="col-md-6">
 												<form>
@@ -46,6 +43,8 @@
 											<thead>
 												<th>ID</th>
 												<th>User Name</th>
+												<th>Email</th>
+												<th>Avatar</th>
 												<th>Role</th>
 												<th>Status</th>
 												<th>Created At</th>
@@ -54,21 +53,22 @@
 											<tbody>
 												<tr th:each="user : ${users}">
 													<td th:text="${user.id}"></td>
-													<td th:text="${user.userName}"></td>
+													<td th:text="${user.username}"></td>
+													<td th:text="${user.email}"></td>
+													<td><img
+														th:src="${user.avatarUrl != null && !user.avatarUrl.isEmpty() ? '/upload-dir/' + user.avatarUrl : '/upload-dir/default-avatar.jfif'}"
+														alt="..." width="100"></td>
 													<td th:text="${user.role.roleName}"></td>
-													<td><span
-														th:if="${user.enabled == true}"
+													<td><span th:if="${user.enabled == true}"
 														class="label label-success">Enabled</span> <span
 														th:if="${user.enabled == false}"
 														class="label label-danger">Disabled</span></td>
-													<td th:text="${user.createdAt}"></td>
+													<td th:text="${user.createdAt.toString().substring(0,10)}"></td>
 													<td><a th:href="@{|/admin/user/edit/${user.id}|}"
 														class="btn btn-primary">Edit</a> <a
 														th:href="@{|/admin/user/delete/${user.id}|}"
 														class="btn btn-danger"
-														onclick="return confirm('Are you sure ???')">Delete</a> <a
-														th:href="@{|/admin/user/view/${user.id}|}"
-														class="btn btn-info">View</a></td>
+														onclick="return confirm('Are you sure ???')">Delete</a></td>
 												</tr>
 											</tbody>
 										</table>

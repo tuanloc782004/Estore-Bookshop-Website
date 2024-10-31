@@ -1,0 +1,27 @@
+package com.myscp.dto;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.validation.constraints.NotEmpty;
+
+public class UserDTO {
+
+	@NotEmpty
+	private RoleDTO role;
+
+	@NotEmpty(message = "The username is required")
+	private String username;
+
+	@NotEmpty(message = "The email is required")
+	private String email;
+	
+	private MultipartFile avatarFile;
+	
+	
+	private String enabled;
+	
+	private String createdAt;
+	
+	
+	
+}
