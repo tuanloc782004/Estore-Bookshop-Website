@@ -25,11 +25,6 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<Category> getAllCategories() {
-		return this.categoryRepository.findAll();
-	}
-
-	@Override
 	public Category getCategoryById(Long id) {
 		return this.categoryRepository.findById(id).orElse(null);
 	}
@@ -64,6 +59,11 @@ public class CategoryServiceImpl implements CategoryService {
 				: pageable.getOffset() + pageable.getPageSize());
 		list = list.subList(start, end);
 		return new PageImpl<Category>(list, pageable, this.searchCategory(keyword).size());
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		return this.categoryRepository.findAll();
 	}
 
 }

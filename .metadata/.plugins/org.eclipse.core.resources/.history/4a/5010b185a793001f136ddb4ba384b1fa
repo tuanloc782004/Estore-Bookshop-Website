@@ -1,5 +1,0 @@
-package com.myscp.service;
-
-public interface UserService {
-
-}

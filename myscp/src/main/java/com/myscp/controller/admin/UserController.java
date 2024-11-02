@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.myscp.model.User;
+import com.myscp.service.StorageService;
 import com.myscp.service.UserService;
-import com.myscp.uploadingfiles.storage.StorageService;
 
 @Controller
 @RequestMapping("/admin/user")

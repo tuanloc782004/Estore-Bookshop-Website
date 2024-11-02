@@ -23,18 +23,18 @@ public class Image {
     private Book book;
 	
 	@Column(name = "image_url", length = 255)
-	private String avatarUrl;
+	private String imageUrl;
 
 	public Image() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Image(Long id, Book book, String avatarUrl) {
+	public Image(Long id, Book book, String imageUrl) {
 		super();
 		this.id = id;
 		this.book = book;
-		this.avatarUrl = avatarUrl;
+		this.imageUrl = imageUrl;
 	}
 
 	public Long getId() {
@@ -53,12 +53,12 @@ public class Image {
 		this.book = book;
 	}
 
-	public String getAvatarUrl() {
-		return avatarUrl;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	
 }

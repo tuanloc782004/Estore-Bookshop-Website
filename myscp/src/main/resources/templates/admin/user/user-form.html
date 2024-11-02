@@ -28,10 +28,10 @@
 														placeholder="Enter ID" th:value="${user.id}"
 														th:field="*{id}"> <input type="hidden"
 														class="form-control" placeholder="Enter Password"
-														th:value="${user.password}" th:field="*{password}"> <label>Username</label>
-													<input type="text" class="form-control"
-														placeholder="Username" th:value="${user.username}"
-														th:field="*{username}">
+														th:value="${user.password}" th:field="*{password}">
+													<label>Username</label> <input type="text"
+														class="form-control" placeholder="Username"
+														th:value="${user.username}" th:field="*{username}">
 												</div>
 											</div>
 											<div class="col-md-7">
@@ -47,18 +47,13 @@
 										<div class="row">
 											<div class="col-md-4">
 												<div class="form-group">
-													<label>Role</label>
+													<label>Language</label>
 													<div>
-														<div class="form-check form-check-inline">
-															<input type="radio" class="form-check-input"
-																th:field="*{role.id}" value="1" /> <label
-																class="form-check-label" for="inlineRadio1">ADMIN</label>
-														</div>
-														<div class="form-check form-check-inline">
-															<input type="radio" class="form-check-input"
-																th:field="*{role.id}" value="2" /> <label
-																class="form-check-label" for="inlineRadio2">USER</label>
-														</div>
+														<select name="language">
+															<option th:each="language : ${languages}"
+																th:value="${language.id}" th:text="${language.languageName}"
+																th:selected="${book.language.contains(language)}"></option>
+														</select>
 													</div>
 												</div>
 											</div>
@@ -91,7 +86,7 @@
 										<div class="row">
 											<div class="col-md-4">
 												<label for="exampleInputEmail1">Avatar</label> <input
-													type="file" name="file">
+													type="file" name="file" accept="image/*">
 											</div>
 										</div>
 

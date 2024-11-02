@@ -2,7 +2,6 @@ package com.myscp.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.Year;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -36,10 +35,10 @@ public class Book {
 	private String author;
 	
 	@Column(name = "publisher", nullable = false, length = 100)
-	private String pusblisher;
+	private String publisher;
 	
 	@Column(name = "year_of_publication", nullable = false)
-	private Year year;
+	private Integer yearOfPublication;
 	
 	@Column(name = "description", nullable = false, columnDefinition = "TEXT")
 	private String description;
@@ -56,6 +55,9 @@ public class Book {
 	@Column(name = "discount", nullable = false, precision = 4, scale = 2)
 	private BigDecimal discount;
 	
+	@Column(name = "enable", nullable = false)
+	private boolean enabled;
+	
 	@Column(name = "create_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime createdAt;
 	
@@ -70,21 +72,22 @@ public class Book {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Book(Long id, Language language, String title, String author, String pusblisher, Year year,
-			String description, Long numOfPages, Long quantity, BigDecimal price, BigDecimal discount,
+	public Book(Long id, Language language, String title, String author, String publisher, Integer yearOfPublication,
+			String description, Long numOfPages, Long quantity, BigDecimal price, BigDecimal discount, boolean enabled,
 			LocalDateTime createdAt, Set<CategoryBook> bookCategories, Set<Image> images) {
 		super();
 		this.id = id;
 		this.language = language;
 		this.title = title;
 		this.author = author;
-		this.pusblisher = pusblisher;
-		this.year = year;
+		this.publisher = publisher;
+		this.yearOfPublication = yearOfPublication;
 		this.description = description;
 		this.numOfPages = numOfPages;
 		this.quantity = quantity;
 		this.price = price;
 		this.discount = discount;
+		this.enabled = enabled;
 		this.createdAt = createdAt;
 		this.bookCategories = bookCategories;
 		this.images = images;
@@ -122,20 +125,20 @@ public class Book {
 		this.author = author;
 	}
 
-	public String getPusblisher() {
-		return pusblisher;
+	public String getPublisher() {
+		return publisher;
 	}
 
-	public void setPusblisher(String pusblisher) {
-		this.pusblisher = pusblisher;
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
 	}
 
-	public Year getYear() {
-		return year;
+	public Integer getYearOfPublication() {
+		return yearOfPublication;
 	}
 
-	public void setYear(Year year) {
-		this.year = year;
+	public void setYearOfPublication(Integer yearOfPublication) {
+		this.yearOfPublication = yearOfPublication;
 	}
 
 	public String getDescription() {
@@ -178,6 +181,14 @@ public class Book {
 		this.discount = discount;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -201,5 +212,5 @@ public class Book {
 	public void setImages(Set<Image> images) {
 		this.images = images;
 	}
-
+	
 }

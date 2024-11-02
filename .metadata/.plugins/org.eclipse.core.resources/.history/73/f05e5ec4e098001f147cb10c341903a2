@@ -1,0 +1,7 @@
+package com.myscp.service;
+
+public class Snippet {
+	@Query("SELECT u FROM User u WHERE u.username LIKE %?1%")
+		public List<User> searchUser(String keyWord);
+}
+

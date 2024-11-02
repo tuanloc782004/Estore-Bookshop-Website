@@ -1,0 +1,20 @@
+package com.myscp.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.myscp.model.Book;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+
+	@Query("SELECT DISTINCT b FROM Book b " +
+	           "JOIN b.bookCategories cb " +
+	           "JOIN cb.category c " +
+	           "WHERE b.title LIKE %:keyword% " +
+	           "OR b.author LIKE %:keyword% " +
+	           "OR cb.categoryName LIKE %:keyword%")
+	public List<Book> searchBook(String keyWord);
+	
+}
