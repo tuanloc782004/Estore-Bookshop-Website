@@ -1,0 +1,9 @@
+package com.estorebookshop.service;
+
+import com.estorebookshop.model.User;
+
+public interface UserService {
+
+	User findByUsername(String username); 
+	
+}

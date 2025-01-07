@@ -1,0 +1,5 @@
+package com.estorebookshop.model;
+
+public class Cart {
+
+}

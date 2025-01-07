@@ -1,0 +1,5 @@
+package com.estorebookshop.service.implement;
+
+public class LanguageServiceImpl {
+
+}

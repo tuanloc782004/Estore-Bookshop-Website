@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<head th:replace="~{admin/layout/head::head}"></head>
+
+<body>
+
+	<div class="wrapper">
+
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="card">
+								<div class="header">
+									<h4 class="title"
+										th:text="${category.id == null} ? 'Add Category' : 'Edit Category'"></h4>
+								</div>
+								<div class="content">
+									<form
+										th:action="|${category.id == null ? '/admin/category/add' : '/admin/category/edit'}|"
+										method="post" th:object="${category}">
+										<div class="row">
+											<div class="col-md-7">
+												<div class="form-group">
+													<input type="hidden" class="form-control"
+														placeholder="Enter ID" th:value="${category.id}"
+														th:field="*{id}"> <label>Category Name</label> <input
+														type="text" class="form-control"
+														placeholder="Enter Category Name"
+														th:value="${category.categoryName}"
+														th:field="*{categoryName}">
+												</div>
+											</div>
+											<div class="col-md-5">
+												<div class="form-group">
+													<label>Created At</label> <input type="text"
+														class="form-control" placeholder="Now"
+														th:value="${category.createdAt}" th:field="*{createdAt}"
+														readonly>
+												</div>
+											</div>
+										</div>
+										<button type="submit" class="btn btn-info btn-fill pull-right"
+											th:text="${category.id == null} ? 'Create Category' : 'Update Category'"></button>
+										<div class="clearfix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="~{admin/layout/head::head}"></head>
+
+<body>
+
+	<div class="wrapper">
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Edit Address</h4>
+								</div>
+								<div class="content">
+									<form th:action="@{/admin/address/edit}" method="post"
+										th:object="${address}" enctype="multipart/form-data">
+										<div class="row">
+											<div class="col-md-5">
+												<div class="form-group">
+													<input type="hidden" class="form-control"
+														placeholder="Enter ID" th:value="${user.id}"
+														th:field="*{id}"> <input type="hidden"
+														class="form-control" placeholder="Enter Password"
+														th:value="${user.password}" th:field="*{password}">
+													<input type="hidden" th:field="*{role.id}"
+														th:value="${user.role.id}" /> <label>Username</label> <input
+														type="text" class="form-control" placeholder="Username"
+														th:value="${address.user.username}"
+														th:field="*{user.username}" readonly>
+												</div>
+											</div>
+											<div class="col-md-7">
+												<div class="form-group">
+													<label for="exampleInputEmail1">Address</label> <input
+														type="text" class="form-control" placeholder="Address"
+														th:value="${address.address}" th:field="*{address}">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-4">
+												<div class="form-group">
+													<label for="exampleInputEmail1">City</label> <input
+														type="text" class="form-control" placeholder="City"
+														th:value="${address.city}" th:field="*{city}">
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label for="exampleInputEmail1">Zip Code</label> <input
+														type="text" class="form-control" placeholder="Zip Code"
+														th:value="${address.zipCode}" th:field="*{zipCode}">
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Country</label> <input type="text"
+														class="form-control" placeholder="Country"
+														th:value="${address.country}" th:field="*{country}">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<label for="exampleInputEmail1">Avatar</label> <input
+													type="file" name="file" accept="image/*">
+											</div>
+										</div>
+
+										<button type="submit" class="btn btn-info btn-fill pull-right">Update
+											User</button>
+										<div class="clearfix"></div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4" th:if="${user.id != null}">
+							<div class="card card-user">
+								<div class="image">
+									<img
+										src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
+										alt="..." />
+								</div>
+								<div class="content">
+									<div class="author">
+										<a href="#"> <img class="avatar border-gray"
+											th:src="${user.avatarUrl}" alt="User Avatar" />
+
+											<h4 class="title" th:text="${user.username}"></h4>
+											<h5 th:text="${user.email}"></h5>
+										</a>
+									</div>
+									<p class="description text-center">
+										"Books are the treasured wealth of the world <br> and the
+										fit inheritance of generations and nations."
+									</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div th:replace="~{admin/layout/script::script}"></div>
+
+</body>
+</html>
