@@ -1,0 +1,50 @@
+package com.estorebookshop.service.implement;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+
+import com.estorebookshop.model.Book;
+import com.estorebookshop.service.BookService;
+
+@Service
+public class BookServiceImpl implements BookService {
+
+	@Override
+	public Book findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Book save(Book book) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Book> findByKeyword(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Book> findAll(Integer pageno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Book> findByKeyword(String keyword, Integer pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

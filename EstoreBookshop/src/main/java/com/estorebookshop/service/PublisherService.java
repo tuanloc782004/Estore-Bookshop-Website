@@ -9,6 +9,8 @@ import com.estorebookshop.model.Publisher;
 public interface PublisherService {
 
 	public Publisher findById(Long id);
+	
+	public List<Publisher> findAll ();
 
 	public Publisher save(Publisher publisher);
 

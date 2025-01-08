@@ -1,7 +1,5 @@
 package com.estorebookshop.controller.admin;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
@@ -52,9 +50,6 @@ public class CategoryController {
 
 	@PostMapping("/add")
 	public String save(@ModelAttribute("category") Category category) {
-		LocalDateTime localDateTime = LocalDateTime.now();
-		category.setCreatedAt(localDateTime);
-
 		this.categoryService.save(category);
 		return "redirect:/admin/category";
 	}

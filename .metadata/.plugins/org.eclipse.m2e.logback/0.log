@@ -1307,3 +1307,278 @@
 2025-01-07 23:48:06,651 [Worker-196: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2025-01-07 23:48:06,672 [Worker-196: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
 2025-01-07 23:48:06,762 [Worker-196: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 07:37:46,396 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-01-08 07:43:04,824 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 07:43:04,896 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 07:43:05,061 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 07:50:41,383 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 07:50:41,408 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 07:50:41,476 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 07:51:06,780 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 07:51:06,802 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 07:51:06,902 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 07:51:13,551 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 07:51:13,574 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 07:51:13,684 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 07:54:12,117 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 07:54:12,139 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 07:54:12,210 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 07:54:52,684 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 07:54:52,706 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 07:54:52,784 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 18:10:31,313 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-01-08 18:23:38,136 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 18:23:38,201 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 18:23:38,357 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 18:26:26,778 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 18:26:26,816 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 18:26:26,820 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 18:26:43,939 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 18:26:43,992 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 18:26:44,000 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 18:27:45,829 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 18:27:45,860 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 18:27:45,864 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 18:29:09,347 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 18:29:09,373 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 18:29:09,378 [Worker-12: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 18:29:30,004 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 18:29:30,028 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 18:29:30,149 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 18:29:45,423 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 18:29:45,444 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 18:29:45,562 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 18:29:59,093 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 18:29:59,114 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 501 resources from src\main\resources to target\classes
+2025-01-08 18:29:59,258 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 18:58:41,411 [Worker-18: Launching EstoreBookshop - EstoreBookshopApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 18:58:41,433 [Worker-18: Launching EstoreBookshop - EstoreBookshopApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 499 resources from src\main\resources to target\classes
+2025-01-08 18:58:41,490 [Worker-18: Launching EstoreBookshop - EstoreBookshopApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:15:11,117 [Worker-33: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 19:15:11,142 [Worker-33: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:15:11,147 [Worker-33: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:17:00,350 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:17:00,373 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 499 resources from src\main\resources to target\classes
+2025-01-08 19:17:00,481 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:18:23,356 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:18:23,371 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 499 resources from src\main\resources to target\classes
+2025-01-08 19:18:23,438 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:18:46,751 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:18:46,772 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 499 resources from src\main\resources to target\classes
+2025-01-08 19:18:46,867 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:21:51,562 [Worker-37: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:21:51,584 [Worker-37: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 499 resources from src\main\resources to target\classes
+2025-01-08 19:21:51,667 [Worker-37: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:21:56,398 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:21:56,410 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 499 resources from src\main\resources to target\classes
+2025-01-08 19:21:56,488 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:22:25,903 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:22:25,929 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 499 resources from src\main\resources to target\classes
+2025-01-08 19:22:26,049 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:26:04,307 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:26:04,324 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 499 resources from src\main\resources to target\classes
+2025-01-08 19:26:04,404 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:26:25,029 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:26:25,064 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 499 resources from src\main\resources to target\classes
+2025-01-08 19:26:25,139 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:30:27,847 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 19:30:27,872 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:30:27,875 [Worker-44: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:40:32,352 [Worker-42: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 19:40:32,388 [Worker-42: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 15 resources from src\main\resources to target\classes
+2025-01-08 19:40:32,424 [Worker-42: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 19:58:03,856 [Worker-48: Launching EstoreBookshop - EstoreBookshopApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 19:58:03,897 [Worker-48: Launching EstoreBookshop - EstoreBookshopApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 19:58:03,904 [Worker-48: Launching EstoreBookshop - EstoreBookshopApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 21:45:13,300 [Worker-68: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 21:45:13,338 [Worker-68: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 21:45:13,346 [Worker-68: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 21:45:31,521 [Worker-69: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 21:45:31,572 [Worker-69: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 21:45:31,577 [Worker-69: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 21:54:21,776 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 21:54:21,848 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 21:54:21,958 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 21:55:09,803 [Worker-75: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 21:55:09,825 [Worker-75: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 21:55:09,913 [Worker-75: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 21:57:28,747 [Worker-73: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 21:57:28,766 [Worker-73: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 21:57:28,843 [Worker-73: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 21:58:03,415 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 21:58:03,437 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 21:58:03,539 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 21:58:10,920 [Worker-68: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 21:58:10,950 [Worker-68: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 21:58:11,030 [Worker-68: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 21:58:33,855 [Worker-76: Launching EstoreBookshop - EstoreBookshopApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 21:58:33,883 [Worker-76: Launching EstoreBookshop - EstoreBookshopApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 21:58:33,887 [Worker-76: Launching EstoreBookshop - EstoreBookshopApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:02:49,290 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:02:49,317 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:02:49,322 [Worker-74: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:05:58,045 [Worker-70: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:05:58,069 [Worker-70: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:05:58,073 [Worker-70: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:10:23,998 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:10:24,022 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:10:24,025 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:12:09,118 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:12:09,143 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:12:09,146 [Worker-80: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:14:24,999 [Worker-83: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:14:25,024 [Worker-83: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:14:25,028 [Worker-83: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:19:18,735 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:19:18,764 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:19:18,768 [Worker-89: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:40:03,952 [Worker-96: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:40:03,975 [Worker-96: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:40:03,979 [Worker-96: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:40:36,627 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:40:36,660 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:40:36,664 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:43:24,065 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:43:24,091 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:43:24,095 [Worker-92: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:47:22,065 [Worker-98: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:47:22,094 [Worker-98: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 22:47:22,187 [Worker-98: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 22:57:57,124 [Worker-102: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 22:57:57,163 [Worker-102: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 22:57:57,168 [Worker-102: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:03:21,973 [Worker-104: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 23:03:22,010 [Worker-104: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:03:22,013 [Worker-104: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:12:59,274 [Worker-111: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:12:59,330 [Worker-111: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:12:59,429 [Worker-111: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:13:39,982 [Worker-109: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:13:40,021 [Worker-109: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:13:40,135 [Worker-109: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:15:56,277 [Worker-109: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:15:56,290 [Worker-109: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:15:56,352 [Worker-109: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:16:31,962 [Worker-115: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:16:31,983 [Worker-115: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:16:32,063 [Worker-115: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:17:28,785 [Worker-116: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:17:28,808 [Worker-116: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:17:28,955 [Worker-116: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:20:29,018 [Worker-120: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:20:29,039 [Worker-120: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:20:29,139 [Worker-120: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:21:02,642 [Worker-119: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:21:02,665 [Worker-119: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:21:02,805 [Worker-119: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:22:19,301 [Worker-115: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:22:19,326 [Worker-115: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:22:19,391 [Worker-115: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:22:46,300 [Worker-104: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:22:46,329 [Worker-104: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:22:46,474 [Worker-104: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:23:19,837 [Worker-115: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:23:19,844 [Worker-115: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:23:19,967 [Worker-115: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:24:38,589 [Worker-119: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:24:38,611 [Worker-119: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:24:38,734 [Worker-119: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:30:11,657 [Worker-123: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:30:11,673 [Worker-123: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:30:11,745 [Worker-123: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:30:53,285 [Worker-120: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:30:53,301 [Worker-120: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-08 23:30:53,359 [Worker-120: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-08 23:38:07,566 [Worker-128: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-08 23:38:07,611 [Worker-128: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-08 23:38:07,637 [Worker-128: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:01:39,919 [Worker-140: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:01:39,943 [Worker-140: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:01:40,034 [Worker-140: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:02:47,680 [Worker-141: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:02:47,703 [Worker-141: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:02:47,801 [Worker-141: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:05:13,872 [Worker-141: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:05:13,886 [Worker-141: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:05:13,946 [Worker-141: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:05:23,539 [Worker-138: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:05:23,558 [Worker-138: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:05:23,613 [Worker-138: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:05:28,641 [Worker-143: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:05:28,659 [Worker-143: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:05:28,732 [Worker-143: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:06:00,929 [Worker-141: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:06:00,953 [Worker-141: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:06:01,088 [Worker-141: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:06:47,216 [Worker-138: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:06:47,261 [Worker-138: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:06:47,362 [Worker-138: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:08:56,643 [Worker-139: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:08:56,662 [Worker-139: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:08:56,756 [Worker-139: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:09:05,367 [Worker-139: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:09:05,387 [Worker-139: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:09:05,477 [Worker-139: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:09:37,845 [Worker-142: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:09:37,870 [Worker-142: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:09:37,986 [Worker-142: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:10:07,993 [Worker-140: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:10:08,018 [Worker-140: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:10:08,118 [Worker-140: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:11:43,872 [Worker-136: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:11:43,899 [Worker-136: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:11:43,983 [Worker-136: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:11:50,641 [Worker-142: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:11:50,663 [Worker-142: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:11:50,787 [Worker-142: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:24:54,130 [Worker-149: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:24:54,153 [Worker-149: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:24:54,220 [Worker-149: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:25:27,143 [Worker-149: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:25:27,167 [Worker-149: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:25:27,234 [Worker-149: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:28:16,647 [Worker-147: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:28:16,667 [Worker-147: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:28:16,773 [Worker-147: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:30:04,171 [Worker-149: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:30:04,192 [Worker-149: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:30:04,280 [Worker-149: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:31:15,913 [Worker-146: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:31:15,955 [Worker-146: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:31:16,056 [Worker-146: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:31:24,735 [Worker-151: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:31:24,755 [Worker-151: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:31:24,842 [Worker-151: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:36:05,894 [Worker-152: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-09 00:36:05,918 [Worker-152: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:36:05,922 [Worker-152: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:38:38,820 [Worker-154: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:38:38,841 [Worker-154: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:38:38,938 [Worker-154: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:38:48,339 [Worker-155: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:38:48,357 [Worker-155: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:38:48,421 [Worker-155: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:44:35,227 [Worker-159: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:44:35,242 [Worker-159: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:44:35,299 [Worker-159: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:46:53,219 [Worker-154: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:46:53,237 [Worker-154: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:46:53,298 [Worker-154: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:49:03,056 [Worker-161: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:49:03,080 [Worker-161: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:49:03,195 [Worker-161: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:50:57,885 [Worker-162: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:50:57,902 [Worker-162: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 511 resources from src\main\resources to target\classes
+2025-01-09 00:50:57,957 [Worker-162: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:54:52,245 [Worker-165: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-09 00:54:52,279 [Worker-165: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2025-01-09 00:54:52,284 [Worker-165: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:56:43,894 [Worker-161: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-01-09 00:56:43,914 [Worker-161: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 513 resources from src\main\resources to target\classes
+2025-01-09 00:56:43,993 [Worker-161: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:56:57,149 [Worker-166: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-09 00:56:57,189 [Worker-166: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-09 00:56:57,193 [Worker-166: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources
+2025-01-09 00:58:00,253 [Worker-167: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-01-09 00:58:00,297 [Worker-167: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
+2025-01-09 00:58:00,303 [Worker-167: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory D:\Estore Bookshop Website for Java Spring\EstoreBookshop\src\test\resources

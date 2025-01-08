@@ -25,7 +25,7 @@ public class Category {
 	private String categoryName;
 	
 	@Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private LocalDateTime createdAt;
+	private LocalDateTime createdAt = LocalDateTime.now();
 	
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private Set<BookCategory> bookCategories;

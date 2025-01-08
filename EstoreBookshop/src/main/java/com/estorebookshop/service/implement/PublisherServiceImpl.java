@@ -61,4 +61,10 @@ public class PublisherServiceImpl implements PublisherService {
 		list = list.subList(start, end);
 		return new PageImpl<Publisher>(list, pageable, this.findByKeyword(keyword).size());
 	}
+
+	@Override
+	public List<Publisher> findAll() {
+		// TODO Auto-generated method stub
+		return this.publisherRepository.findAll();
+	}
 }

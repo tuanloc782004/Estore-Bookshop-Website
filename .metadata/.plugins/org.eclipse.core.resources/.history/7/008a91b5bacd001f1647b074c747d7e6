@@ -1,0 +1,10 @@
+package com.estorebookshop.service.implement;
+
+import org.springframework.stereotype.Service;
+
+import com.estorebookshop.service.BookService;
+
+@Service
+public class BookServiceImpl implements BookService {
+
+}

@@ -1,0 +1,103 @@
+package com.estorebookshop.controller.admin;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.estorebookshop.model.Book;
+import com.estorebookshop.model.Category;
+import com.estorebookshop.model.Language;
+import com.estorebookshop.model.Publisher;
+import com.estorebookshop.service.BookService;
+import com.estorebookshop.service.CategoryService;
+import com.estorebookshop.service.LanguageService;
+import com.estorebookshop.service.PublisherService;
+
+@Controller
+@RequestMapping("/admin/book")
+public class BookController {
+
+	@Autowired
+	private BookService bookService;
+
+	@Autowired
+	private CategoryService categoryService;
+
+	@Autowired
+	private LanguageService languageService;
+
+	@Autowired
+	private PublisherService publisherService;
+
+//	@Autowired
+//	private StorageService storageService;
+
+	@RequestMapping("")
+	public String book(Model model, @Param("keyword") String keyword,
+			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
+
+		Page<Book> list = this.bookService.findAll(pageNo);
+
+		if (keyword != null) {
+			list = this.bookService.findByKeyword(keyword, pageNo);
+			model.addAttribute("keyword", keyword);
+		}
+
+		model.addAttribute("totalPage", list.getTotalPages());
+		model.addAttribute("currentPage", pageNo);
+
+		model.addAttribute("books", list);
+		return "admin/book/book";
+	}
+
+	@GetMapping("/edit/{id}")
+	public String edit(Model model, @PathVariable("id") Long id) {
+		Book book = this.bookService.findById(id);
+		model.addAttribute("book", book);
+
+		List<Category> categories = this.categoryService.findAll();
+		model.addAttribute("categories", categories);
+
+		Set<Long> categoryIds = book.getBookCategories().stream()
+				.map(bookCategory -> bookCategory.getCategory().getId()).collect(Collectors.toSet());
+		model.addAttribute("categoryIds", categoryIds);
+
+		List<Language> languages = this.languageService.findAll();
+		model.addAttribute("languages", languages);
+
+		List<Publisher> publishers = this.publisherService.findAll();
+		model.addAttribute("publishers", publishers);
+
+		return "admin/book/book-form";
+	}
+
+//	@PostMapping("/edit")
+//	public String update(@ModelAttribute("book") Book book, @RequestParam("file") MultipartFile file) {
+//	    if (!file.isEmpty()) {
+//	        String avatarUrl = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_" + file.getOriginalFilename();
+//	        this.storageService.store(file, avatarUrl); // Gọi phương thức lưu với tên file mới
+//	        user.setAvatarUrl("/upload-dir/" + avatarUrl); 
+//	    } else {
+//	    	user.setAvatarUrl(this.userService.findById(user.getId()).getAvatarUrl());
+//	    }
+//
+//	    this.userService.save(user);
+//	    return "redirect:/admin/user";
+//	}
+
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Long id) {
+		this.bookService.deleteById(id);
+		return "redirect:/admin/book";
+	}
+}

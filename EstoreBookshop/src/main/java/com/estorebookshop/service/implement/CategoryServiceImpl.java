@@ -61,4 +61,16 @@ public class CategoryServiceImpl implements CategoryService {
 		list = list.subList(start, end);
 		return new PageImpl<Category>(list, pageable, this.findByKeyword(keyword).size());
 	}
+
+	@Override
+	public List<Category> findAll() {
+		// TODO Auto-generated method stub
+		return this.categoryRepository.findAll();
+	}
+
+	@Override
+	public List<Category> findAllById(List<Long> categoryIds) {
+		// TODO Auto-generated method stub
+		return this.categoryRepository.findAllById(categoryIds);
+	}
 }

@@ -10,7 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.estorebookshop.model.Address;
+import com.estorebookshop.model.User;
 import com.estorebookshop.repository.AddressRepository;
+import com.estorebookshop.repository.UserRepository;
 import com.estorebookshop.service.AddressService;
 
 @Service
@@ -18,6 +20,9 @@ public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AddressRepository addressRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Override
 	public Address findById(Long id) {
@@ -28,6 +33,8 @@ public class AddressServiceImpl implements AddressService {
 	@Override
 	public Address save(Address address) {
 		// TODO Auto-generated method stub
+		User user = this.userRepository.findByUsername(address.getUser().getUsername());
+		address.setUser(user);
 		return this.addressRepository.save(address);
 	}
 

@@ -1,6 +1,5 @@
 package com.estorebookshop.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +18,7 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
     private User user;
 	

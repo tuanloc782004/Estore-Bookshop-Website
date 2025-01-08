@@ -30,7 +30,8 @@
 													<div class="input-group input-group-sm hidden-xs"
 														style="width: 350px;">
 														<input type="text" name="keyword"
-															class=" form-control pull-right" placeholder="Search"
+															class=" form-control pull-right"
+															placeholder="Search by ISBN, title, author"
 															th:value="${keyword}">
 														<div class="input-group-btn">
 															<button type="submit" class="btn btn-default">
@@ -48,24 +49,32 @@
 												<th>Title</th>
 												<th>Author</th>
 												<th>Image</th>
-												<th>Publisher</th>
+												<th>Year of Publication</th>
+												<th>Quantity</th>
+												<th>Price</th>
+												<th>Discount</th>
+												<th>Rating</th>
 												<th>Status</th>
-												<th>Created At</th>
 												<th>Action</th>
 											</thead>
 											<tbody>
-												<tr th:each="book, iterStat : ${books}">
+												<tr th:each="book : ${books}">
 													<td th:text="${book.id}"></td>
 													<td th:text="${book.title}"></td>
 													<td th:text="${book.author}"></td>
-													<td><img th:src="${firstImageUrls[iterStat.index]}"
-														alt="Image not available" width="100" /></td>
-													<td th:text="${book.publisher}"></td>
+													<td><img
+														th:src="${book.bookImages != null and !book.bookImages.isEmpty() ? book.bookImages.iterator().next().imageUrl : '/upload-dir/default-image/book-image.jfif'}"
+														alt="Book Image" width="100" height="100"></td>
+													<td th:text="${book.yearOfPublication}"></td>
+													<td th:text="${book.quantity}"></td>
+													<td th:text="${book.price + ' VND'}"></td>
+													<td th:text="${book.discount + ' %'}"></td>
+													<td><span th:text="${book.rating}"></span> <span
+														style="color: gold;">★</span></td>
 													<td><span th:if="${book.enabled == true}"
 														class="label label-success">Enabled</span> <span
 														th:if="${book.enabled == false}"
 														class="label label-danger">Disabled</span></td>
-													<td th:text="${book.createdAt.toString().substring(0,10)}"></td>
 													<td><a th:href="@{|/admin/book/edit/${book.id}|}"
 														class="btn btn-primary">Edit</a> <a
 														th:href="@{|/admin/book/delete/${book.id}|}"
