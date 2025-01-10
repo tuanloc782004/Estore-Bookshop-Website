@@ -24,11 +24,14 @@ public class Cart {
 	private Long id;
 	
 	@ManyToOne
-    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false, unique = true)
     private User user;
 	
 	@Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime createdAt;
+	
+	@Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private LocalDateTime updatedAt;
 	
 	@OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
 	private Set<CartItem> cartItems;
@@ -38,11 +41,12 @@ public class Cart {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cart(Long id, User user, LocalDateTime createdAt, Set<CartItem> cartItems) {
+	public Cart(Long id, User user, LocalDateTime createdAt, LocalDateTime updatedAt, Set<CartItem> cartItems) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 		this.cartItems = cartItems;
 	}
 
@@ -68,6 +72,14 @@ public class Cart {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public Set<CartItem> getCartItems() {

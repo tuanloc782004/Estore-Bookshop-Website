@@ -1,0 +1,9 @@
+package com.estorebookshop.service;
+
+import com.estorebookshop.model.Book;
+
+public interface BookImageService {
+
+	public void deleteByBook(Book book);
+	
+}

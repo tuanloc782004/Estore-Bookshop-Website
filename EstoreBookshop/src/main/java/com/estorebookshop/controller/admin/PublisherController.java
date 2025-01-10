@@ -48,7 +48,7 @@ public class PublisherController {
 	}
 
 	@PostMapping("/add")
-	public String save(@ModelAttribute("publisher") Publisher publisher) {
+	public String create(@ModelAttribute("publisher") Publisher publisher) {
 		this.publisherService.save(publisher);
 		return "redirect:/admin/publisher";
 	}

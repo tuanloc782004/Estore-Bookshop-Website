@@ -20,8 +20,9 @@
 										th:text="${book.id == null} ? 'Add Book' : 'Edit Book'"></h4>
 								</div>
 								<div class="content">
-									<form th:action="@{/admin/book/edit}" method="post"
-										th:object="${book}" enctype="multipart/form-data">
+									<form
+										th:action="|${book.id == null ? '/admin/book/add' : '/admin/book/edit'}|"
+										method="post" th:object="${book}" enctype="multipart/form-data">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
@@ -54,7 +55,7 @@
 										<div class="row">
 											<div class="col-md-2">
 												<div class="form-group">
-													<label>Price (VND)</label> <input type="text"
+													<label>Price ($)</label> <input type="text"
 														class="form-control" placeholder="Price"
 														th:value="${book.price}" th:field="*{price}">
 												</div>
@@ -175,7 +176,7 @@
 
 										<div class="row">
 											<div class="col-md-4">
-												<label for="exampleInputEmail1">Update Book Images</label> <input
+												<label for="exampleInputEmail1">Add Book Images</label> <input
 													type="file" name="files" accept="image/*" multiple>
 											</div>
 										</div>

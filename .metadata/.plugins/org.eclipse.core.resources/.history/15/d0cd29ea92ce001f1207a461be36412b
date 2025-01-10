@@ -1,0 +1,16 @@
+package com.estorebookshop.controller.admin;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.estorebookshop.service.CartService;
+
+@Controller
+@RequestMapping("/admin/cart")
+public class CartController {
+	
+	@Autowired
+	private CartService cartService;
+
+}

@@ -28,4 +28,10 @@ public class BookCategoryServiceImpl implements BookCategoryService {
 		return this.bookCategoryRepository.save(bookCategory);
 	}
 
+	@Override
+	public void deleteByBookId(Long id) {
+		// TODO Auto-generated method stub
+		this.bookCategoryRepository.deleteByBookId(id);;
+	}
+
 }

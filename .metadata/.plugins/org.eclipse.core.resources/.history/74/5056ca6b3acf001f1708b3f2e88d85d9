@@ -1,0 +1,40 @@
+package com.estorebookshop.controller.admin;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.estorebookshop.model.CartItem;
+import com.estorebookshop.service.CartItemService;
+
+@Controller
+@RequestMapping("/admin/cart-item")
+public class CartItemController {
+
+	@Autowired
+	private CartItemService cartItemService;
+
+	@RequestMapping("/{id}")
+	public String cartItem(@PathVariable("id") Long cartId, Model model) {
+		List<CartItem> cartItems = cartItemService.findAllByCartId(cartId);
+
+		// Sửa kiểu trả về để phù hợp với `int`
+		int totalQuantity = cartItems.stream().mapToInt(cartItem -> cartItem.getQuantity().intValue()).sum();
+
+		// Sửa phép toán với BigDecimal, sử dụng double
+		double totalPrice = cartItems.stream().mapToDouble(cartItem -> cartItem.getQuantity().doubleValue()
+				* cartItem.getBook().getPrice().doubleValue() * (1 - cartItem.getBook().getDiscount().doubleValue()))
+				.sum();
+
+		model.addAttribute("cartItems", cartItems);
+		model.addAttribute("totalQuantity", totalQuantity);
+		model.addAttribute("totalPrice", totalPrice);
+
+		return "admin/cart-item/cart-item";
+	}
+
+}

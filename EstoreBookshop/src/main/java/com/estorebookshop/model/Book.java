@@ -53,8 +53,8 @@ public class Book {
 	@Column(name = "quantity", nullable = false)
 	private Long quantity;
 	
-	@Column(name = "price", nullable = false)
-	private Long price;
+	@Column(name = "price", nullable = false, precision = 10, scale = 2)
+	private BigDecimal price;
 	
 	@Column(name = "discount", nullable = false, precision = 4, scale = 2)
 	private BigDecimal discount;
@@ -66,7 +66,7 @@ public class Book {
 	private boolean enabled;
 	
 	@Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private LocalDateTime createdAt;
+	private LocalDateTime createdAt = LocalDateTime.now();
 	
 	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
 	private Set<BookCategory> bookCategories;
@@ -89,7 +89,7 @@ public class Book {
 	}
 
 	public Book(Long id, Language language, Publisher publisher, String isbn, String title, String author,
-			Integer yearOfPublication, String description, Long numOfPages, Long quantity, Long price,
+			Integer yearOfPublication, String description, Long numOfPages, Long quantity, BigDecimal price,
 			BigDecimal discount, BigDecimal rating, boolean enabled, LocalDateTime createdAt,
 			Set<BookCategory> bookCategories, Set<BookImage> bookImages, Set<CartItem> cartItems, Set<Review> reviews,
 			Set<OderDetail> oderDetail) {
@@ -196,11 +196,11 @@ public class Book {
 		this.quantity = quantity;
 	}
 
-	public Long getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

@@ -36,7 +36,7 @@ public class LanguageController {
 	}
 
 	@PostMapping("/add")
-	public String save(@ModelAttribute("language") Language language) {
+	public String create(@ModelAttribute("language") Language language) {
 		this.languageService.save(language);
 		return "redirect:/admin/language";
 	}

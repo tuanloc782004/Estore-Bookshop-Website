@@ -8,5 +8,7 @@ public interface BookCategoryService {
 	public void deleteByBook(Book book);
 	
 	public BookCategory save(BookCategory bookCategory);
+	
+	public void deleteByBookId(Long id);
 		
 }

@@ -1,7 +1,9 @@
 package com.estorebookshop.controller.admin;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -78,6 +81,72 @@ public class BookController {
 		return "admin/book/book";
 	}
 
+	@GetMapping("/add")
+	public String add(Model model) {
+		Book book = new Book();
+		book.setBookCategories(new HashSet<BookCategory>());
+		model.addAttribute(book);
+
+		List<Category> categories = this.categoryService.findAll();
+		model.addAttribute("categories", categories);
+
+		Set<Long> categoryIds = book.getBookCategories().stream()
+				.map(bookCategory -> bookCategory.getCategory().getId()).collect(Collectors.toSet());
+		model.addAttribute("categoryIds", categoryIds);
+
+		List<Language> languages = this.languageService.findAll();
+		model.addAttribute("languages", languages);
+
+		List<Publisher> publishers = this.publisherService.findAll();
+		model.addAttribute("publishers", publishers);
+
+		return "admin/book/book-form";
+	}
+
+	@PostMapping("/add")
+	public String create(@ModelAttribute("book") Book book, @RequestParam List<Long> categoryIds,
+			@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) {
+
+		book.setRating(BigDecimal.valueOf(0.00));
+
+		// Lưu sách với các thay đổi
+		this.bookService.save(book);
+
+		// Cập nhật danh mục sách
+		List<Category> selectedCategories = this.categoryService.findAllById(categoryIds);
+
+		for (Category category : selectedCategories) {
+			BookCategory bookCategory = new BookCategory();
+			bookCategory.setBook(book);
+			bookCategory.setCategory(category);
+			this.bookCategoryService.save(bookCategory); // Lưu các mối quan hệ mới
+		}
+
+		// Thêm ảnh mới
+		Set<BookImage> newImageEntities = new Array2DHashSet<BookImage>();
+		for (MultipartFile file : files) {
+			if (!file.isEmpty()) {
+				// Đặt tên cho file ảnh mới
+				String imageUrl = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_"
+						+ file.getOriginalFilename();
+				this.storageService.store(file, imageUrl); // Lưu ảnh mới với tên đã tạo
+
+				BookImage bookImage = new BookImage();
+				bookImage.setImageUrl("/upload-dir/" + imageUrl); // Lưu đường dẫn ảnh
+				bookImage.setBook(book); // Liên kết ảnh với sách
+				this.bookImageService.save(bookImage);
+				newImageEntities.add(bookImage);
+			}
+		}
+
+		// Cập nhật ảnh mới vào sách
+		book.setBookImages(newImageEntities);
+
+		redirectAttributes.addFlashAttribute("message", "Book updated successfully!");
+
+		return "redirect:/admin/book";
+	}
+
 	@GetMapping("/edit/{id}")
 	public String edit(Model model, @PathVariable("id") Long id) {
 		Book book = this.bookService.findById(id);
@@ -133,7 +202,7 @@ public class BookController {
 
 		// Cập nhật ảnh mới vào sách
 		book.setBookImages(newImageEntities);
-		
+
 		book.setRating(this.bookService.findById(book.getId()).getRating());
 
 		// Lưu sách với các thay đổi
@@ -143,8 +212,13 @@ public class BookController {
 	}
 
 	@GetMapping("/delete/{id}")
+	@Transactional
 	public String delete(@PathVariable("id") Long id) {
+		
+		this.bookCategoryService.deleteByBookId(id);
+		this.bookImageService.deleteByBookId(id);
 		this.bookService.deleteById(id);
+		
 		return "redirect:/admin/book";
 	}
 }

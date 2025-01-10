@@ -1,0 +1,10 @@
+package com.estorebookshop.controller.admin;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/admin/cart-item")
+public class CartItemController {
+
+}

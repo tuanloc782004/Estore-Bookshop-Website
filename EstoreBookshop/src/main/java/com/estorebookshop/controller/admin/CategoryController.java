@@ -49,7 +49,7 @@ public class CategoryController {
 	}
 
 	@PostMapping("/add")
-	public String save(@ModelAttribute("category") Category category) {
+	public String create(@ModelAttribute("category") Category category) {
 		this.categoryService.save(category);
 		return "redirect:/admin/category";
 	}
