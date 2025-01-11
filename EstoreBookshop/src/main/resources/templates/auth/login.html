@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
 
 <head th:replace="~{user/layout/head::head}"></head>
 
@@ -33,15 +32,14 @@
 							<h3>
 								Welcome Back ! <br> Please Sign in now
 							</h3>
-							<form class="row contact_form" th:action="@{/login}"
-								method="post" novalidate="novalidate">
+							<form class="row contact_form" th:action="@{/login}" method="post" novalidate="novalidate">
 								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="name"
-										name="username" value="" placeholder="Username">
+									<input type="text" class="form-control" id="name" name="username" value=""
+										placeholder="Username">
 								</div>
 								<div class="col-md-12 form-group p_star">
-									<input type="password" class="form-control" id="password"
-										name="password" value="" placeholder="Password">
+									<input type="password" class="form-control" id="password" name="password" value=""
+										placeholder="Password">
 								</div>
 								<div class="col-md-12 form-group">
 									<div class="creat_account d-flex align-items-center">

@@ -23,13 +23,13 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
-
+		this.cartRepository.deleteById(id);
 	}
 
 	@Override
 	public List<Cart> findByKeyword(String keyword, String status, LocalDateTime varDate) {
 		// TODO Auto-generated method stub
-		return cartRepository.findByKeyword(keyword, status, varDate);
+		return this.cartRepository.findByKeyword(keyword, status, varDate);
 	}
 
 	@Override
@@ -50,6 +50,12 @@ public class CartServiceImpl implements CartService {
 		list = list.subList(start, end);
 		
 		return new PageImpl<Cart>(list, pageable, this.cartRepository.findByKeyword(keyword, status, varDate).size());
+	}
+
+	@Override
+	public Cart findById(Long id) {
+		// TODO Auto-generated method stub
+		return this.cartRepository.findById(id).orElse(null);
 	}
 
 }

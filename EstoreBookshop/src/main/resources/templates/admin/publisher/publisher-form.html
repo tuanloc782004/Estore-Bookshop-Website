@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
 <head th:replace="~{admin/layout/head::head}"></head>
 
 <body>
@@ -26,10 +26,8 @@
 										<div class="row">
 											<div class="col-md-7">
 												<div class="form-group">
-													<input type="hidden"
-														class="form-control" placeholder="Enter ID"
-														th:value="${publisher.id}"
-														th:field="*{id}"> <label>Publisher
+													<input type="hidden" class="form-control" placeholder="Enter ID"
+														th:value="${publisher.id}" th:field="*{id}"> <label>Publisher
 														Name</label> <input type="text" class="form-control"
 														placeholder="Enter Publisher Name"
 														th:value="${publisher.publisherName}"

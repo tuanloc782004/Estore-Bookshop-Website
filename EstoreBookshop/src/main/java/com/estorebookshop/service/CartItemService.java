@@ -8,4 +8,6 @@ public interface CartItemService {
  
 	public List<CartItem> findAllByCartId(Long cartId);
 	
+	public void deleteByCartId(Long id);
+	
 }

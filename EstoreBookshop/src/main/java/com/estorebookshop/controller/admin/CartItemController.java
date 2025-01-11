@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.estorebookshop.model.CartItem;
 import com.estorebookshop.service.CartItemService;
+import com.estorebookshop.service.CartService;
 
 @Controller
 @RequestMapping("/admin/cart-item")
@@ -19,6 +20,9 @@ public class CartItemController {
 
 	@Autowired
 	private CartItemService cartItemService;
+	
+	@Autowired
+	private CartService cartService;
 
 	@RequestMapping("/{id}")
 	public String cartItem(@PathVariable("id") Long cartId, Model model) {
@@ -40,7 +44,8 @@ public class CartItemController {
 
 		// Làm tròn tổng giá về 2 chữ số thập phân
 		totalPrice = totalPrice.setScale(2, RoundingMode.HALF_UP);
-
+		
+		model.addAttribute("username", this.cartService.findById(cartId).getUser().getUsername());
 		model.addAttribute("cartItems", cartItems);
 		model.addAttribute("totalQuantity", totalQuantity);
 		model.addAttribute("totalPrice", totalPrice);

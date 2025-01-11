@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head th:replace="~{admin/layout/head::head}"></head>
 
 <body>
@@ -19,24 +20,22 @@
 									<h4 class="title">Edit Address</h4>
 								</div>
 								<div class="content">
-									<form th:action="@{/admin/address/edit}" method="post"
-										th:object="${address1}" enctype="multipart/form-data">
+									<form th:action="@{/admin/address/edit}" method="post" th:object="${address1}"
+										enctype="multipart/form-data">
 										<div class="row">
 											<div class="col-md-5">
 												<div class="form-group">
-													<input type="hidden" class="form-control"
-														placeholder="Enter ID" th:value="${address1.id}"
-														th:field="*{id}">
-													<label>Username</label> <input
-														type="text" class="form-control" placeholder="Username"
-														th:value="${address1.user.username}"
+													<input type="hidden" class="form-control" placeholder="Enter ID"
+														th:value="${address1.id}" th:field="*{id}">
+													<label>Username</label> <input type="text" class="form-control"
+														placeholder="Username" th:value="${address1.user.username}"
 														th:field="*{user.username}" readonly>
 												</div>
 											</div>
 											<div class="col-md-7">
 												<div class="form-group">
-													<label for="exampleInputEmail1">Address</label> <input
-														type="text" class="form-control" placeholder="Address"
+													<label for="exampleInputEmail1">Address</label> <input type="text"
+														class="form-control" placeholder="Address"
 														th:value="${address1.address}" th:field="*{address}">
 												</div>
 											</div>
@@ -45,23 +44,23 @@
 										<div class="row">
 											<div class="col-md-4">
 												<div class="form-group">
-													<label for="exampleInputEmail1">City</label> <input
-														type="text" class="form-control" placeholder="City"
+													<label for="exampleInputEmail1">City</label> <input type="text"
+														class="form-control" placeholder="City"
 														th:value="${address1.city}" th:field="*{city}">
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="form-group">
-													<label for="exampleInputEmail1">Zip Code</label> <input
-														type="text" class="form-control" placeholder="Zip Code"
+													<label for="exampleInputEmail1">Zip Code</label> <input type="text"
+														class="form-control" placeholder="Zip Code"
 														th:value="${address1.zipCode}" th:field="*{zipCode}">
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="form-group">
-													<label>Country</label> <input type="text"
-														class="form-control" placeholder="Country"
-														th:value="${address1.country}" th:field="*{country}">
+													<label>Country</label> <input type="text" class="form-control"
+														placeholder="Country" th:value="${address1.country}"
+														th:field="*{country}">
 												</div>
 											</div>
 										</div>
@@ -84,4 +83,5 @@
 	<div th:replace="~{admin/layout/script::script}"></div>
 
 </body>
+
 </html>

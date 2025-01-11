@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
 <head th:replace="~{admin/layout/head::head}"></head>
+
 <body>
 
 	<div class="wrapper">
@@ -19,7 +20,8 @@
 								<div class="header">
 									<div class="row align-items-center mb-3">
 										<div class="col-md-4">
-											<h4 class="title mb-0">List of Cart Items</h4>
+											<h4 class="title mb-0">List of Cart Items for <span
+													th:text="${username}">[username]</span></h4>
 										</div>
 									</div>
 									<div class="content table-responsive table-full-width">
@@ -35,20 +37,18 @@
 											</thead>
 											<tbody>
 												<tr th:each="cartItem : ${cartItems}">
-													<td><img
-														th:src="${cartItem.book.bookImages?.size() > 0 
+													<td><img th:src="${cartItem.book.bookImages?.size() > 0 
                                                             ? cartItem.book.bookImages.iterator().next().imageUrl 
                                                             : '/upload-dir/default-image/book-image.jfif'}"
-														alt="Book Image" width="100" height="100"></td>
+															alt="Book Image" width="100" height="100"></td>
 													<td th:text="${cartItem.book.title}"></td>
 													<td><span th:if="${cartItem.book.discount > 0}"
-														th:text="${cartItem.book.price + ' $'}"
-														style="text-decoration: line-through; color: red;"></span>
-														<span class="price"
-														th:text="${cartItem.book.discount > 0 
+															th:text="${cartItem.book.price + ' $'}"
+															style="text-decoration: line-through; color: red;"></span>
+														<span class="price" th:text="${cartItem.book.discount > 0 
                                                                 ? cartItem.book.price * (100 - cartItem.book.discount) / 100.00
                                                                 : cartItem.book.price}"
-														th:attr="data-price=${cartItem.book.discount > 0 
+															th:attr="data-price=${cartItem.book.discount > 0 
                                                                 ? cartItem.book.price * (100 - cartItem.book.discount) / 100.00
                                                                 : cartItem.book.price}, 
                                                                     data-discount=${cartItem.book.discount}">0.00</span>
@@ -56,7 +56,7 @@
 													<td th:text="${cartItem.quantity}"
 														th:attr="data-quantity=${cartItem.quantity}"></td>
 													<td><span class="total-price"
-														th:attr="data-quantity=${cartItem.quantity}, 
+															th:attr="data-quantity=${cartItem.quantity}, 
                                                                     data-price=${cartItem.book.discount > 0 
                                                                         ? cartItem.book.price * (100 - cartItem.book.discount) / 100.00
                                                                         : cartItem.book.price}, 
@@ -91,18 +91,18 @@
 	</div>
 
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function () {
 			// Lấy tất cả các phần tử có class price và total-price
 			const priceElements = document.querySelectorAll('.price');
 			const totalPriceElements = document
-					.querySelectorAll('.total-price');
+				.querySelectorAll('.total-price');
 
 			// Cập nhật giá trị price
-			priceElements.forEach(function(priceElement) {
+			priceElements.forEach(function (priceElement) {
 				const price = parseFloat(priceElement
-						.getAttribute('data-price'));
+					.getAttribute('data-price'));
 				const discount = parseFloat(priceElement
-						.getAttribute('data-discount'));
+					.getAttribute('data-discount'));
 
 				let finalPrice = price;
 
@@ -115,14 +115,14 @@
 			});
 
 			// Cập nhật tổng giá trị cho từng sản phẩm
-			totalPriceElements.forEach(function(totalPriceElement) {
+			totalPriceElements.forEach(function (totalPriceElement) {
 				// Lấy quantity từ data-quantity và price từ data-price
 				const quantity = parseInt(totalPriceElement
-						.getAttribute('data-quantity'), 10);
+					.getAttribute('data-quantity'), 10);
 				const price = parseFloat(totalPriceElement
-						.getAttribute('data-price'));
+					.getAttribute('data-price'));
 				const discount = parseFloat(totalPriceElement
-						.getAttribute('data-discount'));
+					.getAttribute('data-discount'));
 
 				let finalPrice = price;
 
@@ -137,4 +137,5 @@
 		});
 	</script>
 </body>
+
 </html>

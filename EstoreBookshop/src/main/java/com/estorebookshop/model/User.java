@@ -52,7 +52,7 @@ public class User {
 	private Set<Address> addresses;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-	private Set<Oder> oders;
+	private Set<Order> oders;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<Review> reviews;
@@ -66,7 +66,7 @@ public class User {
 	}
 
 	public User(Long id, Role role, String username, String password, String email, String phoneNumber,
-			String avatarUrl, boolean enabled, LocalDateTime createdAt, Set<Address> addresses, Set<Oder> oders,
+			String avatarUrl, boolean enabled, LocalDateTime createdAt, Set<Address> addresses, Set<Order> oders,
 			Set<Review> reviews, Set<Cart> carts) {
 		super();
 		this.id = id;
@@ -164,11 +164,11 @@ public class User {
 		this.addresses = addresses;
 	}
 
-	public Set<Oder> getOders() {
+	public Set<Order> getOders() {
 		return oders;
 	}
 
-	public void setOders(Set<Oder> oders) {
+	public void setOders(Set<Order> oders) {
 		this.oders = oders;
 	}
 

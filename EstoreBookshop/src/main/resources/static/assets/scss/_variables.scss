@@ -1,12 +1,15 @@
 @import 'color';
 
 // Font Family
-$font_1 :'Playfair Display', serif; //Heading
-$font_2 :'Poppins', sans-serif;     //Body
-$font_3 :'Yellowtail', cursive;      //Extra Style
+$font_1 :'Playfair Display',
+serif; //Heading
+$font_2 :'Poppins',
+sans-serif; //Body
+$font_3 :'Yellowtail',
+cursive; //Extra Style
 
 
-$white_color:#fff;
+$white_color: #fff;
 
 
 // @media #{$xs}{}
@@ -20,33 +23,33 @@ $white_color:#fff;
 
 $laptop: 'only screen and (min-width: 1200px) and (max-width: 1600px)';
 $lg :'only screen and (min-width: 992px) and (max-width: 1199px)';
-$md:'only screen and (min-width: 768px) and (max-width: 991px)';
-$xs:'(max-width: 767px)';
+$md: 'only screen and (min-width: 768px) and (max-width: 991px)';
+$xs: '(max-width: 767px)';
 $sm: 'only screen and (min-width: 576px) and (max-width: 767px)';
 
 // Extra Responsive
 
 $medium_device : 'only screen and (min-width: 992px) and (max-width: 1200px)';
-$tab_device:'only screen and (min-width: 768px) and (max-width: 991px)';
+$tab_device: 'only screen and (min-width: 768px) and (max-width: 991px)';
 $large_mobile: 'only screen and (min-width: 576px) and (max-width: 767px)';
 $tab: '(max-width: 991px)';
-$small_mobile:'(max-width: 576px)';
-$xs_mobile:'(max-width: 420px)';
-$sm_mobile:'only screen and (min-width: 421px) and (max-width: 575px)';
-$big_screen:'only screen and (min-width: 1200px) and (max-width: 1440px)';
+$small_mobile: '(max-width: 576px)';
+$xs_mobile: '(max-width: 420px)';
+$sm_mobile: 'only screen and (min-width: 421px) and (max-width: 575px)';
+$big_screen: 'only screen and (min-width: 1200px) and (max-width: 1440px)';
 $extra_big_screen: 'only screen and (min-width: 1200px) and (max-width: 3640px)';
 
 
 // More Extra Responsive
-$large_device_2:'(min-width: 1501px) and (max-width: 1700px)';
+$large_device_2: '(min-width: 1501px) and (max-width: 1700px)';
 
-$large1:'(min-width: 1200px) and (max-width: 1400px)';
+$large1: '(min-width: 1200px) and (max-width: 1400px)';
 
-$large_device:'(min-width: 1200px) and (max-width: 1600px)';
-$mid_device:'(min-width: 992px) and (max-width: 1200px)';
-$tablet_device:'(min-width: 768px) and (max-width: 991px)';
-$mobile_device:'(max-width: 767px)';
-$large_mobile:'only screen and (min-width: 480px) and (max-width: 767px)';
+$large_device: '(min-width: 1200px) and (max-width: 1600px)';
+$mid_device: '(min-width: 992px) and (max-width: 1200px)';
+$tablet_device: '(min-width: 768px) and (max-width: 991px)';
+$mobile_device: '(max-width: 767px)';
+$large_mobile: 'only screen and (min-width: 480px) and (max-width: 767px)';
 
 
 
@@ -62,30 +65,33 @@ $large_mobile:'only screen and (min-width: 480px) and (max-width: 767px)';
 
 .boxed-btn {
 	background: #fff;
-    color: #fff !important;
-    
+	color: #fff !important;
+
 	display: inline-block;
 	padding: 18px 44px;
 	font-family: $font_1;
 	font-size: 14px;
-    font-weight: 400;
-    border: 0;
-    border: 1px solid $theme-color;
-    letter-spacing: 3px;
-    text-align: center;
-    text-transform: uppercase;
-    cursor: pointer;
-    &:hover{
-        background: $theme-color;
-        color: #000 !important;
-        border: 1px solid $theme-color;
-    }
-    &:focus{
-        outline: none;
-    }
-    &.large-width{
-        width: 220px;
-    }
+	font-weight: 400;
+	border: 0;
+	border: 1px solid $theme-color;
+	letter-spacing: 3px;
+	text-align: center;
+	text-transform: uppercase;
+	cursor: pointer;
+
+	&:hover {
+		background: $theme-color;
+		color: #000 !important;
+		border: 1px solid $theme-color;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&.large-width {
+		width: 220px;
+	}
 }
 
 
@@ -93,13 +99,13 @@ $large_mobile:'only screen and (min-width: 480px) and (max-width: 767px)';
 // .......................
 
 $font_stack_1: 'Playfair Display', serif;
-$font_stack_2: 'Poppins', sans-serif; 
+$font_stack_2: 'Poppins', sans-serif;
 /*Color Variables*/
 
-$primary-color  : #2577fd;
-$title-color    : #2a2a2a;
-$text-color     : #795376;
-$offwhite       : #f6f6f6;
+$primary-color : #2577fd;
+$title-color : #2a2a2a;
+$text-color : #795376;
+$offwhite : #f6f6f6;
 $white: #fff;
 $section_bg: #f4f4f4;
 $white_color: #fff;
@@ -131,9 +137,3 @@ $font_d: #dddddd;
 $border_color: #edeff2;
 $footer_bg: #303030;
 $sidebar_bg: #fbf9ff;
-
-
-
-
-  
-  

@@ -17,4 +17,6 @@ public interface CartService {
 
 	public Page<Cart> findByKeyword(String keyword, String status, LocalDateTime compareDate, Integer pageNo);
 	
+	public Cart findById(Long id);
+	
 }

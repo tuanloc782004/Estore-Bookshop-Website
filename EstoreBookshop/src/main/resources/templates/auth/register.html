@@ -1,6 +1,5 @@
 <!doctype html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
 
 <head th:replace="~{user/layout/head::head}"></head>
 
@@ -23,23 +22,23 @@
 							<h3>
 								Welcome Back ! <br> Please Sign up now
 							</h3>
-							<form class="row contact_form" th:action="@{/register}"
-								method="post" novalidate="novalidate">
+							<form class="row contact_form" th:action="@{/register}" method="post"
+								novalidate="novalidate">
 								<div class="col-md-12 form-group p_star">
-									<input type="email" class="form-control" id="email"
-										name="email" value="" placeholder="Email">
+									<input type="email" class="form-control" id="email" name="email" value=""
+										placeholder="Email">
 								</div>
 								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="name"
-										name="username" value="" placeholder="Username">
+									<input type="text" class="form-control" id="name" name="username" value=""
+										placeholder="Username">
 								</div>
 								<div class="col-md-12 form-group p_star">
-									<input type="password" class="form-control" id="password"
-										name="password" value="" placeholder="Password">
+									<input type="password" class="form-control" id="password" name="password" value=""
+										placeholder="Password">
 								</div>
 								<div class="col-md-12 form-group p_star">
-									<input type="password" class="form-control" id="rePassword"
-										name="rePassword" value="" placeholder="Re-Password">
+									<input type="password" class="form-control" id="rePassword" name="rePassword"
+										value="" placeholder="Re-Password">
 								</div>
 								<div class="col-md-12 form-group">
 									<button type="submit" value="submit" class="btn_3">

@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
 <head th:replace="~{admin/layout/head::head}"></head>
+
 <body>
 	<div class="wrapper">
 		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
@@ -14,27 +16,27 @@
 							<div class="card">
 								<div class="header">
 									<div class="row align-items-center mb-3">
-										<div class="col-md-6">
-											<h4 class="title mb-0">List of users</h4>
+										<div class="col-md-12">
+											<h4 class="title mb-0">List of Users</h4>
 										</div>
-										<div class="col-md-6 text-right">
-											<p class="btn btn-success">---</p>
-										</div>
-										<div class="align-items-center mb-3">
-											<div class="col-md-6">
-												<form>
-													<div class="input-group input-group-sm hidden-xs"
-														style="width: 350px;">
-														<input type="text" name="keyword"
-															class=" form-control pull-right" placeholder="Search by username, email, phone number"
+									</div>
+									<!-- Form for Search -->
+									<div class="row mb-3">
+										<div class="col-md-12">
+											<form method="get" th:action="@{/admin/user}">
+												<div class="row">
+													<!-- Search by Keyword -->
+													<div class="col-md-3">
+														<input type="text" name="keyword" class="form-control"
+															placeholder="Search by username, email, phone number"
 															th:value="${keyword}">
-														<div class="input-group-btn">
-															<button type="submit" class="btn btn-default">
-																<i class="fa fa-search"></i>
-															</button>
-														</div>
-												</form>
-											</div>
+													</div>
+													<!-- Search Button -->
+													<div class="col-md-3">
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+											</form>
 										</div>
 									</div>
 									<div class="content table-responsive table-full-width">
@@ -72,15 +74,18 @@
 												</tr>
 											</tbody>
 										</table>
+										<div th:replace="~{admin/layout/pagination::pagination}"></div>
 									</div>
 								</div>
 							</div>
-							<div th:replace="~{admin/layout/pagination::pagination}"></div>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div th:replace="~{admin/layout/script::script}"></div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
 </body>
+
 </html>

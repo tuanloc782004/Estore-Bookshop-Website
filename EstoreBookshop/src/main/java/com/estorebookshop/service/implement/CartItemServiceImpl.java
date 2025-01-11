@@ -22,4 +22,10 @@ public class CartItemServiceImpl implements CartItemService {
 				.toList();
 	}
 
+	@Override
+	public void deleteByCartId(Long id) {
+		// TODO Auto-generated method stub
+		this.cartItemRepository.deleteByCartId(id);
+	}
+
 }

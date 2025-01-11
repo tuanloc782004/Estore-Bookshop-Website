@@ -1,12 +1,16 @@
 package com.estorebookshop.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,13 +37,16 @@ public class Address {
 	
 	@Column(name = "country", nullable = false, length = 50)
 	private String country;
+	
+	@OneToMany(mappedBy = "address", fetch = FetchType.EAGER)
+	private Set<Order> oder;
 
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Address(Long id, User user, String address, String city, String zipCode, String country) {
+	public Address(Long id, User user, String address, String city, String zipCode, String country, Set<Order> oder) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -47,6 +54,7 @@ public class Address {
 		this.city = city;
 		this.zipCode = zipCode;
 		this.country = country;
+		this.oder = oder;
 	}
 
 	public Long getId() {
@@ -96,5 +104,13 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
+
+	public Set<Order> getOder() {
+		return oder;
+	}
+
+	public void setOder(Set<Order> oder) {
+		this.oder = oder;
+	}
+
 }

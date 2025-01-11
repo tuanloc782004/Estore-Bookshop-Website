@@ -81,7 +81,7 @@ public class Book {
 	private Set<Review> reviews;
 	
 	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
-	private Set<OderDetail> oderDetail;
+	private Set<OrderDetail> oderDetail;
 
 	public Book() {
 		super();
@@ -92,7 +92,7 @@ public class Book {
 			Integer yearOfPublication, String description, Long numOfPages, Long quantity, BigDecimal price,
 			BigDecimal discount, BigDecimal rating, boolean enabled, LocalDateTime createdAt,
 			Set<BookCategory> bookCategories, Set<BookImage> bookImages, Set<CartItem> cartItems, Set<Review> reviews,
-			Set<OderDetail> oderDetail) {
+			Set<OrderDetail> oderDetail) {
 		super();
 		this.id = id;
 		this.language = language;
@@ -268,11 +268,11 @@ public class Book {
 		this.reviews = reviews;
 	}
 
-	public Set<OderDetail> getOderDetail() {
+	public Set<OrderDetail> getOderDetail() {
 		return oderDetail;
 	}
 
-	public void setOderDetail(Set<OderDetail> oderDetail) {
+	public void setOderDetail(Set<OrderDetail> oderDetail) {
 		this.oderDetail = oderDetail;
 	}
 	

@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
 <head th:replace="~{admin/layout/head::head}"></head>
+
 <body>
 	<div class="wrapper">
 		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
@@ -14,12 +15,8 @@
 							<div class="card">
 								<div class="header">
 									<div class="row align-items-center mb-3">
-										<div class="col-md-6">
+										<div class="col-md-12">
 											<h4 class="title mb-0">List of Carts</h4>
-										</div>
-										<div class="col-md-6 text-right">
-											<!-- Placeholder for any additional actions (can be removed) -->
-											<p class="btn btn-success">---</p>
 										</div>
 									</div>
 									<!-- Form for Search and Filter -->
@@ -37,15 +34,16 @@
 														<select name="status" class="form-control">
 															<option value="all" th:selected="${status == 'all'}">All
 																Status</option>
-															<option value="active"
-																th:selected="${status == 'active'}">Active</option>
+															<option value="active" th:selected="${status == 'active'}">
+																Active</option>
 															<option value="abandoned"
-																th:selected="${status == 'abandoned'}">Abandoned</option>
+																th:selected="${status == 'abandoned'}">Abandoned
+															</option>
 														</select>
 													</div>
 													<!-- Search Button -->
 													<div class="col-md-4">
-														<button type="submit" class="btn">Search</button>
+														<button type="submit" class="btn btn-primary">Search</button>
 													</div>
 												</div>
 											</form>
@@ -63,7 +61,6 @@
 												<th>Updated At</th>
 												<th>Status</th>
 												<th>Action</th>
-												<th>Cart Items</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -74,30 +71,30 @@
 												<td th:text="${cart.createdAt.toString().substring(0, 10)}"></td>
 												<!-- Determine cart status -->
 												<td><span
-													th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isAfter(compareDate)}"
-													class="label label-success">Enabled</span> <span
-													th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isBefore(compareDate)}"
-													class="label label-warning">Abandoned</span></td>
+														th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isAfter(compareDate)}"
+														class="label label-success">Active</span> <span
+														th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isBefore(compareDate)}"
+														class="label label-warning">Abandoned</span></td>
 												<!-- Action: Delete Cart -->
 												<td
 													th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isBefore(compareDate)}">
-													<a th:href="@{|/admin/cart/delete/${cart.id}|}"
-													class="btn btn-danger"
-													onclick="return confirm('Are you sure ???')">Delete</a>
+													<a th:href="@{|/admin/cart-item/${cart.id}|}"
+														class="btn btn-primary">View</a> <a
+														th:href="@{|/admin/cart/delete/${cart.id}|}"
+														class="btn btn-danger"
+														onclick="return confirm('Are you sure ???')">Delete</a>
 												</td>
 												<!-- Fallback when dates don't exist -->
 												<td
-													th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isAfter(compareDate)}"><a
-													class="btn">----------</a></td>
-												<td><a th:href="@{|/admin/cart-item/${cart.id}|}"
-													class="btn btn-primary">View</a></td>
+													th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isAfter(compareDate)}">
+													<a th:href="@{|/admin/cart-item/${cart.id}|}"
+														class="btn btn-primary">View</a></td>
 											</tr>
 										</tbody>
 									</table>
+									<div th:replace="~{admin/layout/pagination::pagination}"></div>
 								</div>
 							</div>
-							<!-- Pagination, if needed -->
-							<div th:replace="~{admin/layout/pagination::pagination}"></div>
 						</div>
 					</div>
 				</div>
@@ -106,4 +103,5 @@
 	</div>
 	<div th:replace="~{admin/layout/script::script}"></div>
 </body>
+
 </html>

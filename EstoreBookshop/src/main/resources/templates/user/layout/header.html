@@ -8,13 +8,11 @@
 						<!-- Logo -->
 						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
 							<div class="logo">
-								<a th:href="@{/}"><img th:src="@{/assets/img/logo/logo.png}"
-									alt=""></a>
+								<a th:href="@{/}"><img th:src="@{/assets/img/logo/logo.png}" alt=""></a>
 							</div>
 						</div>
 						<div class="col-xl-10 col-lg-10 col-md-10 col-sm-6">
-							<ul
-								class="header-right f-right d-flex justify-content-between align-items-center">
+							<ul class="header-right f-right d-flex justify-content-between align-items-center">
 								<li class="d-none d-xl-block">
 									<div class="form-box f-right ">
 										<input type="text" name="Search" placeholder="Search products">
@@ -28,13 +26,16 @@
 										<a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
 									</div>
 								</li>
-								<li class="d-none d-lg-block"><div sec:authorize="isAnonymous()">
+								<li class="d-none d-lg-block">
+									<div sec:authorize="isAnonymous()">
 										<a th:href="@{/login}" class="btn header-btn">Log in</a>
-									</div> <div sec:authorize="isAuthenticated()">
+									</div>
+									<div sec:authorize="isAuthenticated()">
 										<form th:action="@{/logout}" method="post">
 											<input type="submit" value="Log out" class="btn header-btn" />
 										</form>
-									</div></li>
+									</div>
+								</li>
 							</ul>
 						</div>
 

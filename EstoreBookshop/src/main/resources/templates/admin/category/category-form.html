@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
 <head th:replace="~{admin/layout/head::head}"></head>
 
 <body>
@@ -26,21 +26,18 @@
 										<div class="row">
 											<div class="col-md-7">
 												<div class="form-group">
-													<input type="hidden" class="form-control"
-														placeholder="Enter ID" th:value="${category.id}"
-														th:field="*{id}"> <label>Category Name</label> <input
-														type="text" class="form-control"
+													<input type="hidden" class="form-control" placeholder="Enter ID"
+														th:value="${category.id}" th:field="*{id}"> <label>Category
+														Name</label> <input type="text" class="form-control"
 														placeholder="Enter Category Name"
-														th:value="${category.categoryName}"
-														th:field="*{categoryName}">
+														th:value="${category.categoryName}" th:field="*{categoryName}">
 												</div>
 											</div>
 											<div class="col-md-5">
 												<div class="form-group">
-													<label>Created At</label> <input type="text"
-														class="form-control" placeholder="Now"
-														th:value="${category.createdAt}" th:field="*{createdAt}"
-														readonly>
+													<label>Created At</label> <input type="text" class="form-control"
+														placeholder="Now" th:value="${category.createdAt}"
+														th:field="*{createdAt}" readonly>
 												</div>
 											</div>
 										</div>
