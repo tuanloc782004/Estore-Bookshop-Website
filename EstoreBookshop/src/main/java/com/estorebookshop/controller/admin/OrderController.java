@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,22 +30,19 @@ public class OrderController {
 			@RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
 			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, Model model) {
 
-		// Gán giá trị mặc định cho startDate và endDate nếu chúng không được truyền vào
 		if (startDate == null) {
-			startDate = LocalDate.of(2000, 1, 1); // Ngày mặc định từ năm 2000
+			startDate = LocalDate.of(2000, 1, 1);
 		}
 		if (endDate == null) {
-			endDate = LocalDate.now(); // Ngày hiện tại
+			endDate = LocalDate.now();
 		}
 
-		// Chuyển sang LocalDateTime
 		LocalDateTime startDateTime = startDate.atStartOfDay();
-		LocalDateTime endDateTime = endDate.atTime(23, 59, 59); // Lúc cuối của ngày kết thúc
+		LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
 
 		Page<Order> list = this.orderService.findAll(pageNo);
 
-		// Lọc danh sách nếu có điều kiện tìm kiếm
-		if (username != null) {
+		if (username != null || status != null || startDateTime != null || endDateTime != null) {
 			list = this.orderService.findByKeyword(username, status, startDateTime, endDateTime, pageNo);
 		}
 
@@ -60,11 +57,11 @@ public class OrderController {
 		return "admin/order/order";
 	}
 
-	@PostMapping("/change-status")
-	public String changeOrderStatus(@RequestParam Long orderId, @RequestParam String status,
+	@GetMapping("/set-status")
+	public String setStatus(@RequestParam Long orderId, @RequestParam String status,
 			RedirectAttributes redirectAttributes) {
 		try {
-			orderService.updateOrderStatus(orderId, status);
+			orderService.setStatus(orderId, status);
 			redirectAttributes.addFlashAttribute("message", "Order status updated successfully!");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", "Failed to update order status.");

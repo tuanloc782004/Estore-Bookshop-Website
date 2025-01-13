@@ -1,5 +1,6 @@
 package com.estorebookshop.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -31,11 +32,17 @@ public class Order {
     @JoinColumn(name = "id_address", referencedColumnName = "id", nullable = false)
     private Address address;
 	
-	@Column(name = "total_price", nullable = false)
-	private Long totalPrice;
+	@Column(name = "total_price", nullable = false, precision = 10, scale = 2)
+	private BigDecimal totalPrice;
 	
 	@Column(name = "status", nullable = false, length = 50)
 	private String status;
+	
+	@Column(name = "payment_method", nullable = false, length = 50)
+	private String paymentMethod;
+	
+	@Column(name = "note", columnDefinition = "TEXT")
+	private String note;
 	
 	@Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime createdAt;
@@ -48,7 +55,7 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(Long id, User user, Address address, Long totalPrice, String status, LocalDateTime createdAt,
+	public Order(Long id, User user, Address address, BigDecimal totalPrice, String status, LocalDateTime createdAt,
 			Set<OrderDetail> orderDetails) {
 		super();
 		this.id = id;
@@ -84,11 +91,11 @@ public class Order {
 		this.address = address;
 	}
 
-	public Long getTotalPrice() {
+	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(Long totalPrice) {
+	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 

@@ -15,6 +15,8 @@ public interface OrderService {
 	
 	public Page<Order> findByKeyword(String username, String status, LocalDateTime startDate, LocalDateTime endDate, Integer pageNo);
 
-    void updateOrderStatus(Long orderId, String status);
+    void setStatus(Long orderId, String status);
+    
+    public Order findById(Long id);
     
 }

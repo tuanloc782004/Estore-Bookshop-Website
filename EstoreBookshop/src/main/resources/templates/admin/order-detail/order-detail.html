@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{admin/layout/head::head}"></head>
+
+<body>
+
+	<div class="wrapper">
+
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<nav th:replace="~{admin/layout/navbar::navbar}"></nav>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="header">
+									<div class="row align-items-center mb-3">
+										<div class="col-md-8">
+											<h4 class="title mb-0">
+												List of Order Details for Order ID <span
+													th:text="${order.id}">[ID]</span>
+											</h4>
+										</div>
+										<div class="col-md-4 text-right">
+											<span class="badge"
+												th:classappend="${order.status == 'Pending' ? 'bg-warning text-dark' :
+                       order.status == 'Processing' ? 'bg-info text-dark' :
+                       order.status == 'Shipped' ? 'bg-primary' :
+                       order.status == 'Completed' ? 'bg-success' :
+                       'bg-danger'}"
+												th:text="${order.status}"> </span>
+										</div>
+									</div>
+									<div class="content table-responsive table-full-width">
+										<table class="table table-hover table-striped">
+											<thead>
+												<tr>
+													<th>Book Image</th>
+													<th>Title</th>
+													<th>Price</th>
+													<th>Quantity</th>
+													<th>Total Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="orderDetail : ${orderDetails}">
+													<td><img
+														th:src="${orderDetail.book.bookImages?.size() > 0 
+                                                            ? orderDetail.book.bookImages.iterator().next().imageUrl 
+                                                            : '/upload-dir/default-image/book-image.jfif'}"
+														alt="Book Image" width="100" height="100"></td>
+													<td th:text="${orderDetail.book.title}"></td>
+													<td><span th:if="${orderDetail.book.discount > 0}"
+														th:text="${orderDetail.book.price + ' $'}"
+														style="text-decoration: line-through; color: red;">
+													</span> <span class="price"
+														th:attr="data-price=${orderDetail.book.price}, 
+                                                                    data-discount=${orderDetail.book.discount}, 
+                                                                    data-quantity=${orderDetail.quantity}">0.00</span>
+													</td>
+													<td th:text="${orderDetail.quantity}"
+														th:attr="data-quantity=${orderDetail.quantity}"></td>
+													<td th:text="${orderDetail.price + ' $'}"></td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr
+													style="background-color: #e2f0cb; color: #1c6b2f; font-weight: bold; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+													<td colspan="3">Total Quantity</td>
+													<td id="totalQuantity"></td>
+													<td></td>
+												</tr>
+												<tr
+													style="background-color: #d4edda; color: #155724; font-weight: bold; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+													<td colspan="4">Total Price</td>
+													<td th:text="${order.totalPrice}"></td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+									<div class="row">
+										<div class="col-md-12 text-right">
+											<a
+												th:if="${order.status == 'Pending' || order.status == 'Processing' || order.status == 'Shipped'}"
+												th:href="@{|/admin/order-detail/set-status?orderId=${order.id}&status=Cancelled|}"
+												class="btn btn-danger">Cancel</a> <a
+												th:if="${order.status == 'Pending'}"
+												th:href="@{|/admin/order-detail/set-status?orderId=${order.id}&status=Processing|}"
+												class="btn btn-info">Processing</a> <a
+												th:if="${order.status == 'Processing'}"
+												th:href="@{|/admin/order-detail/set-status?orderId=${order.id}&status=Shipped|}"
+												class="btn btn-primary">Ship</a>
+										</div>
+									</div>
+									<!-- ------------------------------------------------------------------ -->
+									<div class="row">
+										<div class="col-md-4">
+											<div class="card card-user">
+												<div class="image">
+													<h3>NOTE:</h3>
+												</div>
+												<div class="content">
+													<div class="note"
+														style="font-size: 16px; color: #333; padding: 10px;">
+														<p
+															th:text="${order.note != null ? order.note : 'No note'}"
+															style="font-style: italic;"></p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="card card-user">
+												<div class="image">
+													<h3>Address:</h3>
+												</div>
+												<div class="content">
+													<div class="author"
+														style="font-size: 14px; line-height: 1.5; color: #555;">
+														<p th:text="${order.user.address.address}">address</p>
+														<p>
+															<span th:text="${order.user.address.city}">city</span>, <span
+																th:text="${order.user.address.zipCode}">zipCode</span>
+														</p>
+														<p th:text="${order.user.address.country}">country</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="card card-user">
+												<div class="image">
+													<img
+														src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
+														alt="..." />
+												</div>
+												<div class="content">
+													<div class="author">
+														<a href="#"> <img class="avatar border-gray"
+															th:src="${order.user.avatarUrl}" alt="User Avatar" />
+															<h4 class="title" th:text="${order.user.username}"></h4>
+															<h5 th:text="${order.user.email}"></h5>
+															<h5 th:text="${order.user.phoneNumber}"></h5>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<!-- ------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div th:replace="~{admin/layout/script::script}"></div>
+	</div>
+
+	<script>
+		document
+				.addEventListener(
+						'DOMContentLoaded',
+						function() {
+							// Lấy tất cả các phần tử có class price
+							const priceElements = document
+									.querySelectorAll('.price');
+							let totalQuantity = 0;
+
+							// Cập nhật giá trị price và tính tổng số lượng
+							priceElements
+									.forEach(function(priceElement) {
+										const price = parseFloat(priceElement
+												.getAttribute('data-price'));
+										const discount = parseFloat(priceElement
+												.getAttribute('data-discount'));
+
+										let finalPrice = price;
+
+										// Nếu có discount, áp dụng giảm giá
+										if (discount > 0) {
+											finalPrice = (price
+													* (100 - discount) / 100);
+										}
+
+										// Cập nhật giá của sản phẩm
+										priceElement.textContent = finalPrice
+												.toFixed(2)
+												+ ' $';
+
+										// Tính tổng số lượng sản phẩm
+										const quantity = parseInt(priceElement
+												.getAttribute('data-quantity'),
+												10);
+										totalQuantity += quantity;
+									});
+
+							// Cập nhật tổng số lượng vào ô có id 'totalQuantity'
+							document.getElementById('totalQuantity').textContent = totalQuantity;
+						});
+	</script>
+
+</body>
+
+</html>

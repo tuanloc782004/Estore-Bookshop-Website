@@ -48,12 +48,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void updateOrderStatus(Long orderId, String status) {
+	public void setStatus(Long orderId, String status) {
 		// TODO Auto-generated method stub
 		Order order = this.orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found!"));
         order.setStatus(status);
         this.orderRepository.save(order);
+	}
+
+	@Override
+	public Order findById(Long id) {
+		// TODO Auto-generated method stub
+		return this.orderRepository.findById(id).orElse(null);
 	}
 	
 }

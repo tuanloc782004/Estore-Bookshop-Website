@@ -1,0 +1,5 @@
+package com.estorebookshop.config.service;
+
+public interface EmailService {
+
+}

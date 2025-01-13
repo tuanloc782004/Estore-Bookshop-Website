@@ -16,7 +16,7 @@
 							<div class="card">
 								<div class="header">
 									<div class="row align-items-center mb-3">
-										<div class="col-md-12">
+										<div class="col-md-8">
 											<h4 class="title mb-0">List of Users</h4>
 										</div>
 									</div>
@@ -26,7 +26,7 @@
 											<form method="get" th:action="@{/admin/user}">
 												<div class="row">
 													<!-- Search by Keyword -->
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<input type="text" name="keyword" class="form-control"
 															placeholder="Search by username, email, phone number"
 															th:value="${keyword}">
@@ -34,6 +34,21 @@
 													<!-- Search Button -->
 													<div class="col-md-3">
 														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+													<div class="col-md-5">
+														<div class="container"
+															style="max-width: 400px; margin: 0 auto;">
+															<!-- Hiển thị thông báo thành công -->
+															<div th:if="${message}" class="alert alert-success"
+																role="alert">
+																<span th:text="${message}"></span>
+															</div>
+															<!-- Hiển thị thông báo lỗi -->
+															<div th:if="${error}" class="alert alert-danger"
+																role="alert">
+																<span th:text="${error}"></span>
+															</div>
+														</div>
 													</div>
 												</div>
 											</form>
@@ -66,11 +81,16 @@
 														th:if="${user.enabled == false}"
 														class="label label-danger">Disabled</span></td>
 													<td th:text="${user.createdAt.toString().substring(0,10)}"></td>
-													<td><a th:href="@{|/admin/user/edit/${user.id}|}"
+													<td><a
+														th:href="@{|/admin/user/edit/${user.id}?keyword=${keyword}&pageNo=${currentPage}|}"
 														class="btn btn-primary">Edit</a> <a
-														th:href="@{|/admin/user/delete/${user.id}|}"
-														class="btn btn-danger"
-														onclick="return confirm('Are you sure ???')">Delete</a></td>
+														th:href="@{|/admin/user/set-enabled/${user.id}?keyword=${keyword}&pageNo=${currentPage}|}"
+														class="btn"
+														th:classappend="${user.enabled ? 'btn-danger' : 'btn-success'}"
+														th:text="${user.enabled ? 'Disable' : 'Enable'}"
+														onclick="return confirm('Are you sure you want to perform this action?')"></a>
+													</td>
+
 												</tr>
 											</tbody>
 										</table>
@@ -78,7 +98,6 @@
 									</div>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>

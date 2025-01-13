@@ -1,5 +1,7 @@
 package com.estorebookshop.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,15 +31,15 @@ public class OrderDetail {
 	@Column(name = "quantity", nullable = false)
 	private Long quantity;
 	
-	@Column(name = "price", nullable = false)
-	private Long price;
+	@Column(name = "price", nullable = false, precision = 10, scale = 2)
+	private BigDecimal price;
 
 	public OrderDetail() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderDetail(Long id, Order order, Book book, Long quantity, Long price) {
+	public OrderDetail(Long id, Order order, Book book, Long quantity, BigDecimal price) {
 		super();
 		this.id = id;
 		this.order = order;
@@ -78,11 +80,11 @@ public class OrderDetail {
 		this.quantity = quantity;
 	}
 
-	public Long getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

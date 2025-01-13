@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{admin/layout/head::head}"></head>
+
+<body>
+
+	<div class="wrapper">
+
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<nav th:replace="~{admin/layout/navbar::navbar}"></nav>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="header">
+									<div class="row align-items-center mb-3">
+										<div class="col-md-4">
+											<h4 class="title mb-0">List of Oders</h4>
+										</div>
+										<div class="col-md-4">
+											<div class="container"
+												style="max-width: 450px; margin: 0 auto;">
+												<!-- Hiển thị thông báo thành công -->
+												<div th:if="${message}" class="alert alert-success"
+													role="alert">
+													<span th:text="${message}"></span>
+												</div>
+												<!-- Hiển thị thông báo lỗi -->
+												<div th:if="${error}" class="alert alert-danger"
+													role="alert">
+													<span th:text="${error}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4 text-right">
+											<a class="btn btn-success">---</a>
+										</div>
+									</div>
+									<!-- Form for Search and Filter -->
+									<div class="row mb-3">
+										<div class="col-md-12">
+											<form method="get" th:action="@{/admin/cart}">
+												<div class="row">
+													<!-- Search by Username -->
+													<div class="col-md-3">
+														<input type="text" name="keyword" class="form-control"
+															placeholder="Search by username" th:value="${keyword}">
+													</div>
+													<!-- Select Status -->
+													<div class="col-md-2">
+														<select name="status" class="form-control">
+															<option value="All" th:selected="${status == 'All'}">All
+																Status</option>
+															<option value="Pending"
+																th:selected="${status == 'Pending'}">Pending</option>
+															<option value="Processing"
+																th:selected="${status == 'Processing'}">Processing</option>
+															<option value="Shipped"
+																th:selected="${status == 'Shipped'}">Shipped</option>
+															<option value="Completed"
+																th:selected="${status == 'Completed'}">Completed</option>
+															<option value="Cancelled"
+																th:selected="${status == 'Cancelled'}">Cancelled</option>
+														</select>
+													</div>
+													<!-- Filter by Start Date -->
+													<div class="col-md-2">
+														<input type="date" name="startDate" class="form-control"
+															placeholder="Start date" th:value="${startDate}">
+													</div>
+													<!-- Filter by End Date -->
+													<div class="col-md-2">
+														<input type="date" name="endDate" class="form-control"
+															placeholder="End date" th:value="${endDate}">
+													</div>
+													<!-- Search Button -->
+													<div class="col-md-3">
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+
+									<div class="content table-responsive table-full-width">
+										<table class="table table-hover table-striped">
+											<thead>
+												<th>ID</th>
+												<th>Username</th>
+												<th>Created At</th>
+												<th>Total Price</th>
+												<th>Status</th>
+												<th>Action</th>
+											</thead>
+											<tbody>
+												<tr th:each="order : ${orders}">
+													<td th:text="${order.id}"></td>
+													<td th:text="${order.user.username}"></td>
+													<td th:text="${order.createdAt.toString().substring(0,10)}"></td>
+													<td th:text="${order.totalPrice}"></td>
+													<td><span
+														th:classappend="${order.status == 'Pending' ? 'badge bg-warning' :
+                           order.status == 'Processing' ? 'badge bg-info' :
+                           order.status == 'Shipped' ? 'badge bg-primary' :
+                           order.status == 'Completed' ? 'badge bg-success' :
+                           'badge bg-danger'}"
+														th:text="${order.status}"></span></td>
+													<td><a th:href="@{|/admin/order-detail/${order.id}|}"
+														class="btn btn-primary">View</a> <a
+														th:if="${order.status == 'Pending' || order.status == 'Processing' || order.status == 'Shipped'}"
+														th:href="@{|/admin/order/change-status?orderId=${order.id}&status=Cancelled|}"
+														class="btn btn-danger">Cancel</a> <a
+														th:if="${order.status == 'Pending'}"
+														th:href="@{|/admin/order/change-status?orderId=${order.id}&status=Processing|}"
+														class="btn btn-info">Processing</a> <a
+														th:if="${order.status == 'Processing'}"
+														th:href="@{|/admin/order/change-status?orderId=${order.id}&status=Shipped|}"
+														class="btn btn-primary">Ship</a>
+												</tr>
+											</tbody>
+										</table>
+										<div th:replace="~{admin/layout/pagination::pagination}"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
+</body>
+
+</html>

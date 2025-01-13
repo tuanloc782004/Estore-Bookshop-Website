@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.estorebookshop.config.service.EmailService;
 import com.estorebookshop.config.service.StorageService;
 import com.estorebookshop.model.User;
 import com.estorebookshop.service.UserService;
@@ -29,6 +31,9 @@ public class UserController {
 
 	@Autowired
 	private StorageService storageService;
+
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping("")
 	public String user(Model model, @Param("keyword") String keyword,
@@ -47,33 +52,84 @@ public class UserController {
 		model.addAttribute("users", list);
 		return "admin/user/user";
 	}
-	
+
 	@GetMapping("/edit/{id}")
 	public String edit(Model model, @PathVariable("id") Long id) {
 		User user = this.userService.findById(id);
 		model.addAttribute("user", user);
 		return "admin/user/user-form";
 	}
-	
-	@PostMapping("/edit")
-	public String update(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file) {
-	    if (!file.isEmpty()) {
-	        String avatarUrl = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_" + file.getOriginalFilename();
-	        this.storageService.store(file, avatarUrl); // Gọi phương thức lưu với tên file mới
-	        user.setAvatarUrl("/upload-dir/" + avatarUrl); 
-	    } else {
-	    	user.setAvatarUrl(this.userService.findById(user.getId()).getAvatarUrl());
-	    }
 
-	    this.userService.save(user);
-	    return "redirect:/admin/user";
+	@PostMapping("/edit")
+	public String update(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file,
+			RedirectAttributes redirectAttributes, @RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo) {
+		try {
+			if (!file.isEmpty()) {
+				String avatarUrl = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_"
+						+ file.getOriginalFilename();
+				this.storageService.store(file, avatarUrl);
+				user.setAvatarUrl("/upload-dir/" + avatarUrl);
+			} else {
+				user.setAvatarUrl(this.userService.findById(user.getId()).getAvatarUrl());
+			}
+
+			this.userService.save(user);
+			redirectAttributes.addFlashAttribute("message", "User updated successfully.");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "An error occurred while updating the user.");
+		}
+
+		redirectAttributes.addAttribute("keyword", keyword);
+		redirectAttributes.addAttribute("pageNo", pageNo);
+
+		return "redirect:/admin/user";
 	}
 
+	@GetMapping("/set-enabled/{id}")
+	public String setEnabled(@PathVariable("id") Long id, RedirectAttributes redirectAttributes,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo) {
+		// Tìm User
+		User user = this.userService.findById(id);
+		if (user == null) {
+			redirectAttributes.addFlashAttribute("errorMessage", "User not found.");
+			return "redirect:/admin/user";
+		}
 
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable("id") Long id) {
-		this.userService.deleteById(id);
+		// Cập nhật trạng thái
+		user.setEnabled(!user.isEnabled());
+		this.userService.save(user);
+
+		// Gửi email thông báo
+		String email = user.getEmail();
+		String username = user.getUsername();
+
+		try {
+			sendNotificationEmail(user, email, username);
+			String action = user.isEnabled() ? "activated" : "disabled";
+			redirectAttributes.addFlashAttribute("message",
+					String.format("User account has been successfully %s.", action));
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "An error occurred while sending the email.");
+		}
+
+		redirectAttributes.addAttribute("keyword", keyword);
+		redirectAttributes.addAttribute("pageNo", pageNo);
+
 		return "redirect:/admin/user";
+	}
+
+	private void sendNotificationEmail(User user, String email, String username) throws Exception {
+		if (user.isEnabled()) {
+			emailService.sendEmail(email, "Account Activated - Estore Bookshop", String.format(
+					"Dear %s,<br><br>Your account has been successfully enabled. You can now log in and use our services.<br><br>Best regards,<br>Estore Bookshop",
+					username));
+		} else {
+			emailService.sendEmail(email, "Account Disabled - Estore Bookshop", String.format(
+					"Dear %s,<br><br>Your account has been disabled by the administrator. If you believe this is a mistake or need assistance, please contact us at <a href='mailto:jobhere.22t.nhat1@gmail.com'>jobhere.22t.nhat1@gmail.com</a>.<br><br>Best regards,<br>Estore Bookshop",
+					username));
+		}
 	}
 
 }

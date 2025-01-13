@@ -14,8 +14,6 @@ public interface UserService {
 
 	public User save(User user);
 
-	public void deleteById(Long id);
-
 	public List<User> findByKeyword(String keyword);
 
 	public Page<User> findAll(Integer pageno);
