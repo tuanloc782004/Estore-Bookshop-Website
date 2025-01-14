@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{admin/layout/head::head}"></head>
+
+<body>
+
+	<div class="wrapper">
+
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<nav th:replace="~{admin/layout/navbar::navbar}"></nav>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="header">
+									<div class="row align-items-center mb-3">
+										<div class="col-md-4">
+											<h4 class="title mb-0">List of Reviews</h4>
+										</div>
+										<div class="col-md-4">
+											<div class="container"
+												style="max-width: 450px; margin: 0 auto;">
+												<!-- Hiển thị thông báo thành công -->
+												<div th:if="${message}" class="alert alert-success"
+													role="alert">
+													<span th:text="${message}"></span>
+												</div>
+												<!-- Hiển thị thông báo lỗi -->
+												<div th:if="${error}" class="alert alert-danger"
+													role="alert">
+													<span th:text="${error}"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- Form for Search -->
+									<div class="row mb-3">
+										<div class="col-md-12">
+											<form method="get" th:action="@{/admin/review}">
+												<div class="row">
+													<!-- Select Status -->
+													<div class="col-md-2">
+														<select name="status" class="form-control">
+															<option value="All" th:selected="${checked == null}">All
+																Status</option>
+															<option value="false" th:selected="${checked == false}">Unchecked</option>
+															<option value="true" th:selected="${checked == true}">Checked</option>
+														</select>
+													</div>
+													<!-- Filter by Start Date -->
+													<div class="col-md-2">
+														<input type="date" name="startDate" class="form-control"
+															placeholder="Start date" th:value="${startDate}">
+													</div>
+													<!-- Filter by End Date -->
+													<div class="col-md-2">
+														<input type="date" name="endDate" class="form-control"
+															placeholder="End date" th:value="${endDate}">
+													</div>
+													<!-- Search Button -->
+													<div class="col-md-2">
+														<button type="submit" class="btn btn-primary">Search</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="content table-responsive table-full-width">
+										<table class="table table-hover table-striped">
+											<thead>
+												<th>Username</th>
+												<th>Book Title</th>
+												<th>Comment</th>
+												<th>Rating</th>
+												<th>Created At</th>
+												<th>Status</th>
+												<th>Action</th>
+											</thead>
+											<tbody>
+												<tr th:each="review : ${reviews}">
+													<td th:text="${review.user.username}"></td>
+													<td th:text="${review.book.title}"></td>
+													<td th:text="${review.comment}"></td>
+													<td><span th:if="${review.rating == 1}"
+														style="color: gold;">★</span> <span
+														th:if="${review.rating == 2}" style="color: gold;">★★</span>
+														<span th:if="${review.rating == 3}" style="color: gold;">★★★</span>
+														<span th:if="${review.rating == 4}" style="color: gold;">★★★★</span>
+														<span th:if="${review.rating == 5}" style="color: gold;">★★★★★</span>
+													</td>
+													<td
+														th:text="${review.createdAt.toString().substring(0,10)}"></td>
+													<td><span th:if="${review.checked == true}"
+														class="label label-success">Checked</span> <span
+														th:if="${review.checked == false}"
+														class="label label-danger">Unchecked</span></td>
+													<td><a
+														th:href="@{|/admin/review/set-checked/${review.id}|}"
+														class="btn btn-primary">Accept</a> <a
+														th:href="@{|/admin/book/delete-comment/${review.id}|}"
+														class="btn btn-danger"
+														onclick="return confirm('Are you sure ???')">Delete
+															comment</a></td>
+												</tr>
+											</tbody>
+										</table>
+										<div th:replace="~{admin/layout/pagination::pagination}"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
+</body>
+
+</html>

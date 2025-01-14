@@ -36,13 +36,17 @@ public class Review {
 
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
+    
+    @Column(name = "checked", nullable = false)
+	private boolean checked;
 
 	public Review() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Review(Long id, User user, Book book, Integer rating, String comment, LocalDateTime createdAt) {
+	public Review(Long id, User user, Book book, Integer rating, String comment, LocalDateTime createdAt,
+			boolean checked) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -50,6 +54,7 @@ public class Review {
 		this.rating = rating;
 		this.comment = comment;
 		this.createdAt = createdAt;
+		this.checked = checked;
 	}
 
 	public Long getId() {
@@ -98,6 +103,14 @@ public class Review {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 
 }

@@ -55,14 +55,16 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(Long id, User user, Address address, BigDecimal totalPrice, String status, LocalDateTime createdAt,
-			Set<OrderDetail> orderDetails) {
+	public Order(Long id, User user, Address address, BigDecimal totalPrice, String status, String paymentMethod,
+			String note, LocalDateTime createdAt, Set<OrderDetail> orderDetails) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.address = address;
 		this.totalPrice = totalPrice;
 		this.status = status;
+		this.paymentMethod = paymentMethod;
+		this.note = note;
 		this.createdAt = createdAt;
 		this.orderDetails = orderDetails;
 	}
@@ -107,6 +109,22 @@ public class Order {
 		this.status = status;
 	}
 
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -122,5 +140,5 @@ public class Order {
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-
+	
 }

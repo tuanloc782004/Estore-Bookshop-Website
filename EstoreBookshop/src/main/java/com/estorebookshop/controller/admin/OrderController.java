@@ -2,6 +2,7 @@ package com.estorebookshop.controller.admin;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.estorebookshop.config.service.EmailService;
 import com.estorebookshop.model.Order;
+import com.estorebookshop.model.User;
 import com.estorebookshop.service.OrderService;
 
 @Controller
@@ -22,6 +25,9 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping("")
 	public String order(@RequestParam(value = "username", required = false) String username,
@@ -58,15 +64,43 @@ public class OrderController {
 	}
 
 	@GetMapping("/set-status")
-	public String setStatus(@RequestParam Long orderId, @RequestParam String status,
-			RedirectAttributes redirectAttributes) {
-		try {
-			orderService.setStatus(orderId, status);
-			redirectAttributes.addFlashAttribute("message", "Order status updated successfully!");
-		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("error", "Failed to update order status.");
-		}
-		return "redirect:/admin/order";
+	public String setStatus(@RequestParam Long orderId, @RequestParam String status, RedirectAttributes redirectAttributes) {
+	   
+	    Order order = this.orderService.findById(orderId);
+	    User user = order.getUser(); 
+	    
+	    String email = user.getEmail();
+	    String username = user.getUsername();
+	    String oldStatus = order.getStatus();
+
+	    try {
+	        orderService.setStatus(orderId, status);
+	        
+	        sendNotificationEmail(user, email, username, oldStatus, status, orderId);
+	        
+	        redirectAttributes.addFlashAttribute("message", "Order status updated successfully!");
+	    } catch (Exception e) {
+	        redirectAttributes.addFlashAttribute("error", "Failed to update order status.");
+	    }
+	    
+	    return "redirect:/admin/order";
 	}
+
+	private void sendNotificationEmail(User user, String email, String username, String oldStatus, String newStatus, Long orderId) throws Exception {
+	    LocalDateTime updateTime = LocalDateTime.now();  
+	    
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	    String formattedUpdateTime = updateTime.format(formatter);
+
+	    String subject = "Order Status Updated - Estore Bookshop";
+	    String message = String.format(
+	            "Dear %s,<br><br>Your order with ID <b>%d</b> has been updated.<br>"
+	            + "The status has changed from <b>%s</b> to <b>%s</b> on <b>%s</b>.<br><br>"
+	            + "Thank you for shopping with us!<br><br>Best regards,<br>Estore Bookshop",
+	            username, orderId, oldStatus, newStatus, formattedUpdateTime);
+
+	    emailService.sendEmail(email, subject, message);
+	}
+
 
 }

@@ -1,6 +1,0 @@
-package com.estorebookshop.service.implement;
-
-@Service
-public class UserServiceImpl {
-
-}

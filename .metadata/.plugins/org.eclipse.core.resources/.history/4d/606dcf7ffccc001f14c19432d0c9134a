@@ -1,5 +1,0 @@
-package com.estorebookshop.service;
-
-public interface PublisherService {
-
-}
