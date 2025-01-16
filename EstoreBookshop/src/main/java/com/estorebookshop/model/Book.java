@@ -53,6 +53,9 @@ public class Book {
 	@Column(name = "quantity", nullable = false)
 	private Long quantity;
 	
+	@Column(name = "sold_quantity", nullable = false)
+	private Long soldQuantity;
+	
 	@Column(name = "price", nullable = false, precision = 10, scale = 2)
 	private BigDecimal price;
 	
@@ -89,8 +92,8 @@ public class Book {
 	}
 
 	public Book(Long id, Language language, Publisher publisher, String isbn, String title, String author,
-			Integer yearOfPublication, String description, Long numOfPages, Long quantity, BigDecimal price,
-			BigDecimal discount, BigDecimal rating, boolean enabled, LocalDateTime createdAt,
+			Integer yearOfPublication, String description, Long numOfPages, Long quantity, Long soldQuantity,
+			BigDecimal price, BigDecimal discount, BigDecimal rating, boolean enabled, LocalDateTime createdAt,
 			Set<BookCategory> bookCategories, Set<BookImage> bookImages, Set<CartItem> cartItems, Set<Review> reviews,
 			Set<OrderDetail> oderDetail) {
 		super();
@@ -104,6 +107,7 @@ public class Book {
 		this.description = description;
 		this.numOfPages = numOfPages;
 		this.quantity = quantity;
+		this.soldQuantity = soldQuantity;
 		this.price = price;
 		this.discount = discount;
 		this.rating = rating;
@@ -194,6 +198,14 @@ public class Book {
 
 	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
+	}
+
+	public Long getSoldQuantity() {
+		return soldQuantity;
+	}
+
+	public void setSoldQuantity(Long soldQuantity) {
+		this.soldQuantity = soldQuantity;
 	}
 
 	public BigDecimal getPrice() {

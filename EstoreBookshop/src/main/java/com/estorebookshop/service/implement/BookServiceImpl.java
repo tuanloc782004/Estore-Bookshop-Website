@@ -62,4 +62,29 @@ public class BookServiceImpl implements BookService {
 		return new PageImpl<Book>(list, pageable, this.findByKeyword(keyword).size());
 	}
 
+	@Override
+	public List<Book> findForHome(Long languageId, Long categoryId, String sort) {
+		// TODO Auto-generated method stub
+		return this.bookRepository.findForHome(languageId, categoryId, sort);
+	}
+	
+	@Override
+	public Page<Book> findAllForHome(Integer pageno) {
+		// TODO Auto-generated method stub
+		Pageable pageable = PageRequest.of(pageno - 1, 6);
+		return this.bookRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Book> findForHome(Long languageId, Long categoryId, String sort, Integer pageNo) {
+		// TODO Auto-generated method stub
+		List<Book> list = this.bookRepository.findForHome(languageId, categoryId, sort);
+		Pageable pageable = PageRequest.of(pageNo - 1, 6);
+		Integer start = (int) pageable.getOffset();
+		Integer end = (int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ? list.size()
+				: pageable.getOffset() + pageable.getPageSize());
+		list = list.subList(start, end);
+		return new PageImpl<Book>(list, pageable, this.findForHome(languageId, categoryId, sort).size());
+	}
+
 }

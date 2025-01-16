@@ -20,4 +20,10 @@ public interface BookService {
 
 	public Page<Book> findByKeyword(String keyword, Integer pageNo);
 	
+	public List<Book> findForHome(Long languageId, Long categoryId, String sort);
+	
+	public Page<Book> findAllForHome(Integer pageno);
+	
+	public Page<Book> findForHome(Long languageId, Long categoryId, String sort, Integer pageNo);
+	
 }

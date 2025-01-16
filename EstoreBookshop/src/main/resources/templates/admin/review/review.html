@@ -46,11 +46,13 @@
 												<div class="row">
 													<!-- Select Status -->
 													<div class="col-md-2">
-														<select name="status" class="form-control">
-															<option value="All" th:selected="${checked == null}">All
+														<select name="checked" class="form-control">
+															<option value="all" th:selected="${checked == 'all'}">All
 																Status</option>
-															<option value="false" th:selected="${checked == false}">Unchecked</option>
-															<option value="true" th:selected="${checked == true}">Checked</option>
+															<option value="Unchecked"
+																th:selected="${checked == 'Unchecked'}">Unchecked</option>
+															<option value="Checked"
+																th:selected="${checked == 'Checked'}">Checked</option>
 														</select>
 													</div>
 													<!-- Filter by Start Date -->
@@ -96,17 +98,17 @@
 													</td>
 													<td
 														th:text="${review.createdAt.toString().substring(0,10)}"></td>
-													<td><span th:if="${review.checked == true}"
+													<td><span th:if="${review.checked == 'Checked'}"
 														class="label label-success">Checked</span> <span
-														th:if="${review.checked == false}"
-														class="label label-danger">Unchecked</span></td>
+														th:if="${review.checked == 'Unchecked'}"
+														class="label label-warning">Unchecked</span></td>
 													<td><a
-														th:href="@{|/admin/review/set-checked/${review.id}|}"
-														class="btn btn-primary">Accept</a> <a
-														th:href="@{|/admin/book/delete-comment/${review.id}|}"
+														th:href="@{|/admin/review/delete-comment?id=${review.id}|}"
 														class="btn btn-danger"
 														onclick="return confirm('Are you sure ???')">Delete
-															comment</a></td>
+															comment</a> <a th:if="${review.checked == 'Unchecked'}"
+														th:href="@{|/admin/review/set-status?id=${review.id}|}"
+														class="btn btn-primary">Accept</a></td>
 												</tr>
 											</tbody>
 										</table>

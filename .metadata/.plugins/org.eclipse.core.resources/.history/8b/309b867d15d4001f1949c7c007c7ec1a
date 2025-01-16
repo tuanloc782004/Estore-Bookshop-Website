@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+
+		<!-- Latest Products Start -->
+		<section class="latest-product-area latest-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-4 col-lg-4 col-md-6" th:each="book : ${books}">
+						<div class="single-product mb-60">
+							<div class="product-img">
+								<img
+									th:src="${book.bookImages != null and !book.bookImages.isEmpty() ? book.bookImages.iterator().next().imageUrl : '/upload-dir/default-image/book-image.jfif'}"
+									alt="Book Image" width="100" height="100">
+							</div>
+							<div class="product-caption">
+								<div class="product-rating">
+									<i class="fas fa-star"
+										th:class="${book.rating >= 1 ? 'active' : ''}"></i> <i
+										class="fas fa-star"
+										th:class="${book.rating >= 2 ? 'active' : ''}"></i> <i
+										class="fas fa-star"
+										th:class="${book.rating >= 3 ? 'active' : ''}"></i> <i
+										class="fas fa-star"
+										th:class="${book.rating >= 4 ? 'active' : ''}"></i> <i
+										class="fas fa-star"
+										th:class="${book.rating >= 5 ? 'active' : ''}"></i> <i
+										class="fas fa-star-half-alt"
+										th:if="${book.rating % 1 >= 0.5 && book.rating < 1}"></i> <span
+										th:if="${book.rating == 0}">No ratings</span>
+								</div>
+								<h4>
+									<a href="#" th:text="${book.title}">Title</a>
+								</h4>
+								<div class="price">
+									<ul>
+										<!-- Giá gốc bị gạch đi -->
+										<li class="discount" th:if="${book.discount > 0}"
+											th:text="${'$' + book.price}"></li>
+
+										<!-- Giá sau giảm -->
+										<li class="price"><span class="price-after-discount"
+											th:text="${'$' + (book.price - (book.price * (book.discount / 100)))}"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div th:replace="~{user/layout/pagination/pagination::pagination}"></div>
+			</div>
+		</section>
+		<!-- Latest Products End -->
+
+	</main>
+
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+
+	<div th:replace="~{user/layout/script::script}"></div>
+
+	<!-- JavaScript Tính toán giá sau giảm -->
+	<script>
+		// Lặp qua tất cả sản phẩm và tính giá sau giảm
+		document.addEventListener("DOMContentLoaded", function() {
+			const books = document.querySelectorAll('.single-product');
+			books.forEach(book => {
+				const priceElement = book.querySelector('.price');
+				const discountElement = book.querySelector('.discount');
+				const price = parseFloat(book.getAttribute('data-price')); // Giả sử giá gốc là thuộc tính data-price
+				const discount = parseFloat(book.getAttribute('data-discount')); // Giả sử discount là thuộc tính data-discount
+
+				if (price && discount) {
+					const discountedPrice = price - (price * (discount / 100));
+					// Định dạng giá sau giảm với 2 chữ số thập phân
+					const formattedPrice = discountedPrice.toFixed(2);
+
+					// Cập nhật giá sau giảm
+					priceElement.querySelector('.price-after-discount').innerText = '$' + formattedPrice;
+
+					// Cập nhật giá gốc nếu có giảm giá
+					if (discount > 0) {
+						discountElement.innerText = '$' + price.toFixed(2);
+					}
+				}
+			});
+		});
+	</script>
+
+</body>
+</html>

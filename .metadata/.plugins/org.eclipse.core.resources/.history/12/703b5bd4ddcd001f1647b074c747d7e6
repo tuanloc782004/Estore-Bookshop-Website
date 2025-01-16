@@ -1,9 +1,0 @@
-package com.estorebookshop.service;
-
-import com.estorebookshop.model.Book;
-
-public interface BookCategoryService {
-	
-	public void deleteByBook(Book book);
-	
-}

@@ -1,0 +1,36 @@
+<div class="text-center mb-3" th:fragment="pagination">
+	<nav class="blog-pagination justify-content-center d-flex">
+		<ul class="pagination">
+			<!-- Link đến trang trước -->
+			<li class="page-item"
+				th:classappend="${currentPage <= 1} ? 'disabled' : ''"><a
+				class="page-link"
+				th:href="@{${selectedLanguageId != null ? '?language=' + selectedLanguageId : ''} 
+                            ${selectedCategoryId != null ? (selectedLanguageId != null ? '&' : '?') + 'category=' + selectedCategoryId : ''} 
+                            ${sort != null && sort != '' ? (selectedLanguageId != null || selectedCategoryId != null ? '&' : '?') + 'sort=' + sort : ''} 
+                            ${selectedLanguageId != null || selectedCategoryId != null || sort != null ? '&' : '?'} + 'pageNo=' + (${currentPage - 1})}">«</a>
+			</li>
+
+			<!-- Số trang -->
+			<li th:each="i : ${#numbers.sequence(1, totalPage)}"
+				class="page-item"
+				th:classappend="${currentPage == i} ? 'active' : ''"><a
+				class="page-link"
+				th:href="@{${selectedLanguageId != null ? '?language=' + selectedLanguageId : ''} 
+                            ${selectedCategoryId != null ? (selectedLanguageId != null ? '&' : '?') + 'category=' + selectedCategoryId : ''} 
+                            ${sort != null && sort != '' ? (selectedLanguageId != null || selectedCategoryId != null ? '&' : '?') + 'sort=' + sort : ''} 
+                            ${selectedLanguageId != null || selectedCategoryId != null || sort != null ? '&' : '?'} + 'pageNo=' + ${i}}"
+				th:text="${i}">1</a></li>
+
+			<!-- Link đến trang kế tiếp -->
+			<li class="page-item"
+				th:classappend="${currentPage >= totalPage} ? 'disabled' : ''">
+				<a class="page-link"
+				th:href="@{${selectedLanguageId != null ? '?language=' + selectedLanguageId : ''} 
+                            ${selectedCategoryId != null ? (selectedLanguageId != null ? '&' : '?') + 'category=' + selectedCategoryId : ''} 
+                            ${sort != null && sort != '' ? (selectedLanguageId != null || selectedCategoryId != null ? '&' : '?') + 'sort=' + sort : ''} 
+                            ${selectedLanguageId != null || selectedCategoryId != null || sort != null ? '&' : '?'} + 'pageNo=' + (${currentPage + 1})}">»</a>
+			</li>
+		</ul>
+	</nav>
+</div>

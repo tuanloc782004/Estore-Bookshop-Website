@@ -38,7 +38,7 @@ public class Review {
     private LocalDateTime createdAt;
     
     @Column(name = "checked", nullable = false)
-	private boolean checked;
+	private String checked;
 
 	public Review() {
 		super();
@@ -46,7 +46,7 @@ public class Review {
 	}
 
 	public Review(Long id, User user, Book book, Integer rating, String comment, LocalDateTime createdAt,
-			boolean checked) {
+			String checked) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -105,11 +105,11 @@ public class Review {
 		this.createdAt = createdAt;
 	}
 
-	public boolean isChecked() {
+	public String getChecked() {
 		return checked;
 	}
 
-	public void setChecked(boolean checked) {
+	public void setChecked(String checked) {
 		this.checked = checked;
 	}
 

@@ -1,0 +1,45 @@
+package com.estorebookshop.service.implement;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
+
+import com.estorebookshop.model.Review;
+import com.estorebookshop.repository.ReviewRepository;
+import com.estorebookshop.service.ReviewService;
+
+@Service
+public class ReviewServiceImpl implements ReviewService {
+	
+	@Autowired
+	private ReviewRepository reviewRepository;
+
+	@Override
+	public List<Review> findByKeyword(String keyword, String status, LocalDateTime startDate, LocalDateTime endDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Review> findAll(Integer pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Review> findByKeyword(String keyword, String status, LocalDateTime startDate, LocalDateTime endDate,
+			Integer pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setStatus(Long reviewId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

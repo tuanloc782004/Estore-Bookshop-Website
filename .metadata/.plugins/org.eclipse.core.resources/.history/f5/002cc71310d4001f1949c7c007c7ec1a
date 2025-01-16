@@ -1,0 +1,119 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+
+		<!-- slider Area Start-->
+		<div class="slider-area ">
+			<!-- Mobile Menu -->
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				data-background="assets/img/hero/category.jpg"></div>
+		</div>
+		<!-- slider Area End-->
+
+		<!-- Latest Products Start -->
+		<section class="latest-product-area latest-padding">
+			<div class="container">
+				<form action="#">
+					<div class="row product-btn d-flex justify-content-between">
+						<div class="select-this d-flex">
+							<div class="featured">
+								<span>Language: </span>
+							</div>
+							<div class="select-itms">
+								<select name="select" id="select1">
+									<option value="">Featured</option>
+									<option value="">Featured A</option>
+									<option value="">Featured B</option>
+									<option value="">Featured C</option>
+								</select>
+							</div>
+						</div>
+						<div class="select-this d-flex">
+							<div class="featured">
+								<span>Category: </span>
+							</div>
+							<div class="select-itms">
+								<select name="select" id="select1">
+									<option value="">Featured</option>
+									<option value="">Featured A</option>
+									<option value="">Featured B</option>
+									<option value="">Featured C</option>
+								</select>
+							</div>
+						</div>
+						<div class="select-this d-flex">
+							<div class="featured">
+								<span>Short by: </span>
+							</div>
+							<div class="select-itms">
+								<select name="select" id="select1">
+									<option value="">Popular</option>
+									<option value="">Best Selling</option>
+									<option value="">New Arrivals</option>
+									<option value="">Price: Low to High</option>
+									<option value="">Price: High to Low</option>
+								</select>
+							</div>
+						</div>
+						
+					</div>
+				</form>
+				<!-- Nav Card -->
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home"
+						role="tabpanel" aria-labelledby="nav-home-tab">
+						<div class="row">
+							<div class="col-xl-4 col-lg-4 col-md-6">
+								<div class="single-product mb-60">
+									<div class="product-img">
+										<img src="assets/img/categori/product6.png" alt="">
+										<div class="new-product">
+											<span>New</span>
+										</div>
+									</div>
+									<div class="product-caption">
+										<div class="product-ratting">
+											<i class="far fa-star"></i> <i class="far fa-star"></i> <i
+												class="far fa-star"></i> <i class="far fa-star low-star"></i>
+											<i class="far fa-star low-star"></i>
+										</div>
+										<h4>
+											<a href="#">Green Dress with details</a>
+										</h4>
+										<div class="price">
+											<ul>
+												<li>$40.00</li>
+												<li class="discount">$60.00</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--<div th:replace="~{admin/layout/pagination::pagination}"></div>-->
+				</div>
+				<!-- End Nav Card -->
+			</div>
+		</section>
+		<!-- Latest Products End -->
+
+	</main>
+
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+
+	<div th:replace="~{user/layout/script::script}"></div>
+
+</body>
+
+</html>

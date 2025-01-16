@@ -1,0 +1,164 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+
+		<!-- slider Area Start-->
+		<div class="slider-area ">
+			<!-- Mobile Menu -->
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				data-background="assets/img/hero/category.jpg"></div>
+		</div>
+		<!-- slider Area End-->
+
+		<!-- Latest Products Start -->
+		<section class="latest-product-area latest-padding">
+			<div class="container">
+				<form method="get" th:action="@{/}">
+					<div class="row product-btn d-flex justify-content-between">
+						<!-- Language Selection -->
+						<div class="select-this d-flex">
+							<div class="featured">
+								<span>Language: </span>
+							</div>
+							<div class="select-itms">
+								<select name="language" id="select1">
+									<option value="">Select Language</option>
+									<!-- Lặp qua danh sách languages -->
+									<option th:each="lang : ${languages}" th:value="${lang.id}"
+										th:text="${lang.languageName}"
+										th:selected="${lang.id == selectedLanguageId}"></option>
+								</select>
+							</div>
+						</div>
+
+						<!-- Category Selection -->
+						<div class="select-this d-flex">
+							<div class="featured">
+								<span>Category: </span>
+							</div>
+							<div class="select-itms">
+								<select name="category" id="select2">
+									<option value="">Select Category</option>
+									<!-- Lặp qua danh sách categories -->
+									<option th:each="category : ${categories}"
+										th:value="${category.id}" th:text="${category.categoryName}"
+										th:selected="${category.id == selectedCategoryId}"></option>
+								</select>
+							</div>
+						</div>
+
+						<!-- Sort By Selection -->
+						<div class="select-this d-flex">
+							<div class="featured">
+								<span>Sort by: </span>
+							</div>
+							<div class="select-itms">
+								<select name="sort" id="select3">
+									<option value="popular"
+										th:selected="${'popular' == selectedSort}">Popular</option>
+									<option value="best" th:selected="${'best' == selectedSort}">Best
+										Selling</option>
+									<option value="new" th:selected="${'new' == selectedSort}">New
+										Arrivals</option>
+									<option value="lh" th:selected="${'lh' == selectedSort}">Price:
+										Low to High</option>
+									<option value="hl" th:selected="${'hl' == selectedSort}">Price:
+										High to Low</option>
+								</select>
+							</div>
+						</div>
+
+						<!-- Submit Button -->
+						<div class="select-this d-flex">
+							<button type="submit" class="btn btn-primary">View
+								Results</button>
+						</div>
+					</div>
+				</form>
+				<!-- Nav Card -->
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home"
+						role="tabpanel" aria-labelledby="nav-home-tab">
+						<div class="row">
+							<div class="col-xl-4 col-lg-4 col-md-6" th:each="book : ${books}">
+								<div class="single-product mb-60">
+									<div class="product-img">
+										<img
+											th:src="${book.bookImages != null and !book.bookImages.isEmpty() ? book.bookImages.iterator().next().imageUrl : '/upload-dir/default-image/book-image.jfif'}"
+											alt="Book Image">
+									</div>
+									<div class="product-caption">
+										<div class="product-rating">
+											<span th:text="${book.rating}"></span> <span
+												style="color: gold;">★</span>
+										</div>
+										<h4>
+											<a href="#" th:text="${book.title}">Title</a>
+										</h4>
+										<div class="price">
+											<ul>
+												<!-- Giá gốc bị gạch đi -->
+												<li class="discount" th:if="${book.discount > 0}"
+													th:text="${'$' + book.price}"></li>
+
+												<!-- Giá sau giảm -->
+												<li><span class="price-after-discount"
+													th:attr="data-price=${book.price}, 
+															data-discount=${book.discount}">0.00</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:replace="~{user/layout/pagination/pagination::pagination}"></div>
+		</section>
+		<!-- Latest Products End -->
+
+	</main>
+
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+
+	<div th:replace="~{user/layout/script::script}"></div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Chọn tất cả các phần tử có class "price-after-discount"
+			const priceAfterDiscountElements = document
+					.querySelectorAll('.price-after-discount');
+
+			// Lặp qua các sản phẩm để tính giá sau giảm
+			priceAfterDiscountElements.forEach(function(element) {
+				const price = parseFloat(element.getAttribute('data-price')); // Lấy giá gốc
+				const discount = parseFloat(element
+						.getAttribute('data-discount')); // Lấy tỷ lệ giảm giá
+
+				let finalPrice = price;
+				if (discount > 0) {
+					// Tính giá sau giảm
+					finalPrice = (price * (100 - discount) / 100);
+				}
+
+				// Hiển thị giá sau giảm
+				element.textContent = '$' + finalPrice.toFixed(2); // Định dạng với 2 chữ số thập phân
+			});
+		});
+	</script>
+
+</body>
+
+</html>
