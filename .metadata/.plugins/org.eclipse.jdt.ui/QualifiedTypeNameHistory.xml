@@ -45,19 +45,19 @@
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.estorebookshop.repository.ReviewRepository"/>
-    <fullyQualifiedTypeName name="com.estorebookshop.service.ReviewService"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
-    <fullyQualifiedTypeName name="com.estorebookshop.model.Review"/>
     <fullyQualifiedTypeName name="com.estorebookshop.config.service.EmailService"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
-    <fullyQualifiedTypeName name="com.estorebookshop.service.BookService"/>
     <fullyQualifiedTypeName name="com.estorebookshop.service.LanguageService"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.estorebookshop.service.CategoryService"/>
     <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.estorebookshop.model.Language"/>
     <fullyQualifiedTypeName name="java.util.Locale.Category"/>
     <fullyQualifiedTypeName name="com.estorebookshop.model.Category"/>
+    <fullyQualifiedTypeName name="com.estorebookshop.service.BookService"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.estorebookshop.model.Review"/>
+    <fullyQualifiedTypeName name="com.estorebookshop.service.ReviewService"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

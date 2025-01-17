@@ -16,10 +16,12 @@ public interface ReviewService {
 	public Page<Review> findByKeyword(String checked, LocalDateTime startDate, LocalDateTime endDate,
 			Integer pageNo);
 
-	void setStatus(Long reviewId);
+	public void setStatus(Long reviewId);
 	
-	void deleteComment(Long reviewId);
+	public void deleteComment(Long reviewId);
 	
 	public Review findById(Long id);
+	
+	public List<Review> findByBookIdSortByCreatedAt (Long bookId);
 
 }

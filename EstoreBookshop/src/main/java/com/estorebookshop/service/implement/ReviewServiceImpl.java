@@ -72,4 +72,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return this.reviewRepository.findById(id).orElse(null);
 	}
 
+	@Override
+	public List<Review> findByBookIdSortByCreatedAt(Long bookId) {
+		// TODO Auto-generated method stub
+		return this.reviewRepository.findByBookIdSortByCreatedAt(bookId);
+	}
+
 }

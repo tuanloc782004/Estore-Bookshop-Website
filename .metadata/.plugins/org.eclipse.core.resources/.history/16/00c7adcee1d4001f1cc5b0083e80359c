@@ -1,0 +1,25 @@
+<div class="text-center mb-3" th:fragment="pagination">
+	<nav class="blog-pagination justify-content-center d-flex">
+		<ul class="pagination">
+			<!-- Link đến trang trước -->
+			<li class="page-item" th:class="${currentPage <= 1} ? 'disabled'">
+				<a class="page-link"
+				th:href="@{(${paginationUrl}(pageNo=${currentPage - 1}))}"
+				aria-label="Previous">«</a>
+			</li>
+
+			<!-- Số trang -->
+			<li th:each="i : ${#numbers.sequence(1, totalPage)}"
+				class="page-item" th:class="${currentPage == i} ? 'active'"><a
+				class="page-link" th:href="@{(${paginationUrl}(pageNo=${i}))}"
+				th:text="${i}"></a></li>
+
+			<!-- Link đến trang kế tiếp -->
+			<li class="page-item"
+				th:class="${currentPage >= totalPage} ? 'disabled'"><a
+				class="page-link"
+				th:href="@{(${paginationUrl}(pageNo=${currentPage + 1}))}"
+				aria-label="Next">»</a></li>
+		</ul>
+	</nav>
+</div>

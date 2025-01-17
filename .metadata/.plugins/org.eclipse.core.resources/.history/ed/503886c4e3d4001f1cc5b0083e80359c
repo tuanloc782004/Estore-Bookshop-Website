@@ -1,0 +1,31 @@
+<div class="text-center mb-3" th:fragment="pagination">
+	<nav class="blog-pagination justify-content-center d-flex">
+		<ul class="pagination">
+			<li class="page-item" th:if="${currentPage > 1}"><a
+				class="page-link"
+				th:href="@{'?' 
+				   + (${selectedLanguageId != null ? 'language=' + selectedLanguageId + '&' : ''}) 
+				   + (${selectedCategoryId != null ? 'category=' + selectedCategoryId + '&' : ''}) 
+				   + (${sort != null && sort != '' ? 'sort=' + sort + '&' : ''}) 
+				   + 'pageNo=' + (currentPage - 1)}">«</a>
+			</li>
+			<li class="page-item" th:each="i:${#numbers.sequence(1, totalPage)}"
+				th:classappend="${currentPage == i ? 'active' : ''}"><a
+				class="page-link"
+				th:href="@{'?' 
+				   + (${selectedLanguageId != null ? 'language=' + selectedLanguageId + '&' : ''}) 
+				   + (${selectedCategoryId != null ? 'category=' + selectedCategoryId + '&' : ''}) 
+				   + (${sort != null && sort != '' ? 'sort=' + sort + '&' : ''}) 
+				   + 'pageNo=' + i}"
+				th:text="${i}"></a></li>
+			<li class="page-item" th:if="${currentPage < totalPage}"><a
+				class="page-link"
+				th:href="@{'?' 
+				   + (${selectedLanguageId != null ? 'language=' + selectedLanguageId + '&' : ''}) 
+				   + (${selectedCategoryId != null ? 'category=' + selectedCategoryId + '&' : ''}) 
+				   + (${sort != null && sort != '' ? 'sort=' + sort + '&' : ''}) 
+				   + 'pageNo=' + (currentPage + 1)}">»</a>
+			</li>
+		</ul>
+	</nav>
+</div>
