@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.antlr.v4.runtime.misc.Array2DHashSet"/>
-    <fullyQualifiedTypeName name="com.estorebookshop.model.Book"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
     <fullyQualifiedTypeName name="java.util.HashSet"/>
     <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
     <fullyQualifiedTypeName name="com.estorebookshop.repository.CartRepository"/>
-    <fullyQualifiedTypeName name="com.estorebookshop.model.Cart"/>
     <fullyQualifiedTypeName name="com.estorebookshop.repository.CartItemRepository"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="ch.qos.logback.core.model.Model"/>
-    <fullyQualifiedTypeName name="com.estorebookshop.model.CartItem"/>
     <fullyQualifiedTypeName name="java.math.RoundingMode"/>
-    <fullyQualifiedTypeName name="com.estorebookshop.service.CartItemService"/>
     <fullyQualifiedTypeName name="jakarta.mail.MessagingException"/>
     <fullyQualifiedTypeName name="jakarta.mail.internet.MimeMessage"/>
     <fullyQualifiedTypeName name="org.springframework.mail.javamail.JavaMailSender"/>
     <fullyQualifiedTypeName name="org.springframework.mail.javamail.MimeMessageHelper"/>
-    <fullyQualifiedTypeName name="com.estorebookshop.service.CartService"/>
     <fullyQualifiedTypeName name="com.estorebookshop.model.Address"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
     <fullyQualifiedTypeName name="org.hibernate.query.Page"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
     <fullyQualifiedTypeName name="com.estorebookshop.repository.OrderRepository"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.PageImpl"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="org.springframework.data.web.PageableDefault"/>
     <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
     <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
@@ -32,7 +24,6 @@
     <fullyQualifiedTypeName name="com.estorebookshop.model.Order"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
     <fullyQualifiedTypeName name="java.lang.System.Logger"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.math.BigDecimal"/>
@@ -40,7 +31,6 @@
     <fullyQualifiedTypeName name="com.estorebookshop.service.OrderDetailService"/>
     <fullyQualifiedTypeName name="com.estorebookshop.model.OrderDetail"/>
     <fullyQualifiedTypeName name="com.estorebookshop.service.OrderService"/>
-    <fullyQualifiedTypeName name="com.estorebookshop.service.UserService"/>
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
@@ -48,7 +38,6 @@
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="com.estorebookshop.config.service.EmailService"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="com.estorebookshop.service.LanguageService"/>
     <fullyQualifiedTypeName name="com.estorebookshop.service.CategoryService"/>
     <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
@@ -56,8 +45,19 @@
     <fullyQualifiedTypeName name="java.util.Locale.Category"/>
     <fullyQualifiedTypeName name="com.estorebookshop.model.Category"/>
     <fullyQualifiedTypeName name="com.estorebookshop.service.BookService"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.estorebookshop.model.Review"/>
     <fullyQualifiedTypeName name="com.estorebookshop.service.ReviewService"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="com.estorebookshop.service.CartService"/>
+    <fullyQualifiedTypeName name="org.springframework.security.core.Authentication"/>
+    <fullyQualifiedTypeName name="org.springframework.security.core.context.SecurityContextHolder"/>
+    <fullyQualifiedTypeName name="com.estorebookshop.service.UserService"/>
+    <fullyQualifiedTypeName name="com.estorebookshop.model.User"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.estorebookshop.service.CartItemService"/>
+    <fullyQualifiedTypeName name="com.estorebookshop.model.Cart"/>
+    <fullyQualifiedTypeName name="com.estorebookshop.model.CartItem"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
 </qualifiedTypeNameHistroy>

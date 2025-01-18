@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+
+		<!-- slider Area Start-->
+		<div class="slider-area ">
+			<!-- Mobile Menu -->
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+		<!-- slider Area End-->
+
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+
+		<!--================Cart Area =================-->
+		<section class="cart_area section_padding">
+			<div class="container">
+				<div class="cart_inner">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Book</th>
+									<th scope="col">Price</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="cartItem : ${cartItems}">
+									<td>
+										<div class="media">
+											<div class="d-flex">
+												<img
+													th:src="${cartItem.book.bookImages?.size() > 0 
+                                                            ? cartItem.book.bookImages.iterator().next().imageUrl 
+                                                            : '/upload-dir/default-image/book-image.jfif'}"
+													alt="" />
+											</div>
+											<div class="media-body">
+												<p th:text="${cartItem.book.title}"></p>
+											</div>
+										</div>
+									</td>
+									<td>
+										<h5 th:if="${cartItem.book.discount > 0}"
+											th:text="${'$' + cartItem.book.price}"
+											style="text-decoration: line-through; color: red;"></h5>
+										<h5>--------------------------------------</h5>
+									</td>
+									<td>
+										<div class="product_count">
+											<span class="input-number-decrement"> <i
+												class="ti-minus"></i></span> <input class="input-number"
+												type="text" value="1" min="0" max="10"> <span
+												class="input-number-increment"> <i class="ti-plus"></i></span>
+										</div>
+									</td>
+									<td>
+										<h5>--------------------------------------</h5>
+									</td>
+								</tr>
+								<tr class="bottom_button">
+									<td><a class="btn_1" href="#">Update Cart</a></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td>
+										<h5>Total</h5>
+									</td>
+									<td>
+										<h5>--------------------------------------</h5>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="checkout_btn_inner float-right">
+							<a class="btn_1" href="#">Continue Shopping</a> <a
+								class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--================End Cart Area =================-->
+
+	</main>
+
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+
+	<div th:replace="~{user/layout/script::script}"></div>
+
+	<script>
+		
+	</script>
+
+</body>
+
+</html>

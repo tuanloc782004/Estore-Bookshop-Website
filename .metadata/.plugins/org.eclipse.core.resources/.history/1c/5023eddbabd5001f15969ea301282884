@@ -1,0 +1,249 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+
+		<!-- slider Area Start-->
+		<div class="slider-area ">
+			<!-- Mobile Menu -->
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+		<!-- slider Area End-->
+
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+
+		<!--================Cart Area =================-->
+		<section class="cart_area section_padding">
+			<div class="container">
+				<div class="cart_inner">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Book</th>
+									<th scope="col">Price</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="cartItem : ${cartItems}">
+									<td>
+										<div class="media">
+											<div class="d-flex">
+												<img
+													th:src="${cartItem.book.bookImages?.size() > 0 
+                                                            ? cartItem.book.bookImages.iterator().next().imageUrl 
+                                                            : '/upload-dir/default-image/book-image.jfif'}"
+													alt="" />
+											</div>
+											<div class="media-body">
+												<p th:text="${cartItem.book.title}"></p>
+											</div>
+										</div>
+									</td>
+									<td>
+										<h5 th:if="${cartItem.book.discount > 0}"
+											th:text="${'$' + cartItem.book.price}"
+											style="text-decoration: line-through; color: red;"></h5>
+										<h5>--------------------------------------</h5>
+									</td>
+									<td>
+										<div class="product_count">
+											<span class="input-number-decrement"> <i
+												class="ti-minus"></i></span> <input class="input-number"
+												type="text" value="1" min="0" max="10"> <span
+												class="input-number-increment"> <i class="ti-plus"></i></span>
+										</div>
+									</td>
+									<td>
+										<h5>--------------------------------------</h5>
+									</td>
+								</tr>
+								<tr class="bottom_button">
+									<td><a class="btn_1" href="#">Update Cart</a></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td>
+										<h5>Subtotal</h5>
+									</td>
+									<td>
+										<h5>$2160.00</h5>
+									</td>
+								</tr>
+								<tr class="shipping_area">
+									<td></td>
+									<td></td>
+									<td>
+										<h5>Shipping</h5>
+									</td>
+									<td>
+										<div class="shipping_box">
+											<ul class="list">
+												<li>Flat Rate: $5.00 <input type="radio"
+													aria-label="Radio button for following text input">
+												</li>
+												<li>Free Shipping <input type="radio"
+													aria-label="Radio button for following text input">
+												</li>
+												<li>Flat Rate: $10.00 <input type="radio"
+													aria-label="Radio button for following text input">
+												</li>
+												<li class="active">Local Delivery: $2.00 <input
+													type="radio"
+													aria-label="Radio button for following text input">
+												</li>
+											</ul>
+											<h6>
+												Calculate Shipping <i class="fa fa-caret-down"
+													aria-hidden="true"></i>
+											</h6>
+											<select class="shipping_select">
+												<option value="1">Bangladesh</option>
+												<option value="2">India</option>
+												<option value="4">Pakistan</option>
+											</select> <select class="shipping_select section_bg">
+												<option value="1">Select a State</option>
+												<option value="2">Select a State</option>
+												<option value="4">Select a State</option>
+											</select> <input class="post_code" type="text"
+												placeholder="Postcode/Zipcode" /> <a class="btn_1" href="#">Update
+												Details</a>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="checkout_btn_inner float-right">
+							<a class="btn_1" href="#">Continue Shopping</a> <a
+								class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--================End Cart Area =================-->
+
+	</main>
+
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+
+	<div th:replace="~{user/layout/script::script}"></div>
+
+	<script>
+		// Lấy các phần tử cần thiết
+		const decrementButton = document.querySelector('.inumber-decrement');
+		const incrementButton = document.querySelector('.number-increment');
+		const quantityInput = document.getElementById('quantity-input');
+		const quantityHiddenInput = document.getElementById('quantity-input-hidden');
+		
+		// Cập nhật giá trị hidden input mỗi khi số lượng thay đổi
+		quantityInput.addEventListener('input', function () {
+			quantityHiddenInput.value = quantityInput.value;
+		});
+
+		// Cập nhật giá trị hidden input ngay khi tải trang
+		quantityHiddenInput.value = quantityInput.value;
+
+		// Sự kiện khi nhấn nút giảm
+		decrementButton.addEventListener('click', function() {
+			let currentValue = parseInt(quantityInput.value);
+			if (currentValue > 1) {
+				quantityInput.value = currentValue - 1;
+			}
+			quantityHiddenInput.value = quantityInput.value;
+			updateTotalPrice();
+		});
+
+		// Sự kiện khi nhấn nút tăng
+		incrementButton.addEventListener('click', function() {
+			let currentValue = parseInt(quantityInput.value);
+			if (currentValue < 10) {
+				quantityInput.value = currentValue + 1;
+			}
+			quantityHiddenInput.value = quantityInput.value;
+			updateTotalPrice();
+		});
+
+		document.addEventListener('DOMContentLoaded', function () {
+			// Hàm tính giá sau giảm
+			const calculateDiscountedPrice = (price, discount) => {
+				return discount > 0 ? price * (1 - discount / 100) : price;
+			};
+
+			// Lấy giá và giảm giá từ thuộc tính dữ liệu
+			const priceAfterDiscountElement = document.querySelector('#price-after-discount');
+			const quantityInput = document.querySelector('#quantity-input');
+			const totalPriceElement = document.querySelector('#total-price');
+			const decrementButton = document.querySelector('.inumber-decrement');
+			const incrementButton = document.querySelector('.number-increment');
+
+			// Lấy giá và giảm giá từ thuộc tính dữ liệu
+			const basePrice = parseFloat(priceAfterDiscountElement.getAttribute('data-price'));
+			const discount = parseFloat(priceAfterDiscountElement.getAttribute('data-discount'));
+			const discountedPrice = calculateDiscountedPrice(basePrice, discount);
+
+			// Cập nhật giá sau giảm
+			priceAfterDiscountElement.textContent = `$${discountedPrice.toFixed(2)}`;
+
+			// Hàm cập nhật tổng giá
+			const updateTotalPrice = () => {
+				const quantity = parseInt(quantityInput.value, 10) || 0;
+				const totalPrice = discountedPrice * quantity;
+				totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+			};
+
+			// Xử lý nút giảm
+			decrementButton.addEventListener('click', () => {
+				let currentQuantity = parseInt(quantityInput.value, 10) || 0;
+				if (currentQuantity > 1) {
+					quantityInput.value = currentQuantity + 1;
+					updateTotalPrice();
+				}
+			});
+
+			// Xử lý nút tăng
+			incrementButton.addEventListener('click', () => {
+				let currentQuantity = parseInt(quantityInput.value, 10) || 0;
+				if (currentQuantity <= 10) {
+					quantityInput.value = currentQuantity - 1;
+					updateTotalPrice();
+				}
+			});
+
+			// Xử lý thay đổi trực tiếp trong ô nhập
+			quantityInput.addEventListener('input', () => {
+				let currentQuantity = parseInt(quantityInput.value, 10);
+				if (isNaN(currentQuantity) || currentQuantity < 1) {
+					quantityInput.value = 1;
+				} else if (currentQuantity > 10) {
+					quantityInput.value = 10;
+				}
+				updateTotalPrice();
+			});
+
+			// Cập nhật giá tổng ban đầu
+			updateTotalPrice();
+		});
+	</script>
+
+</body>
+
+</html>

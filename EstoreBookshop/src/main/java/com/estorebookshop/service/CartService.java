@@ -19,4 +19,8 @@ public interface CartService {
 	
 	public Cart findById(Long id);
 	
+	public Cart findByUserId(Long id);
+	
+	public Cart save(Cart cart);
+	
 }

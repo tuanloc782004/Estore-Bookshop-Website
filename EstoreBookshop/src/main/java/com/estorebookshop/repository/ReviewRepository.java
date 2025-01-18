@@ -16,7 +16,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 	List<Review> findByKeyword(@Param("checked") String checked, @Param("startDate") LocalDateTime startDate,
 			@Param("endDate") LocalDateTime endDate);
 	
-	@Query("SELECT r FROM Review r WHERE r.book.id = :bookId ORDER BY r.createdAt DESC")
+	@Query("SELECT r FROM Review r WHERE r.book.id = :bookId AND r.checked = 'Checked' ORDER BY r.createdAt DESC")
     List<Review> findByBookIdSortByCreatedAt(Long bookId);
 	
 }

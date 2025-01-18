@@ -10,4 +10,6 @@ public interface CartItemService {
 	
 	public void deleteByCartId(Long id);
 	
+	public CartItem save(CartItem cartItem);
+	
 }

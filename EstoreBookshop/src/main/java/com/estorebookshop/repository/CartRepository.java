@@ -17,4 +17,6 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 	List<Cart> findByKeyword(@Param("keyword") String keyword, @Param("status") String status,
 			@Param("compareDate") LocalDateTime compareDate);
 
+	Cart findByUserId(Long id);
+	
 }

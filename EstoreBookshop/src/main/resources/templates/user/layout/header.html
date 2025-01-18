@@ -8,14 +8,33 @@
 						<!-- Logo -->
 						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
 							<div class="logo">
-								<a th:href="@{/}"><img th:src="@{/assets/img/logo/logo.png}" alt=""></a>
+								<a th:href="@{/}"><img th:src="@{/assets/img/logo/logo.png}"
+									alt=""></a>
 							</div>
 						</div>
-						<div class="col-xl-10 col-lg-10 col-md-10 col-sm-6">
-							<ul class="header-right f-right d-flex justify-content-between align-items-center">
+						<div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
+							<!-- Main-menu -->
+							<div class="main-menu f-right d-none d-lg-block">
+								<nav>
+									<ul id="navigation">
+										<li><a th:href="@{/}">Home</a></li>
+										<li><a href="contact.html">Contact</a></li>
+										<li><a href="#">Personal</a>
+                                            <ul class="submenu">
+                                                <li><a href="login.html">Order</a></li>
+                                                <li><a href="cart.html">Address</a></li>
+                                            </ul>
+                                        </li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+						<div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
+							<ul
+								class="header-right f-right d-none d-lg-block d-flex justify-content-between">
 								<li class="d-none d-xl-block">
 									<div class="form-box f-right ">
-										<input type="text" name="Search" placeholder="Search products">
+										<input type="text" name="Search" placeholder="Search books">
 										<div class="search-icon">
 											<i class="fas fa-search special-tag"></i>
 										</div>
@@ -23,7 +42,7 @@
 								</li>
 								<li>
 									<div class="shopping-card">
-										<a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+										<a th:href="@{/user/cart}"><i class="fas fa-shopping-cart"></i></a>
 									</div>
 								</li>
 								<li class="d-none d-lg-block">
@@ -37,18 +56,6 @@
 									</div>
 								</li>
 							</ul>
-						</div>
-
-
-						<div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
-							<!-- Main-menu -->
-							<div class="main-menu f-right d-none d-lg-block">
-								<nav>
-									<ul id="navigation">
-										<li><a href="contact.html">Contact</a></li>
-									</ul>
-								</nav>
-							</div>
 						</div>
 						<!-- Mobile Menu -->
 						<div class="col-12">

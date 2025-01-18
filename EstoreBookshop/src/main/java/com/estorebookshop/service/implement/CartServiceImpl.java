@@ -58,4 +58,16 @@ public class CartServiceImpl implements CartService {
 		return this.cartRepository.findById(id).orElse(null);
 	}
 
+	@Override
+	public Cart findByUserId(Long id) {
+		// TODO Auto-generated method stub
+		return this.cartRepository.findByUserId(id);
+	}
+
+	@Override
+	public Cart save(Cart cart) {
+		// TODO Auto-generated method stub
+		return this.cartRepository.save(cart);
+	}
+
 }

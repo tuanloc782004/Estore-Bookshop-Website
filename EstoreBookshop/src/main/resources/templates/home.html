@@ -91,36 +91,34 @@
 						role="tabpanel" aria-labelledby="nav-home-tab">
 						<div class="row">
 							<div class="col-xl-4 col-lg-4 col-md-6" th:each="book : ${books}">
-								<a th:href="@{/book-detail/{id}(id=${book.id})}">
-									<div class="single-product mb-60">
-										<div class="product-img">
-											<img
-												th:src="${book.bookImages != null and !book.bookImages.isEmpty() ? book.bookImages.iterator().next().imageUrl : '/upload-dir/default-image/book-image.jfif'}"
-												alt="Book Image">
+								<div class="single-product mb-60">
+									<div class="product-img">
+										<a th:href="@{/book-detail/{id}(id=${book.id})}"><img
+											th:src="${book.bookImages != null and !book.bookImages.isEmpty() ? book.bookImages.iterator().next().imageUrl : '/upload-dir/default-image/book-image.jfif'}"
+											alt="Book Image"></a>
+									</div>
+									<div class="product-caption">
+										<div class="product-rating">
+											<span th:text="${book.rating}"></span> <span
+												style="color: gold;">★</span>
 										</div>
-										<div class="product-caption">
-											<div class="product-rating">
-												<span th:text="${book.rating}"></span> <span
-													style="color: gold;">★</span>
-											</div>
-											<h4>
-												<span th:text="${book.title}">Title</span>
-											</h4>
-											<div class="price">
-												<ul>
-													<!-- Giá gốc bị gạch đi -->
-													<li class="discount" th:if="${book.discount > 0}"
-														th:text="${'$' + book.price}"></li>
+										<h4>
+											<span th:text="${book.title}">Title</span>
+										</h4>
+										<div class="price">
+											<ul>
+												<!-- Giá gốc bị gạch đi -->
+												<li class="discount" th:if="${book.discount > 0}"
+													th:text="${'$' + book.price}"></li>
 
-													<!-- Giá sau giảm -->
-													<li><span class="price-after-discount"
-														th:attr="data-price=${book.price}, data-discount=${book.discount}">0.00</span>
-													</li>
-												</ul>
-											</div>
+												<!-- Giá sau giảm -->
+												<li><span class="price-after-discount"
+													th:attr="data-price=${book.price}, data-discount=${book.discount}">0.00</span>
+												</li>
+											</ul>
 										</div>
 									</div>
-								</a>
+								</div>
 							</div>
 						</div>
 						<div

@@ -1,5 +1,0 @@
-package com.estorebookshop.config.service.impl;
-
-public class EmailServiceImpl {
-
-}

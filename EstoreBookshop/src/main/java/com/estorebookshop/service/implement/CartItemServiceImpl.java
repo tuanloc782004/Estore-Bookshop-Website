@@ -28,4 +28,10 @@ public class CartItemServiceImpl implements CartItemService {
 		this.cartItemRepository.deleteByCartId(id);
 	}
 
+	@Override
+	public CartItem save(CartItem cartItem) {
+		// TODO Auto-generated method stub
+		return this.cartItemRepository.save(cartItem);
+	}
+
 }
