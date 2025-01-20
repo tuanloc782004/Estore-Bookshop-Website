@@ -68,5 +68,11 @@ public class AddressServiceImpl implements AddressService {
 		list = list.subList(start, end);
 		return new PageImpl<Address>(list, pageable, this.findByKeyword(keyword).size());
 	}
+
+	@Override
+	public List<Address> findByUser(User user) {
+		// TODO Auto-generated method stub
+		return this.addressRepository.findByUser(user);
+	}
 	
 }

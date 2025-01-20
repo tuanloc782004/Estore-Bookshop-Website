@@ -21,5 +21,13 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 			+ "CASE WHEN :sort = 'hl' THEN b.price END DESC")
 	List<Book> findForHome(@Param("languageId") Long languageId, @Param("categoryId") Long categoryId,
 			@Param("sort") String sort);
-	
+
+	@Query("SELECT b FROM Book b " + "WHERE b.enabled = true "
+			+ "AND (:keyword IS NULL OR :keyword = '' OR b.isbn LIKE %:keyword% OR b.title LIKE %:keyword% OR b.author LIKE %:keyword%) "
+			+ "ORDER BY CASE " + "WHEN :sort = 'popular' THEN b.rating END DESC, "
+			+ "CASE WHEN :sort = 'best' THEN b.soldQuantity END DESC, "
+			+ "CASE WHEN :sort = 'new' THEN b.createdAt END DESC, " + "CASE WHEN :sort = 'lh' THEN b.price END ASC, "
+			+ "CASE WHEN :sort = 'hl' THEN b.price END DESC")
+	List<Book> findForSearch(@Param("keyword") String keyword, @Param("sort") String sort);
+
 }

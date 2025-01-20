@@ -21,8 +21,9 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/login", "/register", "/book-detail/**").permitAll()		// Cho phép truy cập không cần đăng nhập đến trang chủ
+				.requestMatchers("/", "/login", "/register", "/book-detail/**", "/search/**", "/contact").permitAll()		// Cho phép truy cập không cần đăng nhập đến trang chủ
 				.requestMatchers("/admin/**").hasAuthority("ADMIN")				
+				.requestMatchers("/user/**").hasAuthority("USER")				
 				.anyRequest().authenticated()									// Các yêu cầu khác cần xác thực
 			)
 			.formLogin((form) -> form

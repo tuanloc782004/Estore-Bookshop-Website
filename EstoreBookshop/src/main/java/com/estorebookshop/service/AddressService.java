@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.estorebookshop.model.Address;
+import com.estorebookshop.model.User;
 
 public interface AddressService {
 
@@ -19,5 +20,7 @@ public interface AddressService {
 	public Page<Address> findAll(Integer pageno);
 
 	public Page<Address> findByKeyword(String keyword, Integer pageNo);
+	
+	public List<Address> findByUser(User user);
 	
 }

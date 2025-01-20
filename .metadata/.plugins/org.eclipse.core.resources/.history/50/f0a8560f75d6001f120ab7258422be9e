@@ -1,0 +1,40 @@
+package com.estorebookshop.controller.user;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.estorebookshop.config.model.CustomUserDetails;
+import com.estorebookshop.model.User;
+import com.estorebookshop.service.UserService;
+
+@Controller
+@RequestMapping("/user/address")
+public class AddressController {
+
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping("")
+	public String adress(Model model) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if (principal instanceof CustomUserDetails) {
+			username = ((CustomUserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		User user = userService.findByUsername(username);
+		if (user != null) {
+			model.addAttribute("user", user);
+		} else {
+			model.addAttribute("error", "User not found!");
+		}
+
+		return "user/address";
+	}
+}

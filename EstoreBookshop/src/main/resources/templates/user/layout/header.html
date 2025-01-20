@@ -18,13 +18,18 @@
 								<nav>
 									<ul id="navigation">
 										<li><a th:href="@{/}">Home</a></li>
-										<li><a href="contact.html">Contact</a></li>
-										<li><a href="#">Personal</a>
-                                            <ul class="submenu">
-                                                <li><a href="login.html">Order</a></li>
-                                                <li><a href="cart.html">Address</a></li>
-                                            </ul>
-                                        </li>
+										<li><a th:href="@{/contact}">Contact</a></li>
+										<li><a href="#" class="d-flex align-items-center"> <span
+												th:if="${avatarUrl != null}" class="avatar"> <img
+													th:src="${avatarUrl}" alt="Avatar" class="rounded-circle"
+													style="width: 40px; height: 40px; object-fit: cover;">
+											</span> <span th:if="${avatarUrl == null}">Personal</span>
+										</a>
+											<ul class="submenu">
+												<li><a th:href="@{/user/my-profile}">My Account</a></li>
+												<li><a th:href="@{/user/order}">Order</a></li>
+												<li><a th:href="@{/user/address}">Address</a></li>
+											</ul></li>
 									</ul>
 								</nav>
 							</div>
@@ -33,11 +38,14 @@
 							<ul
 								class="header-right f-right d-none d-lg-block d-flex justify-content-between">
 								<li class="d-none d-xl-block">
-									<div class="form-box f-right ">
-										<input type="text" name="Search" placeholder="Search books">
-										<div class="search-icon">
-											<i class="fas fa-search special-tag"></i>
-										</div>
+									<div class="form-box f-right">
+										<form action="/search" method="GET">
+											<input type="text" name="keyword" placeholder="Search books"
+												class="search-input" th:value="${keyword}">
+											<button type="submit" class="search-icon">
+												<i class="fas fa-search special-tag"></i>
+											</button>
+										</form>
 									</div>
 								</li>
 								<li>

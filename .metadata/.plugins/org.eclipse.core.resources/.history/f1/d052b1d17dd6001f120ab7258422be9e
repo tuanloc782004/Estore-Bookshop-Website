@@ -1,0 +1,167 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+
+	<!-- Preloader Start -->
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+
+	<!-- Header Start -->
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+		<!-- Slider Area Start -->
+		<div class="slider-area">
+			<!-- Mobile Menu -->
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+		<!-- Slider Area End -->
+
+		<!-- Alert Messages -->
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+		<div th:if="${error}" class="alert alert-danger">
+			<span th:text="${error}"></span>
+		</div>
+
+		<!-- Manage Addresses Section -->
+		<section class="cart_area section_padding">
+			<div class="container">
+				<div class="address-container">
+					<h3 class="d-flex justify-content-between">
+						My Addresses
+						<button type="button" class="btn btn-primary"
+							onclick="showAddForm()">Add</button>
+					</h3>
+					<hr>
+
+					<!-- Add Address Form (Initially Hidden) -->
+					<div id="addAddressForm" class="address-form"
+						style="display: none;">
+						<h4>Add New Address</h4>
+						<button type="button" class="close"
+							onclick="closeForm('addAddressForm')">&times;</button>
+						<form th:action="@{/user/add}" method="POST">
+							<div class="form-group">
+								<label for="address">Address:</label> <input type="text"
+									class="form-control" id="address" name="address" required>
+							</div>
+							<div class="form-group">
+								<label for="city">City:</label> <input type="text"
+									class="form-control" id="city" name="city" required>
+							</div>
+							<div class="form-group">
+								<label for="zipCode">Zip Code:</label> <input type="text"
+									class="form-control" id="zipCode" name="zipCode" required>
+							</div>
+							<div class="form-group">
+								<label for="country">Country:</label> <input type="text"
+									class="form-control" id="country" name="country" required>
+							</div>
+							<button type="submit" class="btn btn-success">Save</button>
+						</form>
+						<hr>
+					</div>
+
+					<!-- Update Address Form (Initially Hidden) -->
+					<div id="updateAddressForm" class="address-form"
+						style="display: none;">
+						<h4>Edit Address</h4>
+						<button type="button" class="close"
+							onclick="closeForm('updateAddressForm')">&times;</button>
+						<form th:action="@{/user/edit}" method="POST">
+							<input type="hidden" id="addressId" name="addressId">
+							<div class="form-group">
+								<label for="updateAddress">Address:</label> <input type="text"
+									class="form-control" id="updateAddress" name="address" required>
+							</div>
+							<div class="form-group">
+								<label for="updateCity">City:</label> <input type="text"
+									class="form-control" id="updateCity" name="city" required>
+							</div>
+							<div class="form-group">
+								<label for="updateZipCode">Zip Code:</label> <input type="text"
+									class="form-control" id="updateZipCode" name="zipCode" required>
+							</div>
+							<div class="form-group">
+								<label for="updateCountry">Country:</label> <input type="text"
+									class="form-control" id="updateCountry" name="country" required>
+							</div>
+							<button type="submit" class="btn btn-success">Save</button>
+						</form>
+						<hr>
+					</div>
+
+					<!-- List of User Addresses -->
+					<div th:each="address : ${addresses}"
+						class="address-item mb-3">
+						<div
+							class="address-box d-flex justify-content-between align-items-center">
+							<div>
+								<p>
+									<strong>Address:</strong> <span th:text="${address.address}"></span>
+								</p>
+								<p>
+									<strong>City:</strong> <span th:text="${address.city}"></span>
+								</p>
+								<p>
+									<strong>Zip Code:</strong> <span th:text="${address.zipCode}"></span>
+								</p>
+								<p>
+									<strong>Country:</strong> <span th:text="${address.country}"></span>
+								</p>
+							</div>
+							<div>
+								<!-- Update Address Button -->
+								<button th:attr="onclick='showUpdateForm(${address.id})'"
+									class="btn btn-warning">Update</button>
+							</div>
+						</div>
+						<hr>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer Start -->
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+
+	<!-- Script Include -->
+	<div th:replace="~{user/layout/script::script}"></div>
+
+	<script>
+		// Show Add Address Form
+		function showAddForm() {
+			document.getElementById('addAddressForm').style.display = 'block';
+			document.getElementById('updateAddressForm').style.display = 'none';
+		}
+
+		// Show Update Address Form with pre-filled data
+		function showUpdateForm(addressId) {
+			document.getElementById('addressId').value = addressId;
+
+			// Example to pre-fill with current data (replace with actual values)
+			document.getElementById('updateAddress').value = "Existing address";
+			document.getElementById('updateCity').value = "Existing city";
+			document.getElementById('updateZipCode').value = "Existing zip";
+			document.getElementById('updateCountry').value = "Existing country";
+
+			document.getElementById('addAddressForm').style.display = 'none';
+			document.getElementById('updateAddressForm').style.display = 'block';
+		}
+
+		// Close Add/Update Form
+		function closeForm(formId) {
+			document.getElementById(formId).style.display = 'none';
+		}
+	</script>
+
+</body>
+
+</html>

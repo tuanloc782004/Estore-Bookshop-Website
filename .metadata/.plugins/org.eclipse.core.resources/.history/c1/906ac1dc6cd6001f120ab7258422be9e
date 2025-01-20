@@ -1,0 +1,5 @@
+package com.estorebookshop.controller.user;
+
+public class ContactController {
+
+}

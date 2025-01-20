@@ -19,11 +19,15 @@ public interface BookService {
 	public Page<Book> findAll(Integer pageno);
 
 	public Page<Book> findByKeyword(String keyword, Integer pageNo);
-	
+
 	public List<Book> findForHome(Long languageId, Long categoryId, String sort);
-	
+
 	public Page<Book> findAllForHome(Integer pageno);
-	
+
 	public Page<Book> findForHome(Long languageId, Long categoryId, String sort, Integer pageNo);
-	
+
+	public List<Book> findForSearch(String keyword, String sort);
+
+	public Page<Book> findForSearch(String keyword, String sort, Integer pageNo);
+
 }

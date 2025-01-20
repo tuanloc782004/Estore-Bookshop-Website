@@ -67,7 +67,7 @@ public class BookServiceImpl implements BookService {
 		// TODO Auto-generated method stub
 		return this.bookRepository.findForHome(languageId, categoryId, sort);
 	}
-	
+
 	@Override
 	public Page<Book> findAllForHome(Integer pageno) {
 		// TODO Auto-generated method stub
@@ -85,6 +85,24 @@ public class BookServiceImpl implements BookService {
 				: pageable.getOffset() + pageable.getPageSize());
 		list = list.subList(start, end);
 		return new PageImpl<Book>(list, pageable, this.findForHome(languageId, categoryId, sort).size());
+	}
+
+	@Override
+	public List<Book> findForSearch(String keyword, String sort) {
+		// TODO Auto-generated method stub
+		return this.bookRepository.findForSearch(keyword, sort);
+	}
+
+	@Override
+	public Page<Book> findForSearch(String keyword, String sort, Integer pageNo) {
+		// TODO Auto-generated method stub
+		List<Book> list = this.bookRepository.findForSearch(keyword, sort);
+		Pageable pageable = PageRequest.of(pageNo - 1, 6);
+		Integer start = (int) pageable.getOffset();
+		Integer end = (int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ? list.size()
+				: pageable.getOffset() + pageable.getPageSize());
+		list = list.subList(start, end);
+		return new PageImpl<Book>(list, pageable, this.findForSearch(keyword, sort).size());
 	}
 
 }

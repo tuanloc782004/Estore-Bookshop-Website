@@ -1,0 +1,304 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+
+		<!-- slider Area Start-->
+		<div class="slider-area ">
+			<!-- Mobile Menu -->
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+		<!-- slider Area End-->
+		
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+
+		<!--================Single Product Area =================-->
+		<div class="product_image_area">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-4">
+						<div class="single_product_text text-center">
+							<div class="product_img_slide owl-carousel">
+								<!-- Lặp qua từng ảnh nếu có ảnh -->
+								<div
+									th:if="${book.bookImages != null and !book.bookImages.isEmpty()}"
+									th:each="img : ${book.bookImages}" class="single_product_img">
+									<img th:src="@{${img.imageUrl}}" alt="Product Image"
+										class="img-fluid">
+								</div>
+
+								<!-- Hiển thị ảnh mặc định nếu không có ảnh -->
+								<div
+									th:unless="${book.bookImages != null and !book.bookImages.isEmpty()}"
+									class="single_product_img">
+									<img th:src="@{/upload-dir/default-image/book-image.jfif}"
+										alt="Default Image" class="img-fluid">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-8">
+						<div class="single_product_text text-center">
+							<h3 th:text="${book.title}"></h3>
+							<h4 th:text="${'- ' + book.author + ' -'}"></h4>
+							<div class="price">
+								<ul>
+									<!-- Giá gốc bị gạch đi -->
+									<li class="discount" th:if="${book.discount > 0}"
+										th:text="${'$' + book.price}"
+										style="font-size: 20px; color: red; text-decoration: line-through;"></li>
+									<!-- Giá sau giảm -->
+									<li id="price-after-discount"
+										th:attr="data-price=${book.price}, data-discount=${book.discount}"
+										style="font-size: 30px; font-weight: bold;"></li>
+								</ul>
+							</div>
+							<div class="card_area">
+								<div class="product_count_area">
+									<p>Quantity</p>
+									<div class="product_count d-inline-block">
+										<!-- Nút giảm số lượng -->
+										<span class="product_count_item inumber-decrement"> <i
+											class="ti-minus"></i>
+										</span>
+										<!-- Input nhập số lượng -->
+										<input id="quantity-input"
+											class="product_count_item input-number" type="number"
+											value="1" min="1" max="10">
+										<!-- Nút tăng số lượng -->
+										<span class="product_count_item number-increment"> <i
+											class="ti-plus"></i>
+										</span>
+									</div>
+									<!-- Hiển thị giá tổng -->
+									<p>
+										Total Price: <span id="total-price"
+											style="font-size: 25px; font-weight: bold;"></span>
+									</p>
+								</div>
+								<div class="add_to_cart">
+									<form th:action="@{/book-detail/add-to-cart}" method="post">
+										<input type="hidden" name="bookId" th:value="${book.id}" /> <input
+											type="hidden" name="quantity" id="quantity-input-hidden"
+											th:value="1" />
+										<button type="submit" class="btn_3">Add to cart</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--================End Single Product Area =================-->
+
+		<!-- Deatails -->
+		<div class="whole-wrap">
+			<div class="container box_1170">
+				<div class="section-top-border">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="single-defination">
+								<h4 class="mb-20">Detailed information</h4>
+								<p>
+									<strong>Rating:</strong> <span th:text="${book.rating}"></span>
+									<span style="color: gold;">★</span>
+								</p>
+								<p>
+									<strong>Sold:</strong> <span th:text="${book.soldQuantity}"></span>
+								</p>
+								<p>
+									<strong>Year of Publication:</strong> <span
+										th:text="${book.yearOfPublication}"></span>
+								</p>
+								<p>
+									<strong>Number of Pages:</strong> <span
+										th:text="${book.numOfPages}"></span>
+								</p>
+								<p>
+									<strong>Publisher:</strong> <span
+										th:text="${book.publisher.publisherName}"></span>
+								</p>
+								<p>
+									<strong>Language:</strong> <span
+										th:text="${book.language.languageName}"></span>
+								</p>
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="single-defination">
+								<h4 class="mb-20">Description</h4>
+								<p th:text="${book.description}"></p>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="single-defination">
+								<h4 class="mb-20">Categories</h4>
+								<ul>
+									<li th:each="bookCategory : ${book.bookCategories}"
+										th:text="${bookCategory.category.categoryName}"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Commnent -->
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 posts-list">
+					<div class="comments-area">
+						<h4 th:text="${count + ' Comments'}"></h4>
+						<div th:each="review : ${reviews}">
+							<div class="comment-list">
+								<div class="single-comment justify-content-between d-flex">
+									<div class="user justify-content-between d-flex">
+										<div class="thumb">
+											<img th:src="${review.user.avatarUrl}" alt="">
+										</div>
+										<div class="desc">
+											<div>
+												<span th:if="${review.rating == 1}" style="color: gold;">★</span>
+												<span th:if="${review.rating == 2}" style="color: gold;">★★</span>
+												<span th:if="${review.rating == 3}" style="color: gold;">★★★</span>
+												<span th:if="${review.rating == 4}" style="color: gold;">★★★★</span>
+												<span th:if="${review.rating == 5}" style="color: gold;">★★★★★</span>
+											</div>
+											<p class="comment" th:text="${review.comment}"></p>
+											<div class="d-flex justify-content-between">
+												<div class="d-flex align-items-center">
+													<p class="date"
+														th:text="${review.createdAt.toString().substring(0,10)}"></p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<hr style="width: 800px;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+
+	<div th:replace="~{user/layout/script::script}"></div>
+
+	<script>
+		// Lấy các phần tử cần thiết
+		const decrementButton = document.querySelector('.inumber-decrement');
+		const incrementButton = document.querySelector('.number-increment');
+		const quantityInput = document.getElementById('quantity-input');
+		const quantityHiddenInput = document.getElementById('quantity-input-hidden');
+		
+		// Cập nhật giá trị hidden input mỗi khi số lượng thay đổi
+		quantityInput.addEventListener('input', function () {
+			quantityHiddenInput.value = quantityInput.value;
+		});
+
+		// Cập nhật giá trị hidden input ngay khi tải trang
+		quantityHiddenInput.value = quantityInput.value;
+
+		// Sự kiện khi nhấn nút giảm
+		decrementButton.addEventListener('click', function() {
+			let currentValue = parseInt(quantityInput.value);
+			if (currentValue > 1) {
+				quantityInput.value = currentValue - 1;
+			}
+			quantityHiddenInput.value = quantityInput.value;
+			updateTotalPrice();
+		});
+
+		// Sự kiện khi nhấn nút tăng
+		incrementButton.addEventListener('click', function() {
+			let currentValue = parseInt(quantityInput.value);
+			if (currentValue < 10) {
+				quantityInput.value = currentValue + 1;
+			}
+			quantityHiddenInput.value = quantityInput.value;
+			updateTotalPrice();
+		});
+
+		document.addEventListener('DOMContentLoaded', function () {
+			// Hàm tính giá sau giảm
+			const calculateDiscountedPrice = (price, discount) => {
+				return discount > 0 ? price * (1 - discount / 100) : price;
+			};
+
+			// Lấy giá và giảm giá từ thuộc tính dữ liệu
+			const priceAfterDiscountElement = document.querySelector('#price-after-discount');
+			const quantityInput = document.querySelector('#quantity-input');
+			const totalPriceElement = document.querySelector('#total-price');
+			const decrementButton = document.querySelector('.inumber-decrement');
+			const incrementButton = document.querySelector('.number-increment');
+
+			// Lấy giá và giảm giá từ thuộc tính dữ liệu
+			const basePrice = parseFloat(priceAfterDiscountElement.getAttribute('data-price'));
+			const discount = parseFloat(priceAfterDiscountElement.getAttribute('data-discount'));
+			const discountedPrice = calculateDiscountedPrice(basePrice, discount);
+
+			// Cập nhật giá sau giảm
+			priceAfterDiscountElement.textContent = `$${discountedPrice.toFixed(2)}`;
+
+			// Hàm cập nhật tổng giá
+			const updateTotalPrice = () => {
+				const quantity = parseInt(quantityInput.value, 10) || 0;
+				const totalPrice = discountedPrice * quantity;
+				totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
+			};
+
+			// Xử lý nút giảm
+			decrementButton.addEventListener('click', () => {
+				let currentQuantity = parseInt(quantityInput.value, 10) || 0;
+				if (currentQuantity > 1) {
+					quantityInput.value = currentQuantity + 1;
+					updateTotalPrice();
+				}
+			});
+
+			// Xử lý nút tăng
+			incrementButton.addEventListener('click', () => {
+				let currentQuantity = parseInt(quantityInput.value, 10) || 0;
+				if (currentQuantity <= 10) {
+					quantityInput.value = currentQuantity - 1;
+					updateTotalPrice();
+				}
+			});
+
+			// Xử lý thay đổi trực tiếp trong ô nhập
+			quantityInput.addEventListener('input', () => {
+				let currentQuantity = parseInt(quantityInput.value, 10);
+				if (isNaN(currentQuantity) || currentQuantity < 1) {
+					quantityInput.value = 1;
+				} else if (currentQuantity > 10) {
+					quantityInput.value = 10;
+				}
+				updateTotalPrice();
+			});
+
+			// Cập nhật giá tổng ban đầu
+			updateTotalPrice();
+		});
+	</script>
+
+</body>
+
+</html>

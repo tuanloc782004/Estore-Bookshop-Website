@@ -1,0 +1,133 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+
+		<!-- slider Area Start-->
+		<div class="slider-area ">
+			<!-- Mobile Menu -->
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+		<!-- slider Area End-->
+
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+
+		<!--================Single Product Area =================-->
+		<div class="product_image_area">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-4">
+						<div class="single_product_text text-center">
+							<div class="single_product_img">
+								<img id="avatarPreview" th:src="${user.avatarUrl}" alt="Avatar"
+									class="img-fluid"
+									style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+								<form id="avatarUploadForm"
+									th:action="@{/user/my-profile/upload-avatar}" method="post"
+									enctype="multipart/form-data">
+									<label for="avatarFile" class="btn btn-secondary mt-2">Choose
+										Avatar</label> <input type="file" id="avatarFile" name="file"
+										accept="image/*" style="display: none;" required>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-8">
+						<div class="single_product_text">
+							<h4>My Profile</h4>
+							<form th:action="@{/user/my-profile/edit}" method="post"
+								class="form-profile">
+								<div class="form-group">
+									<label for="username">Username</label> <input type="text"
+										class="form-control" id="username" th:value="${user.username}"
+										readonly>
+								</div>
+								<div class="form-group">
+									<label for="email">Email</label> <input type="email"
+										class="form-control" id="email" name="email"
+										th:value="${user.email}" required>
+								</div>
+								<div class="form-group">
+									<label for="phone">Phone Number</label> <input type="text"
+										class="form-control" id="phone" name="phoneNumber"
+										th:value="${user.phoneNumber}" required>
+								</div>
+								<button type="submit" class="btn btn-primary">Save</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--================End Single Product Area =================-->
+
+		<div class="row justify-content-center mt-5">
+			<div class="col-lg-8">
+				<h4>Change Password</h4>
+				<form th:action="@{/user/my-profile/change-password}" method="post"
+					class="form-change-password">
+					<div class="form-group">
+						<label for="currentPassword">Current Password</label> <input
+							type="password" class="form-control" id="currentPassword"
+							name="currentPassword" required>
+					</div>
+					<div class="form-group">
+						<label for="newPassword">New Password</label> <input
+							type="password" class="form-control" id="newPassword"
+							name="newPassword" required>
+					</div>
+					<div class="form-group">
+						<label for="confirmPassword">Confirm New Password</label> <input
+							type="password" class="form-control" id="confirmPassword"
+							name="confirmPassword" required>
+					</div>
+					<button type="submit" class="btn btn-primary">Change
+						Password</button>
+				</form>
+			</div>
+		</div>
+
+	</main>
+
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+
+	<div th:replace="~{user/layout/script::script}"></div>
+
+	<script>
+		document
+				.getElementById("avatarFile")
+				.addEventListener(
+						"change",
+						function(event) {
+							const file = event.target.files[0];
+
+							if (file) {
+								// Hiển thị ảnh preview
+								const reader = new FileReader();
+								reader.onload = function(e) {
+									document.getElementById("avatarPreview").src = e.target.result;
+								};
+								reader.readAsDataURL(file);
+
+								// Tự động gửi form
+								document.getElementById("avatarUploadForm")
+										.submit();
+							}
+						});
+	</script>
+
+</body>
+
+</html>

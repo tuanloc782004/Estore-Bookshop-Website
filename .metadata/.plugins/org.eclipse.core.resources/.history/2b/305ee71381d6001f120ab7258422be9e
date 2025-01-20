@@ -1,0 +1,85 @@
+package com.estorebookshop.controller.user;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.estorebookshop.config.model.CustomUserDetails;
+import com.estorebookshop.model.Address;
+import com.estorebookshop.model.User;
+import com.estorebookshop.service.AddressService;
+import com.estorebookshop.service.UserService;
+
+@Controller
+@RequestMapping("/user/address")
+public class MyAddressController {
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private AddressService addressService;
+
+	@RequestMapping("")
+	public String adress(Model model) {
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if (principal instanceof CustomUserDetails) {
+			username = ((CustomUserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		User user = this.userService.findByUsername(username);
+
+		List<Address> addresses = this.addressService.findByUser(user);
+
+		if (addresses != null) {
+			model.addAttribute("addresses", addresses);
+		} else {
+			model.addAttribute("error", "Addrress not found!");
+		}
+
+		return "user/address";
+	}
+
+	@PostMapping("/add")
+	public String create(@RequestParam String address, @RequestParam String city, @RequestParam String zipCode,
+			@RequestParam String country,Model model) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if (principal instanceof CustomUserDetails) {
+			username = ((CustomUserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		User user = this.userService.findByUsername(username);
+
+		Address addressOb = new Address();
+		addressOb.setCity(city);
+		addressOb.setCountry(country);
+		addressOb.setZipCode(zipCode);
+		addressOb.setAddress(address);
+		addressOb.setUser(user);
+		
+		try {
+			this.addressService.save(addressOb);
+			model.addAttribute("message", "Address added successfully!");
+		} catch (Exception e) {
+			model.addAttribute("error", "Error adding address: " + e.getMessage());
+		}
+		return "redirect:/user/address";
+
+	}
+
+}

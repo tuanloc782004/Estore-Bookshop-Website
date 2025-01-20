@@ -77,7 +77,7 @@ public class Address {
 		return address;
 	}
 
-	public void setAddressName(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
