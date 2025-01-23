@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.estorebookshop.model.Order;
+import com.estorebookshop.model.User;
 import com.estorebookshop.repository.OrderRepository;
 import com.estorebookshop.service.OrderService;
 
@@ -60,6 +61,18 @@ public class OrderServiceImpl implements OrderService {
 	public Order findById(Long id) {
 		// TODO Auto-generated method stub
 		return this.orderRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public List<Order> findByUser(User user) {
+		// TODO Auto-generated method stub
+		return this.orderRepository.findByUser(user);
+	}
+
+	@Override
+	public Order save(Order order) {
+		// TODO Auto-generated method stub
+		return this.orderRepository.save(order);
 	}
 	
 }

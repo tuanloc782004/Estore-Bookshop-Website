@@ -35,7 +35,7 @@ public class ReviewController {
 			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, Model model) {
 
 		if (startDate == null) {
-			startDate = LocalDate.of(2000, 1, 1);
+			startDate = LocalDate.of(2016, 1, 1);
 		}
 		if (endDate == null) {
 			endDate = LocalDate.now();

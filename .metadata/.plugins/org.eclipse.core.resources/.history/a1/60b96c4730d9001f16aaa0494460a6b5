@@ -1,0 +1,117 @@
+package com.estorebookshop.controller.user;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.estorebookshop.config.model.CustomUserDetails;
+import com.estorebookshop.dto.CartItemDTO;
+import com.estorebookshop.model.Address;
+import com.estorebookshop.model.Book;
+import com.estorebookshop.model.Cart;
+import com.estorebookshop.model.CartItem;
+import com.estorebookshop.model.User;
+import com.estorebookshop.service.AddressService;
+import com.estorebookshop.service.BookService;
+import com.estorebookshop.service.CartItemService;
+import com.estorebookshop.service.CartService;
+import com.estorebookshop.service.UserService;
+
+@Controller
+@RequestMapping("/user/cart")
+public class MyCartController {
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private CartService cartService;
+	
+	@Autowired
+	private CartItemService cartItemService;
+	
+	@Autowired
+	private AddressService addressService;
+	
+	@Autowired
+	private BookService bookService;
+	
+	@RequestMapping("")
+	public String cart(Model model, RedirectAttributes redirectAttributes) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if (principal instanceof CustomUserDetails) {
+			username = ((CustomUserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		User user = this.userService.findByUsername(username);
+		
+		Cart cart = this.cartService.findByUserId(user.getId());
+		
+		List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
+		List<Address> addresses = this.addressService.findByUser(user);
+		
+		model.addAttribute("cartItems", cartItems);
+		model.addAttribute("addresses", addresses);
+		
+		return "user/cart";
+		
+	}
+	
+	@PostMapping("/update")
+	public String updateCart(@RequestBody List<CartItemDTO> updatedCartItems, Model model, RedirectAttributes redirectAttributes) {
+	   
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if (principal instanceof CustomUserDetails) {
+			username = ((CustomUserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		User user = this.userService.findByUsername(username);
+		
+		Cart cart = this.cartService.findByUserId(user.getId());
+		
+		List<CartItem> list = new ArrayList<CartItem>();
+		
+		try {
+			for (CartItemDTO dto : updatedCartItems) {
+				Book book = this.bookService.findById(dto.getBookId());
+		        CartItem existingCartItem = cartItemService.findByCartAndBook(cart, book);
+		        
+		        if (existingCartItem != null) {
+		            existingCartItem.setQuantity(dto.getQuantity());
+		            list.add(existingCartItem);
+		        }
+		        
+		        cartItemService.saveCartItems(list);
+		        
+		        List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
+				List<Address> addresses = this.addressService.findByUser(user);
+				
+				model.addAttribute("cartItems", cartItems);
+				model.addAttribute("addresses", addresses);
+				
+				redirectAttributes.addFlashAttribute("message", "Cart updated successfully!");
+			}
+			
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "Error updating cart: " + e.getMessage());
+		}
+	   
+	    return "redirect:/user/cart";
+	}
+
+}

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.estorebookshop.model.Order;
+import com.estorebookshop.model.User;
 
 public interface OrderService {
 
@@ -18,5 +19,9 @@ public interface OrderService {
     void setStatus(Long orderId, String status);
     
     public Order findById(Long id);
+    
+    public List<Order> findByUser(User user);
+    
+    public Order save (Order order);
     
 }

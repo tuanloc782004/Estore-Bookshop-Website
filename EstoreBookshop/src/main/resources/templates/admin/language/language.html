@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
 
 <head th:replace="~{admin/layout/head::head}"></head>
 
@@ -13,6 +14,14 @@
 			<nav th:replace="~{admin/layout/navbar::navbar}"></nav>
 
 			<div class="content">
+				<!-- Hiển thị thông báo thành công -->
+				<div th:if="${message}" class="alert alert-success" role="alert">
+					<span th:text="${message}"></span>
+				</div>
+				<!-- Hiển thị thông báo lỗi -->
+				<div th:if="${error}" class="alert alert-danger" role="alert">
+					<span th:text="${error}"></span>
+				</div>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-12">
@@ -37,11 +46,12 @@
 												<tr th:each="language : ${languages}">
 													<td th:text="${language.id}"></td>
 													<td th:text="${language.languageName}"></td>
-													<td><a th:href="@{|/admin/language/edit/${language.id}|}"
-															class="btn btn-primary">Edit</a> <a
-															th:href="@{|/admin/language/delete/${language.id}|}"
-															class="btn btn-danger"
-															onclick="return confirm('Are you sure ???')">Delete</a></td>
+													<td><a
+														th:href="@{|/admin/language/edit/${language.id}|}"
+														class="btn btn-primary">Edit</a> <a
+														th:href="@{|/admin/language/delete/${language.id}|}"
+														class="btn btn-danger"
+														onclick="return confirm('Are you sure ???')">Delete</a></td>
 												</tr>
 											</tbody>
 										</table>
@@ -55,6 +65,7 @@
 			</div>
 		</div>
 		<div th:replace="~{admin/layout/script::script}"></div>
+	</div>
 </body>
 
 </html>

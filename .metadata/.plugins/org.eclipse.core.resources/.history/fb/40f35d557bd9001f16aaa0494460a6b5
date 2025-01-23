@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<head th:replace="~{user/layout/head::head}"></head>
+<body>
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+		<div class="slider-area">
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+		<div th:if="${error}" class="alert alert-danger">
+			<span th:text="${error}"></span>
+		</div>
+
+		<section class="order_history_area section_padding">
+			<div class="container">
+				<div class="order_history_inner">
+					<h4>Order History</h4>
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Order ID</th>
+									<th>Date</th>
+									<th>Total Price</th>
+									<th>Status</th>
+									<th>Payment Method</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="order : ${orders}">
+									<td><span th:text="${order.id}"></span></td>
+									<td><span
+										th:text="${order.createdAt.toString().substring(0,10)}"></span>
+									</td>
+									<td><span th:text="${'$' + order.totalPrice}"></span></td>
+									<td><span
+										th:style="${order.status == 'Pending' ? 'background-color: #ffc107; color: white;' :
+                    order.status == 'Processing' ? 'background-color: #17a2b8; color: white;' :
+                    order.status == 'Shipped' ? 'background-color: #007bff; color: white;' :
+                    order.status == 'Completed' ? 'background-color: #28a745; color: white;' :
+                    'background-color: #dc3545; color: white;'}"
+										th:text="${order.status}"></span></td>
+									<td><span th:text="${order.paymentMethod}"></span></td>
+									<td><a class="btn btn-info btn-sm"
+										th:href="@{'/user/order/details/' + ${order.id}}">View</a> <span
+										th:if="${order.status == 'Pending'}"> <a
+											class="btn btn-danger btn-sm"
+											th:href="@{'/user/order/cancel/' + ${order.id}}">Cancel</a>
+									</span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+	<div th:replace="~{user/layout/script::script}"></div>
+</body>
+</html>

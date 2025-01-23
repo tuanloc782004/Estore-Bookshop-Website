@@ -8,4 +8,7 @@ public interface OrderDetailService {
 
 	public List<OrderDetail> findAllByOrderId(Long orderId);
 	
+    public OrderDetail save (OrderDetail orderDetail);
+
+	
 }

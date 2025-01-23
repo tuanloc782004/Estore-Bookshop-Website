@@ -22,4 +22,10 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 				.toList();
 	}
 
+	@Override
+	public OrderDetail save(OrderDetail orderDetail) {
+		// TODO Auto-generated method stub
+		return this.orderDetailRepository.save(orderDetail);
+	}
+
 }

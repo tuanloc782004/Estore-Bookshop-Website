@@ -1,0 +1,99 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+		<div class="slider-area">
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+		<div th:if="${error}" class="alert alert-danger">
+			<span th:text="${error}"></span>
+		</div>
+
+		<section class="cart_area section_padding">
+			<div class="container">
+				<div class="cart_inner">
+					<h4 th:text="${'OrderID: ' + order.id + ' - ' + order.createdAt.toString().substring(0,10)} + ' / Status: ' + order.status"></h4>
+					<div class="table-responsive">
+						<form th:action="@{/user/cart/update}" method="post">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Book</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="orderDetail, iterStat : ${orderDetails}">
+										<td>
+											<div class="media">
+												<div class="d-flex">
+													<img
+														th:src="${orderDetail.book.bookImages?.size() > 0 ? orderDetail.book.bookImages.iterator().next().imageUrl : '/upload-dir/default-image/book-image.jfif'}"
+														alt="" />
+												</div>
+												<div class="media-body">
+													<p th:text="${orderDetail.book.title}"></p>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="media-body">
+												<p th:text="${orderDetail.quantity}"></p>
+											</div>
+										</td>
+										<td><span th:text="${orderDetail.price}"></span></td>
+									</tr>
+									<tr class="bottom_button">
+										<td>
+											<h5>Total</h5>
+										</td>
+										<td><span th:text="${order.totalPrice}"></span></td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+						<div class="checkout_address_area mt-5">
+							<h4 class="mb-4">Choose Shipping Address</h4>
+							<div class="address_list">
+								<div class="form-check mb-3">
+									<span th:text="${order.addres.address}"></span>, <span
+										th:text="${order.address.city}"></span>, <span
+										th:text="${order.address.zipCode}"></span>, <span
+										th:text="${order.address.country}"></span>
+								</div>
+							</div>
+							<div class="form-group mt-4">
+								<h4 class="mb-4">Order Note</h4>
+								<textarea class="form-control" id="note" name="note" rows="4"
+									placeholder="Enter any additional instructions for your order"
+									readonly></textarea>
+							</div>
+						</div>
+						<hr>
+						<div class="checkout_btn_inner float-right">
+							<a class="btn_1 btn-success rounded-pill checkout_btn_1"
+								th:href="@{/user/cart/pay}" id="cod-payment"> Pay on
+								Delivery </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+	<div th:replace="~{user/layout/script::script}"></div>
+</body>
+</html>

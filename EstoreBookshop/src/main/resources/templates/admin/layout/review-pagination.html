@@ -1,0 +1,24 @@
+<div class="text-center mb-3" th:fragment="pagination">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<!-- Nút Previous -->
+			<li th:if="${currentPage > 1}" class="page-item"><a
+				class="page-link"
+				th:href="@{|?checked=${checked != null && checked != 'all' ? checked : ''}&startDate=${startDate != null ? startDate : ''}&endDate=${endDate != null ? endDate : ''}&pageNo=${currentPage - 1}|}">
+					« </a></li>
+
+			<!-- Các trang -->
+			<li th:each="i : ${#numbers.sequence(1, totalPage)}"
+				th:classappend="${currentPage == i ? 'active' : ''}"
+				class="page-item"><a class="page-link"
+				th:href="@{|?checked=${checked != null && checked != 'all' ? checked : ''}&startDate=${startDate != null ? startDate : ''}&endDate=${endDate != null ? endDate : ''}&pageNo=${i}|}"
+				th:text="${i}"> </a></li>
+
+			<!-- Nút Next -->
+			<li th:if="${currentPage < totalPage}" class="page-item"><a
+				class="page-link"
+				th:href="@{|?checked=${checked != null && checked != 'all' ? checked : ''}&startDate=${startDate != null ? startDate : ''}&endDate=${endDate != null ? endDate : ''}&pageNo=${currentPage + 1}|}">
+					» </a></li>
+		</ul>
+	</nav>
+</div>

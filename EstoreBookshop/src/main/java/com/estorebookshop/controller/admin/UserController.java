@@ -54,7 +54,7 @@ public class UserController {
 	}
 
 	@GetMapping("/edit/{id}")
-	public String edit(Model model, @PathVariable("id") Long id) {
+	public String edit(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		User user = this.userService.findById(id);
 		model.addAttribute("user", user);
 		return "admin/user/user-form";
@@ -62,8 +62,7 @@ public class UserController {
 
 	@PostMapping("/edit")
 	public String update(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file,
-			RedirectAttributes redirectAttributes, @RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo) {
+			RedirectAttributes redirectAttributes) {
 		try {
 			if (!file.isEmpty()) {
 				String avatarUrl = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_"
@@ -80,16 +79,11 @@ public class UserController {
 			redirectAttributes.addFlashAttribute("error", "An error occurred while updating the user.");
 		}
 
-		redirectAttributes.addAttribute("keyword", keyword);
-		redirectAttributes.addAttribute("pageNo", pageNo);
-
 		return "redirect:/admin/user";
 	}
 
 	@GetMapping("/set-enabled/{id}")
-	public String setEnabled(@PathVariable("id") Long id, RedirectAttributes redirectAttributes,
-			@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo) {
+	public String setEnabled(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		// Tìm User
 		User user = this.userService.findById(id);
 		if (user == null) {
@@ -113,9 +107,6 @@ public class UserController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", "An error occurred while sending the email.");
 		}
-
-		redirectAttributes.addAttribute("keyword", keyword);
-		redirectAttributes.addAttribute("pageNo", pageNo);
 
 		return "redirect:/admin/user";
 	}

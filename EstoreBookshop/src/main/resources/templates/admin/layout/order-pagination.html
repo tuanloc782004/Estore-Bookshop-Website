@@ -1,0 +1,24 @@
+<div class="text-center mb-3" th:fragment="pagination">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<li class="page-item"
+				th:classappend="${orders.hasPrevious() ? '' : 'disabled'}"><a
+				class="page-link"
+				th:href="@{/admin/order(page=${orders.number - 1}, username=${username}, status=${status}, startDate=${startDate}, endDate=${endDate})}"
+				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+			</a></li>
+			<li class="page-item"
+				th:each="i : ${#numbers.sequence(0, orders.totalPages - 1)}"
+				th:classappend="${orders.number == i ? 'active' : ''}"><a
+				class="page-link"
+				th:href="@{/admin/order(page=${i}, username=${username}, status=${status}, startDate=${startDate}, endDate=${endDate})}"
+				th:text="${i + 1}">1</a></li>
+			<li class="page-item"
+				th:classappend="${orders.hasNext() ? '' : 'disabled'}"><a
+				class="page-link"
+				th:href="@{/admin/order(page=${orders.number + 1}, username=${username}, status=${status}, startDate=${startDate}, endDate=${endDate})}"
+				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			</a></li>
+		</ul>
+	</nav>
+</div>

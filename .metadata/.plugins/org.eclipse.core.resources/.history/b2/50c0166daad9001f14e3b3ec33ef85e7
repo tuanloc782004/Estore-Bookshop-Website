@@ -1,0 +1,33 @@
+<div class="text-center mb-3" th:fragment="pagination">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<!-- Nút Previous -->
+			<li th:if="${currentPage > 1}"><a
+				th:href="@{${#strings.concat('?pageNo=', currentPage - 1, 
+                     username != null ? '&username=' + username : '', 
+                     status != null ? '&status=' + status : '', 
+                     startDate != null ? '&startDate=' + startDate : '', 
+                     endDate != null ? '&endDate=' + endDate : '')}}">«</a>
+			</li>
+
+			<!-- Nút chuyển đến các trang -->
+			<li th:each="i: ${#numbers.sequence(1, totalPage)}"
+				th:classappend="${currentPage == i ? 'active' : ''}"><a
+				th:href="@{${#strings.concat('?pageNo=', i, 
+                     username != null ? '&username=' + username : '', 
+                     status != null ? '&status=' + status : '', 
+                     startDate != null ? '&startDate=' + startDate : '', 
+                     endDate != null ? '&endDate=' + endDate : '')}}"
+				th:text="${i}"></a></li>
+
+			<!-- Nút Next -->
+			<li th:if="${currentPage < totalPage}"><a
+				th:href="@{${#strings.concat('?pageNo=', currentPage + 1, 
+                     username != null ? '&username=' + username : '', 
+                     status != null ? '&status=' + status : '', 
+                     startDate != null ? '&startDate=' + startDate : '', 
+                     endDate != null ? '&endDate=' + endDate : '')}}">»</a>
+			</li>
+		</ul>
+	</nav>
+</div>

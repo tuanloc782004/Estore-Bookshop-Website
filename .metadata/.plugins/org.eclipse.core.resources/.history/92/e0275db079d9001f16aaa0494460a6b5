@@ -1,0 +1,40 @@
+package com.estorebookshop.dto;
+
+import java.util.List;
+
+public class CartUpdateRequest {
+
+	private List<CartItemUpdate> cartItems;
+
+    public static class CartItemUpdate {
+        private Long id; // CartItem ID
+        private Long quantity;
+
+        // Getters và Setters
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public Long getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(Long quantity) {
+            this.quantity = quantity;
+        }
+    }
+
+    // Getters và Setters
+    public List<CartItemUpdate> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItemUpdate> cartItems) {
+        this.cartItems = cartItems;
+    }
+	
+}

@@ -1,0 +1,140 @@
+package com.estorebookshop.controller.user;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.estorebookshop.config.model.CustomUserDetails;
+import com.estorebookshop.model.Address;
+import com.estorebookshop.model.Book;
+import com.estorebookshop.model.Cart;
+import com.estorebookshop.model.CartItem;
+import com.estorebookshop.model.User;
+import com.estorebookshop.service.AddressService;
+import com.estorebookshop.service.BookService;
+import com.estorebookshop.service.CartItemService;
+import com.estorebookshop.service.CartService;
+import com.estorebookshop.service.UserService;
+
+@Controller
+@RequestMapping("/user/cart")
+public class MyCartController {
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private CartService cartService;
+
+	@Autowired
+	private CartItemService cartItemService;
+
+	@Autowired
+	private AddressService addressService;
+
+	@Autowired
+	private BookService bookService;
+
+	@RequestMapping("")
+	public String cart(Model model, RedirectAttributes redirectAttributes) {
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		if (principal instanceof CustomUserDetails) {
+			username = ((CustomUserDetails) principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+
+		User user = this.userService.findByUsername(username);
+
+		Cart cart = this.cartService.findByUserId(user.getId());
+
+		List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
+		List<Address> addresses = this.addressService.findByUser(user);
+
+		model.addAttribute("cartItems", cartItems);
+		model.addAttribute("addresses", addresses);
+
+		return "user/cart";
+
+	}
+
+	@PostMapping("/update")
+	public String updateCart(@RequestParam Map<String, String> formData, Model model, RedirectAttributes redirectAttributes) {
+	    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    String username;
+	    if (principal instanceof CustomUserDetails) {
+	        username = ((CustomUserDetails) principal).getUsername();
+	    } else {
+	        username = principal.toString();
+	    }
+
+	    User user = this.userService.findByUsername(username);
+	    
+	    // Kiểm tra sự tồn tại của giỏ hàng
+	    Cart cart = this.cartService.findByUserId(user.getId());
+	    if (cart == null) {
+	        redirectAttributes.addFlashAttribute("error", "Cart not found!");
+	        return "redirect:/user/cart";
+	    }
+	    
+	    try {
+	        for (String key : formData.keySet()) {
+	            if (key.startsWith("quantity")) {
+	                String cartItemIdString = key.split("\\[")[1].split("\\]")[0];
+	                Long cartItemId = Long.valueOf(cartItemIdString);
+
+	                // Kiểm tra xem quantity có hợp lệ không
+	                String quantityStr = formData.get(key);
+	                Long quantity = (quantityStr != null && quantityStr.matches("\\d+")) ? Long.parseLong(quantityStr) : 0L;
+
+	                // Kiểm tra xem bookId có hợp lệ không
+	                String bookIdStr = formData.get("bookId[" + cartItemId + "]");
+	                if (bookIdStr == null || !bookIdStr.matches("\\d+")) {
+	                    throw new IllegalArgumentException("Invalid bookId for cartItemId: " + cartItemId);
+	                }
+
+	                Long bookId = Long.parseLong(bookIdStr);
+	                Book book = this.bookService.findById(bookId);
+	                if (book == null) {
+	                    throw new IllegalArgumentException("Book not found for ID: " + bookId);
+	                }
+
+	                // Kiểm tra sự tồn tại của CartItem trước khi tạo mới
+	                CartItem existingCartItem = this.cartItemService.findByCartIdAndBookId(cart.getId(), bookId);
+	                if (existingCartItem == null) {
+	                    CartItem cartItem = new CartItem(cartItemId, cart, book, quantity);
+	                    this.cartItemService.save(cartItem);
+	                } else {
+	                    // Cập nhật cartItem nếu đã tồn tại
+	                    existingCartItem.setQuantity(quantity);
+	                    this.cartItemService.save(existingCartItem);
+	                }
+	            }
+	        }
+
+	        // Cập nhật lại các thông tin liên quan đến giỏ hàng
+	        List<CartItem> cartItems = cartItemService.findAllByCartId(cart.getId());
+	        List<Address> addresses = this.addressService.findByUser(user);
+	        
+	        model.addAttribute("cartItems", cartItems);
+	        model.addAttribute("addresses", addresses);
+
+	        redirectAttributes.addFlashAttribute("message", "Cart updated successfully!");
+	    } catch (Exception e) {
+	        redirectAttributes.addFlashAttribute("error", "Error updating cart: " + e.getMessage());
+	    }
+
+	    return "redirect:/user/cart";
+	}
+
+}

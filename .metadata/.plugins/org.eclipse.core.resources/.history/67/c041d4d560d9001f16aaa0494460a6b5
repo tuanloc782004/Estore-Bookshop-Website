@@ -1,0 +1,186 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+		<div class="slider-area">
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+		<div th:if="${error}" class="alert alert-danger">
+			<span th:text="${error}"></span>
+		</div>
+
+		<section class="cart_area section_padding">
+			<div class="container">
+				<div class="cart_inner">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Book</th>
+									<th scope="col">Price</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="cartItem, iterStat : ${cartItems}">
+									<td>
+										<div class="media">
+											<div class="d-flex">
+												<img
+													th:src="${cartItem.book.bookImages?.size() > 0 ? cartItem.book.bookImages.iterator().next().imageUrl : '/upload-dir/default-image/book-image.jfif'}"
+													alt="" />
+											</div>
+											<div class="media-body">
+												<p th:text="${cartItem.book.title}"></p>
+											</div>
+										</div>
+									</td>
+									<td><span th:if="${cartItem.book.discount > 0}"
+										th:text="${'$' + cartItem.book.price}"
+										style="text-decoration: line-through; color: red;"></span> <span
+										class="price"
+										th:attr="data-price=${cartItem.book.price}, data-discount=${cartItem.book.discount}">0.00</span>
+									</td>
+									<td>
+										<div class="product_count">
+											<!-- Truyền danh sách mới với tên theo thứ tự -->
+											<input type="hidden" name="cartUpdateDto[__${cartItem.id}__].id"
+												th:value="${cartItem.id}" /> <input class="input-number"
+												type="number" name="cartUpdateDto[__${cartItem.id}__].quantity"
+												th:value="${cartItem.quantity}" min="1" max="10" />
+										</div>
+									</td>
+									<td><span class="total-price"
+										th:attr="data-quantity=${cartItem.quantity}, data-price=${cartItem.book.price}, data-discount=${cartItem.book.discount}">0.00</span>
+									</td>
+								</tr>
+								<tr class="bottom_button">
+									<td><button type="submit" class="btn_1">Update
+											Cart</button></td>
+									<td></td>
+									<td>
+										<h5>Total</h5>
+									</td>
+									<td><span id="totalPrice"></span></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="checkout_address_area mt-5">
+							<h4 class="mb-4">Choose Shipping Address</h4>
+							<form>
+								<div class="address_list">
+									<div class="form-check mb-3" th:each="address : ${addresses}">
+										<input class="form-check-input" type="radio" name="address"
+											th:id="'address_' + ${address.id}" th:value="${address.id}">
+										<label class="form-check-label"
+											th:for="'address_' + ${address.id}"> <span
+											th:text="${address.address}"></span>, <span
+											th:text="${address.city}"></span>, <span
+											th:text="${address.zipCode}"></span>, <span
+											th:text="${address.country}"></span>
+										</label>
+									</div>
+								</div>
+							</form>
+						</div>
+						<hr>
+						<div class="checkout_btn_inner float-right">
+							<a class="btn_1 btn-primary rounded-pill" th:href="@{/}">Back
+								to Shop</a> <a class="btn_1 btn-warning rounded-pill checkout_btn_1"
+								th:href="@{/user/paypal/pay}"> Pay with PayPal </a> <a
+								class="btn_1 btn-success rounded-pill checkout_btn_1"
+								href="javascript:void(0)" id="cod-payment"> Pay on Delivery
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+	<div th:replace="~{user/layout/script::script}"></div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const quantityInputs = document.querySelectorAll('.input-number');
+			const priceElements = document.querySelectorAll('.price');
+			const totalPriceElements = document
+					.querySelectorAll('.total-price');
+			const totalPriceElement = document.getElementById('totalPrice');
+
+			// Hàm cập nhật giá trị tổng cho từng sản phẩm và toàn bộ giỏ hàng
+			function updateTotals() {
+				let cartTotal = 0;
+
+				totalPriceElements.forEach(function(totalPriceElement) {
+					const quantity = parseInt(totalPriceElement
+							.getAttribute('data-quantity'), 10);
+					const price = parseFloat(totalPriceElement
+							.getAttribute('data-price'));
+					const discount = parseFloat(totalPriceElement
+							.getAttribute('data-discount')) || 0;
+
+					let finalPrice = price;
+					if (discount > 0) {
+						finalPrice = (price * (100 - discount)) / 100;
+					}
+
+					const total = quantity * finalPrice;
+					totalPriceElement.textContent = `$${total.toFixed(2)}`;
+					cartTotal += total;
+				});
+
+				// Cập nhật tổng giá trị giỏ hàng
+				totalPriceElement.textContent = `$${cartTotal.toFixed(2)}`;
+			}
+
+			// Cập nhật giá trị price ban đầu
+			priceElements.forEach(function(priceElement) {
+				const price = parseFloat(priceElement
+						.getAttribute('data-price'));
+				const discount = parseFloat(priceElement
+						.getAttribute('data-discount')) || 0;
+
+				let finalPrice = price;
+				if (discount > 0) {
+					finalPrice = (price * (100 - discount)) / 100;
+				}
+
+				priceElement.textContent = `$${finalPrice.toFixed(2)}`;
+			});
+
+			// Lắng nghe sự kiện thay đổi số lượng
+			quantityInputs.forEach(function(input) {
+				input.addEventListener('input', function() {
+					const newQuantity = parseInt(input.value, 10) || 1;
+					input.value = newQuantity; // Đảm bảo giá trị không rỗng hoặc âm
+
+					const totalPriceElement = input.closest('tr')
+							.querySelector('.total-price');
+					totalPriceElement
+							.setAttribute('data-quantity', newQuantity);
+
+					// Cập nhật tổng số lượng và giỏ hàng
+					updateTotals();
+				});
+			});
+
+			// Cập nhật tổng ban đầu
+			updateTotals();
+		});
+	</script>
+</body>
+</html>

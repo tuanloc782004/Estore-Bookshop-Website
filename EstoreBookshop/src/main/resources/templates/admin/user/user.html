@@ -10,6 +10,14 @@
 		<div class="main-panel">
 			<nav th:replace="~{admin/layout/navbar::navbar}"></nav>
 			<div class="content">
+				<!-- Hiển thị thông báo thành công -->
+				<div th:if="${message}" class="alert alert-success" role="alert">
+					<span th:text="${message}"></span>
+				</div>
+				<!-- Hiển thị thông báo lỗi -->
+				<div th:if="${error}" class="alert alert-danger" role="alert">
+					<span th:text="${error}"></span>
+				</div>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-12">
@@ -34,21 +42,6 @@
 													<!-- Search Button -->
 													<div class="col-md-3">
 														<button type="submit" class="btn btn-primary">Search</button>
-													</div>
-													<div class="col-md-5">
-														<div class="container"
-															style="max-width: 400px; margin: 0 auto;">
-															<!-- Hiển thị thông báo thành công -->
-															<div th:if="${message}" class="alert alert-success"
-																role="alert">
-																<span th:text="${message}"></span>
-															</div>
-															<!-- Hiển thị thông báo lỗi -->
-															<div th:if="${error}" class="alert alert-danger"
-																role="alert">
-																<span th:text="${error}"></span>
-															</div>
-														</div>
 													</div>
 												</div>
 											</form>

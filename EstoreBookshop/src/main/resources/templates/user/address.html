@@ -155,26 +155,24 @@
 		}
 
 		function showUpdateForm(button) {
-			var id = button.getAttribute('data-id');
+		    var id = button.getAttribute('data-id');
 		    var address = button.getAttribute('data-address');
 		    var city = button.getAttribute('data-city');
 		    var zipCode = button.getAttribute('data-zipcode');
 		    var country = button.getAttribute('data-country');
-		    
-			console.log("Address ID:", addressId); // Kiểm tra giá trị của addressId
 
-			// Gán giá trị của addressId vào input ẩn
-			document.getElementById('addressId').value = addressId;
+		    console.log("Address ID:", id); // Kiểm tra giá trị của id
 
-			// Gán các giá trị vào form
-			document.getElementById('updateAddress').value = address;
-			document.getElementById('updateCity').value = city;
-			document.getElementById('updateZipCode').value = zipCode;
-			document.getElementById('updateCountry').value = country;
+		    // Gán giá trị vào input ẩn và các trường form
+		    document.getElementById('addressId').value = id;
+		    document.getElementById('updateAddress').value = address;
+		    document.getElementById('updateCity').value = city;
+		    document.getElementById('updateZipCode').value = zipCode;
+		    document.getElementById('updateCountry').value = country;
 
-			// Hiển thị form cập nhật
-			document.getElementById('addAddressForm').style.display = 'none';
-			document.getElementById('updateAddressForm').style.display = 'block';
+		    // Hiển thị form cập nhật
+		    document.getElementById('addAddressForm').style.display = 'none';
+		    document.getElementById('updateAddressForm').style.display = 'block';
 		}
 
 		// Close Add/Update Form

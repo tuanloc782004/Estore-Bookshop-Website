@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.estorebookshop.config.service.EmailService;
 import com.estorebookshop.model.Cart;
@@ -43,13 +44,11 @@ public class CartController {
 		if (keyword != null) {
 			list = this.cartService.findByKeyword(keyword, status, compareDate, pageNo);
 		}
-		
+
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("status", status);
-
 		model.addAttribute("totalPage", list.getTotalPages());
 		model.addAttribute("currentPage", pageNo);
-
 		model.addAttribute("compareDate", compareDate);
 		model.addAttribute("carts", list);
 		return "admin/cart/cart";
@@ -57,27 +56,36 @@ public class CartController {
 
 	@GetMapping("/delete/{id}")
 	@Transactional
-	public String delete(@PathVariable("id") Long id) {
-		Cart cart = cartService.findById(id);
+	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+		try {
+			Cart cart = cartService.findById(id);
 
-		if (cart != null && cart.getUser() != null) {
-			String email = cart.getUser().getEmail();
-			String username = cart.getUser().getUsername();
+			if (cart != null && cart.getUser() != null) {
+				String email = cart.getUser().getEmail();
+				String username = cart.getUser().getUsername();
 
-			cartItemService.deleteByCartId(id);
+				cartItemService.deleteByCartId(id);
+				cartService.deleteById(id);
 
-			cartService.deleteById(id);
+				try {
+					emailService.sendEmail(email, "Notification from Estore Bookshop", String.format(
+							"Dear %s,<br><br>Your cart has been deleted by the administrator due to inactivity for the past 90 days. If you have any questions or concerns, feel free to contact us at <a href='mailto:jobhere.22t.nhat1@gmail.com'>jobhere.22t.nhat1@gmail.com</a>.<br><br>Thank you for your understanding.<br><br>Best regards,<br>Estore Bookshop",
+							username));
+				} catch (Exception e) {
+					redirectAttributes.addFlashAttribute("error",
+							"Error occurred while sending notification email: " + e.getMessage());
+					return "redirect:/admin/cart";
+				}
 
-			try {
-				emailService.sendEmail(email, "Notification from Estore Bookshop", String.format(
-						"Dear %s,<br><br>Your cart has been deleted by the administrator due to inactivity for the past 90 days. If you have any questions or concerns, feel free to contact us at <a href='mailto:jobhere.22t.nhat1@gmail.com'>jobhere.22t.nhat1@gmail.com</a>.<br><br>Thank you for your understanding.<br><br>Best regards,<br>Estore Bookshop",
-						username));
-			} catch (Exception e) {
-				e.printStackTrace();
+				redirectAttributes.addFlashAttribute("message",
+						"Cart deleted and email notification sent successfully.");
+			} else {
+				redirectAttributes.addFlashAttribute("error", "Cart not found or user not found.");
 			}
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "Error occurred while deleting the cart: " + e.getMessage());
 		}
 
 		return "redirect:/admin/cart";
 	}
-
 }

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<head th:replace="~{user/layout/head::head}"></head>
+<body>
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+		<div class="slider-area">
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+		<div th:if="${error}" class="alert alert-danger">
+			<span th:text="${error}"></span>
+		</div>
+
+		<section class="cart_area section_padding">
+			<div class="container">
+				<div class="cart_inner">
+					<div class="table-responsive">
+						<form th:action="@{/user/cart/update}" method="post">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Order ID</th>
+										<th>Date</th>
+										<th>Total Price</th>
+										<th>Status</th>
+										<th>Payment Method</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="cartItem, iterStat : ${cartItems}">
+									<tr th:each="order : ${orders}">
+										<td><p th:text="${order.id}"></p></td>
+										<td><p
+												th:text="${order.createdAt.toString().substring(0,10)}"></p>
+										</td>
+										<td><p th:text="${'$' + order.totalPrice}"></p></td>
+										<td><p th:text="${order.status}"></p></td>
+										<td><p th:text="${order.paymentMethod}"></p></td>
+										<td><a class="btn btn-info btn-sm"
+											th:href="@{'/user/order/order-detail/' + ${order.id}}">View</a>
+											<p th:if="${order.status == 'Pending'}">
+												<a class="btn btn-danger btn-sm"
+													th:href="@{'/user/order/cancel/' + ${order.id}}">Cancel</a>
+											</p></td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+	<div th:replace="~{user/layout/script::script}"></div>
+</body>
+</html>

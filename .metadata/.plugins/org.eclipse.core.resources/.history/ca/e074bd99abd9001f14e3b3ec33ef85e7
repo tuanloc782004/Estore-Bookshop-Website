@@ -1,0 +1,46 @@
+<div th:fragment="sidebar">
+	<div class="sidebar" data-color="green" th:attr="data-image=@{/fe/img/sidebar-5.jpg}">
+
+		<!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+
+		<div class="sidebar-wrapper">
+			<div class="logo text-center d-flex justify-content-center align-items-center">
+				<h3>ADMIN</h3>
+			</div>
+
+			<ul class="nav">
+				<li><a th:href="@{/admin}"> <i class="pe-7s-graph"></i>
+						<p>Dashboard</p>
+					</a></li>
+				<li><a th:href="@{/admin/user}"> <i class="pe-7s-users"></i>
+						<p>Users</p>
+					</a></li>
+				<li class="active"><a th:href="@{/admin/category}"> <i class="pe-7s-menu"></i>
+						<p>Categories</p>
+					</a></li>
+				<li><a th:href="@{/admin/book}"> <i class="pe-7s-bookmarks"></i>
+						<p>Books</p>
+					</a></li>
+				<li><a th:href="@{/admin/publisher}"> <i class="pe-7s-paper-plane"></i>
+						<p>Publishers</p>
+					</a></li>
+				<li><a th:href="@{/admin/language}"> <i class="pe-7s-global"></i>
+						<p>Languages</p>
+					</a></li>
+				<li><a th:href="@{/admin/cart}"> <i class="pe-7s-cart"></i>
+						<p>Carts</p>
+					</a></li>
+				<li><a th:href="@{/admin/order}"> <i class="pe-7s-news-paper"></i>
+						<p>Orders</p>
+					</a></li>
+				<li><a th:href="@{/admin/review}"> <i class="pe-7s-look"></i>
+						<p>Reviews</p>
+					</a></li>
+				<li><a th:href="@{/admin/address}"> <i class="pe-7s-culture"></i>
+						<p>Addresses</p>
+					</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

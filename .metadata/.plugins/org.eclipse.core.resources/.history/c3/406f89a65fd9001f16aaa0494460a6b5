@@ -1,0 +1,28 @@
+package com.estorebookshop.dto;
+
+import java.util.Map;
+
+public class CartUpdateDTO {
+
+	private Map<String, CartItemDTO> cartItems;
+
+	public CartUpdateDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CartUpdateDTO(Map<String, CartItemDTO> cartItems) {
+		super();
+		this.cartItems = cartItems;
+	}
+
+	public Map<String, CartItemDTO> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(Map<String, CartItemDTO> cartItems) {
+		this.cartItems = cartItems;
+	}
+	
+	
+}

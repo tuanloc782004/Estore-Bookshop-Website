@@ -103,5 +103,25 @@ public class MyAddressController {
 		
 		return "redirect:/user/address";
 	}
+	
+	@PostMapping("/edit")
+	public String update(@RequestParam Long addressId, @RequestParam String address, @RequestParam String city, @RequestParam String zipCode,
+			@RequestParam String country, RedirectAttributes redirectAttributes) {
+
+		Address addressOb = this.addressService.findById(addressId);
+		addressOb.setCity(city);
+		addressOb.setCountry(country);
+		addressOb.setZipCode(zipCode);
+		addressOb.setAddress(address);
+
+		try {
+			this.addressService.save(addressOb);
+			redirectAttributes.addFlashAttribute("message", "Address updated successfully!");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "Error updating address: " + e.getMessage());
+		}
+		return "redirect:/user/address";
+
+	}
 
 }

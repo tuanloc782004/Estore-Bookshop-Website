@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.estorebookshop.model.Order;
+import com.estorebookshop.model.User;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
@@ -18,4 +19,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 	List<Order> findByKeyword(@Param("username") String username, @Param("status") String status,
 			@Param("startDateTime") LocalDateTime startDateTime, @Param("endDateTime") LocalDateTime endDateTime);
 
+	List<Order> findByUser(User user);
 }

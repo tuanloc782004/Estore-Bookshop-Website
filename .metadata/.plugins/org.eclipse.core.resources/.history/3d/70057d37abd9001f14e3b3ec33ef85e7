@@ -1,0 +1,21 @@
+<div class="text-center mb-3" th:fragment="pagination">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+			<li class="page-item" th:classappend="${pageNo == 1} ? 'disabled'">
+				<a class="page-link"
+				th:href="@{|/admin/review?pageNo=${pageNo - 1}&checked=${checked}&startDate=${startDate}&endDate=${endDate}|}">
+					Previous </a>
+			</li>
+			<li class="page-item"
+				th:each="i : ${#numbers.sequence(1, totalPages)}"
+				th:classappend="${pageNo == i} ? 'active'"><a class="page-link"
+				th:href="@{|/admin/review?pageNo=${i}&checked=${checked}&startDate=${startDate}&endDate=${endDate}|}"
+				th:text="${i}"></a></li>
+			<li class="page-item"
+				th:classappend="${pageNo == totalPages} ? 'disabled'"><a
+				class="page-link"
+				th:href="@{|/admin/review?pageNo=${pageNo + 1}&checked=${checked}&startDate=${startDate}&endDate=${endDate}|}">
+					Next </a></li>
+		</ul>
+	</nav>
+</div>

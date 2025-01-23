@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.estorebookshop.config.service.EmailService;
+import com.estorebookshop.model.Book;
 import com.estorebookshop.model.Order;
+import com.estorebookshop.model.OrderDetail;
 import com.estorebookshop.model.User;
 import com.estorebookshop.service.OrderService;
 
@@ -25,7 +27,7 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
-	
+
 	@Autowired
 	private EmailService emailService;
 
@@ -37,7 +39,7 @@ public class OrderController {
 			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo, Model model) {
 
 		if (startDate == null) {
-			startDate = LocalDate.of(2000, 1, 1);
+			startDate = LocalDate.of(2016, 1, 1);
 		}
 		if (endDate == null) {
 			endDate = LocalDate.now();
@@ -64,43 +66,54 @@ public class OrderController {
 	}
 
 	@GetMapping("/set-status")
-	public String setStatus(@RequestParam Long orderId, @RequestParam String status, RedirectAttributes redirectAttributes) {
-	   
-	    Order order = this.orderService.findById(orderId);
-	    User user = order.getUser(); 
-	    
-	    String email = user.getEmail();
-	    String username = user.getUsername();
-	    String oldStatus = order.getStatus();
+	public String setStatus(@RequestParam Long orderId, @RequestParam String status,
+			RedirectAttributes redirectAttributes) {
+		Order order = this.orderService.findById(orderId);
+		User user = order.getUser();
 
-	    try {
-	        orderService.setStatus(orderId, status);
-	        
-	        sendNotificationEmail(user, email, username, oldStatus, status, orderId);
-	        
-	        redirectAttributes.addFlashAttribute("message", "Order status updated successfully!");
-	    } catch (Exception e) {
-	        redirectAttributes.addFlashAttribute("error", "Failed to update order status.");
-	    }
-	    
-	    return "redirect:/admin/order";
+		String email = user.getEmail();
+		String username = user.getUsername();
+		String oldStatus = order.getStatus();
+
+		try {
+			if ("Pending".equals(oldStatus) && "Processing".equals(status)) {
+				for (OrderDetail od : order.getOrderDetails()) {
+					Book book = od.getBook();
+					book.setQuantity(book.getQuantity() - od.getQuantity());
+				}
+			} else if (("Processing".equals(oldStatus) || "Shipped".equals(oldStatus)) && "Cancelled".equals(status)) {
+				for (OrderDetail od : order.getOrderDetails()) {
+					Book book = od.getBook();
+					book.setQuantity(book.getQuantity() + od.getQuantity());
+				}
+			}
+
+			orderService.setStatus(orderId, status);
+
+			sendNotificationEmail(user, email, username, oldStatus, status, orderId);
+
+			redirectAttributes.addFlashAttribute("message", "Order status updated successfully!");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "Failed to update order status: " + e.getMessage());
+		}
+
+		return "redirect:/admin/order";
 	}
 
-	private void sendNotificationEmail(User user, String email, String username, String oldStatus, String newStatus, Long orderId) throws Exception {
-	    LocalDateTime updateTime = LocalDateTime.now();  
-	    
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-	    String formattedUpdateTime = updateTime.format(formatter);
+	private void sendNotificationEmail(User user, String email, String username, String oldStatus, String newStatus,
+			Long orderId) throws Exception {
+		LocalDateTime updateTime = LocalDateTime.now();
 
-	    String subject = "Order Status Updated - Estore Bookshop";
-	    String message = String.format(
-	            "Dear %s,<br><br>Your order with ID <b>%d</b> has been updated.<br>"
-	            + "The status has changed from <b>%s</b> to <b>%s</b> on <b>%s</b>.<br><br>"
-	            + "Thank you for shopping with us!<br><br>Best regards,<br>Estore Bookshop",
-	            username, orderId, oldStatus, newStatus, formattedUpdateTime);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String formattedUpdateTime = updateTime.format(formatter);
 
-	    emailService.sendEmail(email, subject, message);
+		String subject = "Order Status Updated - Estore Bookshop";
+		String message = String.format(
+				"Dear %s,<br><br>Your order with ID <b>%d</b> has been updated.<br>"
+						+ "The status has changed from <b>%s</b> to <b>%s</b> on <b>%s</b>.<br><br>"
+						+ "Thank you for shopping with us!<br><br>Best regards,<br>Estore Bookshop",
+				username, orderId, oldStatus, newStatus, formattedUpdateTime);
+
+		emailService.sendEmail(email, subject, message);
 	}
-
-
 }

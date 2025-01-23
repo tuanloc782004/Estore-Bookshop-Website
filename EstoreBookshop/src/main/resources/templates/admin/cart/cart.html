@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
 
 <head th:replace="~{admin/layout/head::head}"></head>
 
@@ -9,6 +10,14 @@
 		<div class="main-panel">
 			<nav th:replace="~{admin/layout/navbar::navbar}"></nav>
 			<div class="content">
+				<!-- Hiển thị thông báo thành công -->
+				<div th:if="${message}" class="alert alert-success" role="alert">
+					<span th:text="${message}"></span>
+				</div>
+				<!-- Hiển thị thông báo lỗi -->
+				<div th:if="${error}" class="alert alert-danger" role="alert">
+					<span th:text="${error}"></span>
+				</div>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-12">
@@ -34,8 +43,8 @@
 														<select name="status" class="form-control">
 															<option value="all" th:selected="${status == 'all'}">All
 																Status</option>
-															<option value="active" th:selected="${status == 'active'}">
-																Active</option>
+															<option value="active"
+																th:selected="${status == 'active'}">Active</option>
 															<option value="abandoned"
 																th:selected="${status == 'abandoned'}">Abandoned
 															</option>
@@ -71,28 +80,29 @@
 												<td th:text="${cart.createdAt.toString().substring(0, 10)}"></td>
 												<!-- Determine cart status -->
 												<td><span
-														th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isAfter(compareDate)}"
-														class="label label-success">Active</span> <span
-														th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isBefore(compareDate)}"
-														class="label label-warning">Abandoned</span></td>
+													th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isAfter(compareDate)}"
+													class="label label-success">Active</span> <span
+													th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isBefore(compareDate)}"
+													class="label label-warning">Abandoned</span></td>
 												<!-- Action: Delete Cart -->
 												<td
 													th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isBefore(compareDate)}">
 													<a th:href="@{|/admin/cart-item/${cart.id}|}"
-														class="btn btn-primary">View</a> <a
-														th:href="@{|/admin/cart/delete/${cart.id}|}"
-														class="btn btn-danger"
-														onclick="return confirm('Are you sure ???')">Delete</a>
+													class="btn btn-primary">View</a> <a
+													th:href="@{|/admin/cart/delete/${cart.id}|}"
+													class="btn btn-danger"
+													onclick="return confirm('Are you sure ???')">Delete</a>
 												</td>
 												<!-- Fallback when dates don't exist -->
 												<td
 													th:if="${cart.updatedAt != null and compareDate != null and cart.updatedAt.isAfter(compareDate)}">
 													<a th:href="@{|/admin/cart-item/${cart.id}|}"
-														class="btn btn-primary">View</a></td>
+													class="btn btn-primary">View</a>
+												</td>
 											</tr>
 										</tbody>
 									</table>
-									<div th:replace="~{admin/layout/pagination::pagination}"></div>
+									<div th:replace="~{admin/layout/cart-pagination::pagination}"></div>
 								</div>
 							</div>
 						</div>
