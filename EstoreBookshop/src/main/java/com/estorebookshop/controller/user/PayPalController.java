@@ -2,6 +2,8 @@ package com.estorebookshop.controller.user;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.estorebookshop.config.model.CustomUserDetails;
+import com.estorebookshop.config.service.EmailService;
 import com.estorebookshop.model.Cart;
 import com.estorebookshop.model.CartItem;
 import com.estorebookshop.model.Order;
@@ -36,6 +39,7 @@ import com.paypal.api.payments.RedirectUrls;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.APIContext;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -62,6 +66,9 @@ public class PayPalController {
 
 	@Autowired
 	private OrderDetailService orderDetailService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@PostMapping("/pay")
 	public RedirectView pay(@RequestParam Map<String, String> quantities, @RequestParam("addressId") Long addressId,
@@ -101,9 +108,11 @@ public class PayPalController {
 			// Tính tổng tiền
 			BigDecimal totalPrice = BigDecimal.ZERO;
 			for (CartItem cartItem : cartItems) {
-				BigDecimal itemTotal = cartItem.getBook().getPrice()
-						.multiply(BigDecimal.valueOf(cartItem.getQuantity()));
-				totalPrice = totalPrice.add(itemTotal);
+				BigDecimal bookPrice = cartItem.getBook().getPrice();
+	            BigDecimal discountRate = BigDecimal.valueOf(100).subtract(cartItem.getBook().getDiscount());
+	            BigDecimal discountedPrice = bookPrice.multiply(discountRate).divide(BigDecimal.valueOf(100));
+	            BigDecimal itemTotal = discountedPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+	            totalPrice = totalPrice.add(itemTotal);
 			}
 
 			// Tạo đối tượng thanh toán PayPal
@@ -175,6 +184,8 @@ public class PayPalController {
 	        order.setTotalPrice(new BigDecimal(executedPayment.getTransactions().get(0).getAmount().getTotal()));
 
 	        this.orderService.save(order);
+	        
+	        List<OrderDetail> orderDetails = new ArrayList<>();
 
 	        // Lưu chi tiết đơn hàng
 	        for (CartItem cartItem : cartItems) {
@@ -182,8 +193,14 @@ public class PayPalController {
 	            orderDetail.setOrder(order);
 	            orderDetail.setBook(cartItem.getBook());
 	            orderDetail.setQuantity(cartItem.getQuantity());
-	            orderDetail.setPrice(cartItem.getBook().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+	            
+	            BigDecimal bookPrice = cartItem.getBook().getPrice();
+	            BigDecimal discountRate = BigDecimal.valueOf(100).subtract(cartItem.getBook().getDiscount());
+	            BigDecimal discountedPrice = bookPrice.multiply(discountRate).divide(BigDecimal.valueOf(100));
+	            orderDetail.setPrice(discountedPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+
 	            this.orderDetailService.save(orderDetail);
+	            orderDetails.add(orderDetail);
 	        }
 
 	        // Xóa giỏ hàng
@@ -191,6 +208,8 @@ public class PayPalController {
 
 	        session.removeAttribute("addressId");
 	        session.removeAttribute("note");
+	        
+	        sendOrderDetailsEmail(user, order, orderDetails, redirectAttributes);
 
 	        redirectAttributes.addFlashAttribute("success", "Order placed successfully!");
 
@@ -206,5 +225,40 @@ public class PayPalController {
 	@GetMapping("/cancel")
 	public String cancel() {
 		return "Payment canceled.";
+	}
+	
+	private void sendOrderDetailsEmail(User user, Order order, List<OrderDetail> orderDetails,
+			RedirectAttributes redirectAttributes) {
+		String email = user.getEmail();
+		String username = user.getUsername();
+
+		String subject = "Your Order Details - Estore Bookshop";
+		StringBuilder message = new StringBuilder();
+
+		message.append(String.format("Dear %s,<br><br>", username));
+		message.append("Thank you for your purchase! Here are the details of your order:<br><br>");
+		message.append(String.format("Order ID: <b>%d</b><br>", order.getId()));
+		message.append(String.format("Order Date: <b>%s</b><br>",
+				order.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+		message.append("Order Details:<br><table border='1' cellpadding='5' cellspacing='0'>");
+		message.append("<tr><th>Book</th><th>Quantity</th><th>Price</th></tr>");
+
+		for (OrderDetail orderDetail : orderDetails) {
+			message.append(String.format("<tr><td>%s</td><td>%d</td><td>$%.2f</td></tr>",
+					orderDetail.getBook().getTitle(), orderDetail.getQuantity(), orderDetail.getPrice()));
+		}
+
+		message.append("</table>");
+		message.append(String.format("<br><b>Total Price: $%.2f</b><br><br>", order.getTotalPrice()));
+		message.append("We hope you enjoy your books!<br><br>Best regards,<br>Estore Bookshop");
+
+		try {
+			this.emailService.sendEmail(email, subject, message.toString());
+		} catch (MessagingException e) {
+			System.err.println("Error sending email: " + e.getMessage());
+			redirectAttributes.addFlashAttribute("warning",
+					"Order placed successfully, but failed to send confirmation email.");
+		}
+
 	}
 }

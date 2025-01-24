@@ -1,0 +1,14 @@
+package com.estorebookshop.service;
+
+import java.util.List;
+import java.util.Map;
+
+public interface DashboardService {
+
+	public List<Map<String, Object>> getBooksByCategory();
+	
+	public List<Map<String, Object>> getRevenueByMonth();
+	
+	public List<Map<String, Object>> getBooksSoldByMonth();
+	
+}

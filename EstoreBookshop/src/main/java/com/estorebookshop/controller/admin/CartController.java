@@ -51,6 +51,9 @@ public class CartController {
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("compareDate", compareDate);
 		model.addAttribute("carts", list);
+		
+		model.addAttribute("current", "cart");
+		
 		return "admin/cart/cart";
 	}
 

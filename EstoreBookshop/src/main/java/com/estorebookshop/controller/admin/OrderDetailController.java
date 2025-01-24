@@ -29,7 +29,7 @@ public class OrderDetailController {
 		// Gửi dữ liệu vào view
 		model.addAttribute("order", this.orderService.findById(orderId));
 		model.addAttribute("orderDetails", orderDetails);
-
+		model.addAttribute("current", "order");
 		return "admin/order-detail/order-detail";
 	}
 	

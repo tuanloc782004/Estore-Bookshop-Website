@@ -66,159 +66,200 @@ public class BookController {
 	@RequestMapping("")
 	public String book(Model model, @Param("keyword") String keyword,
 			@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo) {
+		model.addAttribute("current", "book");
+		try {
+			Page<Book> list = this.bookService.findAll(pageNo);
 
-		Page<Book> list = this.bookService.findAll(pageNo);
+			if (keyword != null) {
+				list = this.bookService.findByKeyword(keyword, pageNo);
+				model.addAttribute("keyword", keyword);
+			}
 
-		if (keyword != null) {
-			list = this.bookService.findByKeyword(keyword, pageNo);
-			model.addAttribute("keyword", keyword);
+			model.addAttribute("totalPage", list.getTotalPages());
+			model.addAttribute("currentPage", pageNo);
+			model.addAttribute("books", list);
+			return "admin/book/book";
+		} catch (Exception e) {
+			model.addAttribute("error", "An error occurred while fetching books: " + e.getMessage());
+			return "admin/book/book";
 		}
-
-		model.addAttribute("totalPage", list.getTotalPages());
-		model.addAttribute("currentPage", pageNo);
-
-		model.addAttribute("books", list);
-		return "admin/book/book";
 	}
 
 	@GetMapping("/add")
 	public String add(Model model) {
-		Book book = new Book();
-		book.setBookCategories(new HashSet<BookCategory>());
-		model.addAttribute(book);
+		try {
+			Book book = new Book();
+			book.setBookCategories(new HashSet<BookCategory>());
+			model.addAttribute(book);
 
-		List<Category> categories = this.categoryService.findAll();
-		model.addAttribute("categories", categories);
+			List<Category> categories = this.categoryService.findAll();
+			model.addAttribute("categories", categories);
 
-		Set<Long> categoryIds = book.getBookCategories().stream()
-				.map(bookCategory -> bookCategory.getCategory().getId()).collect(Collectors.toSet());
-		model.addAttribute("categoryIds", categoryIds);
+			Set<Long> categoryIds = book.getBookCategories().stream()
+					.map(bookCategory -> bookCategory.getCategory().getId()).collect(Collectors.toSet());
+			model.addAttribute("categoryIds", categoryIds);
 
-		List<Language> languages = this.languageService.findAll();
-		model.addAttribute("languages", languages);
+			List<Language> languages = this.languageService.findAll();
+			model.addAttribute("languages", languages);
 
-		List<Publisher> publishers = this.publisherService.findAll();
-		model.addAttribute("publishers", publishers);
+			List<Publisher> publishers = this.publisherService.findAll();
+			model.addAttribute("publishers", publishers);
 
-		return "admin/book/book-form";
+			model.addAttribute("current", "book");
+
+			return "admin/book/book-form";
+		} catch (Exception e) {
+			model.addAttribute("error", "An error occurred while preparing the add book form: " + e.getMessage());
+			return "redirect:/admin/book";
+		}
 	}
 
 	@PostMapping("/add")
 	public String create(@ModelAttribute("book") Book book, @RequestParam List<Long> categoryIds,
 			@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) {
+		try {
+			book.setRating(BigDecimal.valueOf(0.00));
+			this.bookService.save(book);
 
-		book.setRating(BigDecimal.valueOf(0.00));
+			List<Category> selectedCategories = this.categoryService.findAllById(categoryIds);
 
-		// Lưu sách với các thay đổi
-		this.bookService.save(book);
-
-		// Cập nhật danh mục sách
-		List<Category> selectedCategories = this.categoryService.findAllById(categoryIds);
-
-		for (Category category : selectedCategories) {
-			BookCategory bookCategory = new BookCategory();
-			bookCategory.setBook(book);
-			bookCategory.setCategory(category);
-			this.bookCategoryService.save(bookCategory); // Lưu các mối quan hệ mới
-		}
-
-		// Thêm ảnh mới
-		Set<BookImage> newImageEntities = new Array2DHashSet<BookImage>();
-		for (MultipartFile file : files) {
-			if (!file.isEmpty()) {
-				// Đặt tên cho file ảnh mới
-				String imageUrl = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_"
-						+ file.getOriginalFilename();
-				this.storageService.store(file, imageUrl); // Lưu ảnh mới với tên đã tạo
-
-				BookImage bookImage = new BookImage();
-				bookImage.setImageUrl("/upload-dir/" + imageUrl); // Lưu đường dẫn ảnh
-				bookImage.setBook(book); // Liên kết ảnh với sách
-				this.bookImageService.save(bookImage);
-				newImageEntities.add(bookImage);
+			for (Category category : selectedCategories) {
+				BookCategory bookCategory = new BookCategory();
+				bookCategory.setBook(book);
+				bookCategory.setCategory(category);
+				this.bookCategoryService.save(bookCategory);
 			}
+
+			Set<BookImage> newImageEntities = new Array2DHashSet<>();
+			for (MultipartFile file : files) {
+				if (!file.isEmpty()) {
+					String imageUrl = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_"
+							+ file.getOriginalFilename();
+					this.storageService.store(file, imageUrl);
+
+					BookImage bookImage = new BookImage();
+					bookImage.setImageUrl("/upload-dir/" + imageUrl);
+					bookImage.setBook(book);
+					this.bookImageService.save(bookImage);
+					newImageEntities.add(bookImage);
+				}
+			}
+
+			book.setBookImages(newImageEntities);
+			redirectAttributes.addFlashAttribute("message", "Book added successfully!");
+			return "redirect:/admin/book";
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "Failed to add book: " + e.getMessage());
+			return "redirect:/admin/book/add";
 		}
-
-		// Cập nhật ảnh mới vào sách
-		book.setBookImages(newImageEntities);
-
-		redirectAttributes.addFlashAttribute("message", "Book updated successfully!");
-
-		return "redirect:/admin/book";
 	}
 
 	@GetMapping("/edit/{id}")
 	public String edit(Model model, @PathVariable("id") Long id) {
-		Book book = this.bookService.findById(id);
-		model.addAttribute("book", book);
+		try {
+			Book book = this.bookService.findById(id);
+			if (book == null) {
+				model.addAttribute("error", "Book not found!");
+				return "redirect:/admin/book";
+			}
 
-		List<Category> categories = this.categoryService.findAll();
-		model.addAttribute("categories", categories);
+			model.addAttribute("book", book);
 
-		Set<Long> categoryIds = book.getBookCategories().stream()
-				.map(bookCategory -> bookCategory.getCategory().getId()).collect(Collectors.toSet());
-		model.addAttribute("categoryIds", categoryIds);
+			List<Category> categories = this.categoryService.findAll();
+			model.addAttribute("categories", categories);
 
-		List<Language> languages = this.languageService.findAll();
-		model.addAttribute("languages", languages);
+			Set<Long> categoryIds = book.getBookCategories().stream()
+					.map(bookCategory -> bookCategory.getCategory().getId()).collect(Collectors.toSet());
+			model.addAttribute("categoryIds", categoryIds);
 
-		List<Publisher> publishers = this.publisherService.findAll();
-		model.addAttribute("publishers", publishers);
+			List<Language> languages = this.languageService.findAll();
+			model.addAttribute("languages", languages);
 
-		return "admin/book/book-form";
+			List<Publisher> publishers = this.publisherService.findAll();
+			model.addAttribute("publishers", publishers);
+
+			model.addAttribute("current", "book");
+
+			return "admin/book/book-form";
+		} catch (Exception e) {
+			model.addAttribute("error", "An error occurred while fetching book details: " + e.getMessage());
+			return "redirect:/admin/book";
+		}
 	}
 
 	@PostMapping("/edit")
 	public String update(@ModelAttribute("book") Book book, @RequestParam List<Long> categoryIds,
 			@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes) {
+		try {
+			List<Category> selectedCategories = this.categoryService.findAllById(categoryIds);
+			this.bookCategoryService.deleteByBook(book);
 
-		// Cập nhật danh mục sách
-		List<Category> selectedCategories = this.categoryService.findAllById(categoryIds);
-		this.bookCategoryService.deleteByBook(book); // Xóa các mối quan hệ cũ
-
-		for (Category category : selectedCategories) {
-			BookCategory bookCategory = new BookCategory();
-			bookCategory.setBook(book);
-			bookCategory.setCategory(category);
-			this.bookCategoryService.save(bookCategory); // Lưu các mối quan hệ mới
-		}
-
-		// Thêm ảnh mới
-		Set<BookImage> newImageEntities = new Array2DHashSet<BookImage>();
-		for (MultipartFile file : files) {
-			if (!file.isEmpty()) {
-				// Đặt tên cho file ảnh mới
-				String imageUrl = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_"
-						+ file.getOriginalFilename();
-				this.storageService.store(file, imageUrl); // Lưu ảnh mới với tên đã tạo
-
-				BookImage bookImage = new BookImage();
-				bookImage.setImageUrl("/upload-dir/" + imageUrl); // Lưu đường dẫn ảnh
-				bookImage.setBook(book); // Liên kết ảnh với sách
-				this.bookImageService.save(bookImage);
-				newImageEntities.add(bookImage);
+			for (Category category : selectedCategories) {
+				BookCategory bookCategory = new BookCategory();
+				bookCategory.setBook(book);
+				bookCategory.setCategory(category);
+				this.bookCategoryService.save(bookCategory);
 			}
+
+			Set<BookImage> newImageEntities = new Array2DHashSet<>();
+			if (files != null) {
+				for (MultipartFile file : files) {
+					if (!file.isEmpty()) {
+						String imageUrl = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))
+								+ "_" + file.getOriginalFilename();
+						this.storageService.store(file, imageUrl);
+
+						BookImage bookImage = new BookImage();
+						bookImage.setImageUrl("/upload-dir/" + imageUrl);
+						bookImage.setBook(book);
+						this.bookImageService.save(bookImage);
+						newImageEntities.add(bookImage);
+					}
+				}
+			}
+
+			book.setBookImages(newImageEntities);
+			book.setRating(this.bookService.findById(book.getId()).getRating());
+			this.bookService.save(book);
+
+			redirectAttributes.addFlashAttribute("message", "Book updated successfully!");
+			return "redirect:/admin/book";
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "Failed to update book: " + e.getMessage());
+			return "redirect:/admin/book/edit/" + book.getId();
 		}
-
-		// Cập nhật ảnh mới vào sách
-		book.setBookImages(newImageEntities);
-
-		book.setRating(this.bookService.findById(book.getId()).getRating());
-
-		// Lưu sách với các thay đổi
-		this.bookService.save(book);
-		redirectAttributes.addFlashAttribute("message", "Book updated successfully!");
-		return "redirect:/admin/book"; // Điều hướng về danh sách sách sau khi cập nhật
 	}
 
 	@GetMapping("/delete/{id}")
 	@Transactional
-	public String delete(@PathVariable("id") Long id) {
-		
-		this.bookCategoryService.deleteByBookId(id);
-		this.bookImageService.deleteByBookId(id);
-		this.bookService.deleteById(id);
-		
+	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+		try {
+			this.bookCategoryService.deleteByBookId(id);
+			this.bookImageService.deleteByBookId(id);
+			this.bookService.deleteById(id);
+			redirectAttributes.addFlashAttribute("message", "Book deleted successfully!");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "Failed to delete book: " + e.getMessage());
+		}
+		return "redirect:/admin/book";
+	}
+
+	@GetMapping("/set-enabled/{id}")
+	public String setEnabled(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+		try {
+			Book book = this.bookService.findById(id);
+			if (book == null) {
+				redirectAttributes.addFlashAttribute("error", "Book not found!");
+				return "redirect:/admin/book";
+			}
+
+			book.setEnabled(!book.isEnabled());
+			this.bookService.save(book);
+
+			redirectAttributes.addFlashAttribute("message", "Book status updated successfully!");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "Failed to update book status: " + e.getMessage());
+		}
 		return "redirect:/admin/book";
 	}
 }

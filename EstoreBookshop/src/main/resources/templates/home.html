@@ -20,6 +20,13 @@
 		</div>
 		<!-- slider Area End-->
 
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+		<div th:if="${error}" class="alert alert-danger">
+			<span th:text="${error}"></span>
+		</div>
+
 		<!-- Latest Products Start -->
 		<section class="latest-product-area latest-padding">
 			<div class="container">
@@ -64,8 +71,7 @@
 							</div>
 							<div class="select-itms">
 								<select name="sort" id="select3">
-									<option value="popular"
-										th:selected="${'popular' == sort}">Popular</option>
+									<option value="popular" th:selected="${'popular' == sort}">Popular</option>
 									<option value="best" th:selected="${'best' == sort}">Best
 										Selling</option>
 									<option value="new" th:selected="${'new' == sort}">New

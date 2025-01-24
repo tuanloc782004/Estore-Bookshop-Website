@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout/head::head}">
+<!-- Các tài nguyên bạn đã cung cấp -->
+<link rel="manifest" href="site.webmanifest">
+<link rel="shortcut icon" type="image/x-icon"
+	th:href="@{/fe/img/favicon.ico}">
+
+<!-- CSS here -->
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
+<link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
+<link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
+<link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+<link rel="stylesheet" th:href="@{/assets/css/slick.css}">
+<link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
+<link rel="stylesheet" th:href="@{/assets/css/style.css}">
+</head>
+<body>
+	<div class="wrapper">
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<!-- Card Users -->
+						<div class="col-md-4">
+							<div class="card bg-danger text-white">
+								<div class="card-header text-center">
+									<h4 class="card-title"
+										style="font-family: 'Arial', sans-serif; font-size: 22px;">Users</h4>
+								</div>
+								<div class="card-body text-center">
+									<h4 th:text="${userCount}"
+										style="font-size: 40px; font-weight: bold;"></h4>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card Books -->
+						<div class="col-md-4">
+							<div class="card bg-success text-white">
+								<div class="card-header text-center">
+									<h4 class="card-title"
+										style="font-family: 'Arial', sans-serif; font-size: 22px;">Books</h4>
+								</div>
+								<div class="card-body text-center">
+									<h4 th:text="${bookCount}"
+										style="font-size: 40px; font-weight: bold;"></h4>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card Orders -->
+						<div class="col-md-4">
+							<div class="card bg-warning text-dark">
+								<div class="card-header text-center">
+									<h4 class="card-title"
+										style="font-family: 'Arial', sans-serif; font-size: 22px;">Orders</h4>
+								</div>
+								<div class="card-body text-center">
+									<h4 th:text="${orderCount}"
+										style="font-size: 40px; font-weight: bold;"></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
+</body>
+</html>

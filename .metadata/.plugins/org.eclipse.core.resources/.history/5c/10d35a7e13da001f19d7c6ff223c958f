@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/layout/head::head}"></head>
+
+<body>
+	<div class="wrapper">
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<!-- Biểu đồ số lượng sách theo thể loại -->
+						<div class="col-md-6">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Book Categories</h4>
+								</div>
+								<div class="content">
+									<canvas id="categoryChart"></canvas>
+								</div>
+							</div>
+						</div>
+
+						<!-- Biểu đồ doanh thu theo tháng -->
+						<div class="col-md-6">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Revenue By Month</h4>
+								</div>
+								<div class="content">
+									<canvas id="revenueChart"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Biểu đồ lượng sách bán ra theo tháng -->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Books Sold By Month</h4>
+								</div>
+								<div class="content">
+									<canvas id="soldChart"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+	<script th:utext="|var categoryData = ${booksByCategory} ;|"></script>
+	<script th:utext="|var revenueData = ${revenueByMonth} ;|"></script>
+	<script th:utext="|var soldData = ${booksSoldByMonth} ;|"></script>
+
+	<script>
+        // Chuyển đổi chuỗi JSON thành đối tượng JavaScript nếu cần
+        categoryData = JSON.parse(categoryData);
+        revenueData = JSON.parse(revenueData);
+        soldData = JSON.parse(soldData);
+
+        // Biểu đồ thể loại sách
+        var ctx1 = document.getElementById('categoryChart').getContext('2d');
+        var categoryChart = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: categoryData.map(data => data[0]), // category
+                datasets: [{
+                    data: categoryData.map(data => data[1]), // count
+                    backgroundColor: ['#ffcc00', '#4caf50', '#2196f3', '#ff5722', '#9c27b0'],
+                }]
+            }
+        });
+
+        // Biểu đồ doanh thu
+        var ctx2 = document.getElementById('revenueChart').getContext('2d');
+        var revenueChart = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: revenueData.map(data => 'Month ' + data[0]), // Month
+                datasets: [{
+                    label: 'Revenue',
+                    data: revenueData.map(data => data[1]), // revenue
+                    borderColor: '#42a5f5',
+                    fill: false
+                }]
+            }
+        });
+
+        // Biểu đồ sách bán ra
+        var ctx3 = document.getElementById('soldChart').getContext('2d');
+        var soldChart = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: soldData.map(data => 'Month ' + data[0]), // Month
+                datasets: [{
+                    label: 'Books Sold',
+                    data: soldData.map(data => data[1]), // quantity
+                    borderColor: '#ff7043',
+                    fill: false
+                }]
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -18,7 +18,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 				.anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN"));
 
 		if (isAdmin) {
-			response.sendRedirect("/admin"); 
+			response.sendRedirect("/admin/dashboard"); 
 		} else {
 			response.sendRedirect(""); 
 		}

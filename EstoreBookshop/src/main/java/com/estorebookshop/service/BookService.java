@@ -29,5 +29,7 @@ public interface BookService {
 	public List<Book> findForSearch(String keyword, String sort);
 
 	public Page<Book> findForSearch(String keyword, String sort, Integer pageNo);
+	
+	public long countBooks();
 
 }

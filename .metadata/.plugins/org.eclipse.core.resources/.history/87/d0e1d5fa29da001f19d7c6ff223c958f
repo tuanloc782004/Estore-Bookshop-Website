@@ -1,0 +1,5 @@
+package com.estorebookshop.controller;
+
+public class RegisterController {
+
+}

@@ -30,4 +30,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 			+ "CASE WHEN :sort = 'hl' THEN b.price END DESC")
 	List<Book> findForSearch(@Param("keyword") String keyword, @Param("sort") String sort);
 
+	long count();
+
 }

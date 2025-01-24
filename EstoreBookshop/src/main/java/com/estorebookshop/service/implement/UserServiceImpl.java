@@ -61,5 +61,23 @@ public class UserServiceImpl implements UserService {
 		list = list.subList(start, end);
 		return new PageImpl<User>(list, pageable, this.findByKeyword(keyword).size());
 	}
+
+	@Override
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return this.userRepository.findByEmail(email);
+	}
+
+	@Override
+	public User findByPhoneNumber(String phoneNumber) {
+		// TODO Auto-generated method stub
+		return this.userRepository.findByPhoneNumber(phoneNumber);
+	}
+
+	@Override
+	public long countUsers() {
+		// TODO Auto-generated method stub
+		return this.userRepository.count();
+	}
 	
 }

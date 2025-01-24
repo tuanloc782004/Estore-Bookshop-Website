@@ -74,5 +74,11 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return this.orderRepository.save(order);
 	}
+
+	@Override
+	public long countOrders() {
+		// TODO Auto-generated method stub
+		return this.orderRepository.count();
+	}
 	
 }

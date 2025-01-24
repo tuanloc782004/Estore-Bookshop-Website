@@ -75,9 +75,9 @@
 														class="label label-danger">Disabled</span></td>
 													<td th:text="${user.createdAt.toString().substring(0,10)}"></td>
 													<td><a
-														th:href="@{|/admin/user/edit/${user.id}?keyword=${keyword}&pageNo=${currentPage}|}"
+														th:href="@{|/admin/user/edit/${user.id}|}"
 														class="btn btn-primary">Edit</a> <a
-														th:href="@{|/admin/user/set-enabled/${user.id}?keyword=${keyword}&pageNo=${currentPage}|}"
+														th:href="@{|/admin/user/set-enabled/${user.id}|}"
 														class="btn"
 														th:classappend="${user.enabled ? 'btn-danger' : 'btn-success'}"
 														th:text="${user.enabled ? 'Disable' : 'Enable'}"

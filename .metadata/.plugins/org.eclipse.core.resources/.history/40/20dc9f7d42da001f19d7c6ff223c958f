@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout/head::head}"></head>
+<body>
+	<div class="wrapper">
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<!-- Card Users -->
+						<div class="col-md-4">
+							<div class="card bg-danger text-white">
+								<div class="card-header text-center">
+									<h4 class="card-title">Users</h4>
+								</div>
+								<div class="card-body text-center">
+									<h4 th:text="${userCount}" class="display-4"></h4>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card Books -->
+						<div class="col-md-4">
+							<div class="card bg-success text-white">
+								<div class="card-header text-center">
+									<h4 class="card-title">Books</h4>
+								</div>
+								<div class="card-body text-center">
+									<h4 th:text="${bookCount}" class="display-4"></h4>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card Orders -->
+						<div class="col-md-4">
+							<div class="card bg-warning text-dark">
+								<div class="card-header text-center">
+									<h4 class="card-title">Orders</h4>
+								</div>
+								<div class="card-body text-center">
+									<h4 th:text="${orderCount}" class="display-4"></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
+</body>
+</html>

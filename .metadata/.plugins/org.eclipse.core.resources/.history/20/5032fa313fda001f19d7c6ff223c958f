@@ -1,0 +1,5 @@
+package com.estorebookshop.service;
+
+public interface RevenueService {
+
+}

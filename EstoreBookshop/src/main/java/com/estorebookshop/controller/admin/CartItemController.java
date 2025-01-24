@@ -29,6 +29,8 @@ public class CartItemController {
 		// Gửi dữ liệu vào view
 		model.addAttribute("username", this.cartService.findById(cartId).getUser().getUsername());
 		model.addAttribute("cartItems", cartItems);
+		
+		model.addAttribute("current", "cart");
 
 		return "admin/cart-item/cart-item";
 	}

@@ -23,5 +23,7 @@ public interface ReviewService {
 	public Review findById(Long id);
 	
 	public List<Review> findByBookIdSortByCreatedAt (Long bookId);
+	
+	public Review save(Review review);
 
 }

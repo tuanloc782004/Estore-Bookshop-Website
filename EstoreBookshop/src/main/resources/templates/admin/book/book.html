@@ -31,22 +31,7 @@
 										<div class="col-md-4">
 											<h4 class="title mb-0">List of Books</h4>
 										</div>
-										<div class="col-md-4">
-											<div class="container"
-												style="max-width: 450px; margin: 0 auto;">
-												<!-- Hiển thị thông báo thành công -->
-												<div th:if="${message}" class="alert alert-success"
-													role="alert">
-													<span th:text="${message}"></span>
-												</div>
-												<!-- Hiển thị thông báo lỗi -->
-												<div th:if="${error}" class="alert alert-danger"
-													role="alert">
-													<span th:text="${error}"></span>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 text-right">
+										<div class="col-md-8 text-right">
 											<a class="btn btn-success" th:href="@{/admin/book/add}">Add</a>
 										</div>
 									</div>
@@ -104,9 +89,11 @@
 														class="label label-danger">Disabled</span></td>
 													<td><a th:href="@{|/admin/book/edit/${book.id}|}"
 														class="btn btn-primary">Edit</a> <a
-														th:href="@{|/admin/book/delete/${book.id}|}"
-														class="btn btn-danger"
-														onclick="return confirm('Are you sure ???')">Delete</a></td>
+														th:href="@{|/admin/book/set-enabled/${book.id}|}"
+														class="btn"
+														th:classappend="${book.enabled ? 'btn-danger' : 'btn-success'}"
+														th:text="${book.enabled ? 'Disable' : 'Enable'}"
+														onclick="return confirm('Are you sure you want to perform this action?')"></a></td>
 												</tr>
 											</tbody>
 										</table>

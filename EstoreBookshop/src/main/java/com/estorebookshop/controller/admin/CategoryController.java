@@ -43,6 +43,8 @@ public class CategoryController {
         } catch (Exception e) {
             model.addAttribute("message", "Error occurred while fetching categories: " + e.getMessage());
         }
+        
+        model.addAttribute("current", "category");
 
         return "admin/category/category";
     }
@@ -51,6 +53,9 @@ public class CategoryController {
     public String add(Model model) {
         Category category = new Category();
         model.addAttribute("category", category);
+        
+        model.addAttribute("current", "category");
+        
         return "admin/category/category-form";
     }
 
@@ -69,6 +74,7 @@ public class CategoryController {
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Long id) {
         Category category = null;
+        model.addAttribute("current", "category");
         try {
             category = this.categoryService.findById(id);
             model.addAttribute("category", category);

@@ -20,4 +20,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 			@Param("startDateTime") LocalDateTime startDateTime, @Param("endDateTime") LocalDateTime endDateTime);
 
 	List<Order> findByUser(User user);
+
+	long count();
+
 }

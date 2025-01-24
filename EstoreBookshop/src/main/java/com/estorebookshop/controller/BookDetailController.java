@@ -37,10 +37,10 @@ public class BookDetailController {
 
 	@Autowired
 	private CartService cartService;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private CartItemService cartItemService;
 
@@ -60,34 +60,41 @@ public class BookDetailController {
 	}
 
 	@PostMapping("/add-to-cart")
-	public String addToCart(Model model, @RequestParam Long bookId, @RequestParam Long quantity, RedirectAttributes redirectAttributes) {
+	public String addToCart(Model model, @RequestParam Long bookId, @RequestParam Long quantity,
+			RedirectAttributes redirectAttributes) {
 
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		if (authentication == null || !authentication.isAuthenticated()) {
 			return "redirect:/login";
 		}
-		
+
 		String username = authentication.getName();
-		
+
 		User user = this.userService.findByUsername(username);
 		Long userId = user.getId();
-		
+
 		if (this.cartService.findByUserId(userId) == null) {
-            Cart temp = new Cart();
-            temp.setUser(user);
-            cartService.save(temp);  
-        }
-		
+			Cart temp = new Cart();
+			temp.setUser(user);
+			cartService.save(temp);
+		}
+
 		Cart cart = this.cartService.findByUserId(userId);
 		CartItem cartItem = new CartItem();
 		cartItem.setCart(cart);
-		cartItem.setQuantity(quantity - 1);
+		if (quantity != 1) {
+			cartItem.setQuantity(quantity - 1);
+		}
+		if (cartItem.getQuantity() == null) {
+		    cartItem.setQuantity(Long.valueOf(1)); 
+		}
+
 		cartItem.setBook(this.bookService.findById(bookId));
 		this.cartItemService.save(cartItem);
-		
-	    redirectAttributes.addFlashAttribute("message", "Book added to cart successfully!");
-		
+
+		redirectAttributes.addFlashAttribute("message", "Book added to cart successfully!");
+
 		return "redirect:/book-detail/" + bookId;
 
 	}

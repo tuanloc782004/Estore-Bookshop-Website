@@ -1,0 +1,23 @@
+package com.estorebookshop.dto;
+
+import java.math.BigDecimal;
+
+public class RevenueData {
+
+	private Integer month;
+    private BigDecimal revenue;
+
+    public RevenueData(Integer month, BigDecimal revenue) {
+        this.month = month;
+        this.revenue = revenue;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public BigDecimal getRevenue() {
+        return revenue;
+    }
+    
+}

@@ -81,7 +81,8 @@
 						</form>
 						<form th:action="@{/user/cart/pay}" method="post">
 							<div class="checkout_address_area mt-5">
-								<div th:each="cartItem : ${cartItems}" style="display: none;">
+								<div th:each="cartItem, iterStat : ${cartItems}"
+									style="display: none;">
 									<input class="input-number" type="number"
 										th:name="'quantities[' + ${cartItem.id} + ']'"
 										th:value="${cartItem.quantity}" min="1" max="10" />
@@ -129,73 +130,103 @@
 	<div th:replace="~{user/layout/script::script}"></div>
 
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			const quantityInputs = document.querySelectorAll('.input-number');
-			const priceElements = document.querySelectorAll('.price');
-			const totalPriceElements = document
-					.querySelectorAll('.total-price');
-			const totalPriceElement = document.getElementById('totalPrice');
+		document
+				.addEventListener(
+						'DOMContentLoaded',
+						function() {
+							const quantityInputs = document
+									.querySelectorAll('.input-number');
+							const priceElements = document
+									.querySelectorAll('.price');
+							const totalPriceElements = document
+									.querySelectorAll('.total-price');
+							const totalPriceElement = document
+									.getElementById('totalPrice');
+							const hiddenQuantities = document
+									.querySelectorAll('input[name^="quantities"]'); // Select hidden input fields for quantities in pay form
 
-			// Hàm cập nhật giá trị tổng cho từng sản phẩm và toàn bộ giỏ hàng
-			function updateTotals() {
-				let cartTotal = 0;
+							// Hàm cập nhật giá trị tổng cho từng sản phẩm và toàn bộ giỏ hàng
+							function updateTotals() {
+								let cartTotal = 0;
 
-				totalPriceElements.forEach(function(totalPriceElement) {
-					const quantity = parseInt(totalPriceElement
-							.getAttribute('data-quantity'), 10);
-					const price = parseFloat(totalPriceElement
-							.getAttribute('data-price'));
-					const discount = parseFloat(totalPriceElement
-							.getAttribute('data-discount')) || 0;
+								totalPriceElements
+										.forEach(function(totalPriceElement) {
+											const quantity = parseInt(
+													totalPriceElement
+															.getAttribute('data-quantity'),
+													10);
+											const price = parseFloat(totalPriceElement
+													.getAttribute('data-price'));
+											const discount = parseFloat(totalPriceElement
+													.getAttribute('data-discount')) || 0;
 
-					let finalPrice = price;
-					if (discount > 0) {
-						finalPrice = (price * (100 - discount)) / 100;
-					}
+											let finalPrice = price;
+											if (discount > 0) {
+												finalPrice = (price * (100 - discount)) / 100;
+											}
 
-					const total = quantity * finalPrice;
-					totalPriceElement.textContent = `$${total.toFixed(2)}`;
-					cartTotal += total;
-				});
+											const total = quantity * finalPrice;
+											totalPriceElement.textContent = `$${total.toFixed(2)}`;
+											cartTotal += total;
+										});
 
-				// Cập nhật tổng giá trị giỏ hàng
-				totalPriceElement.textContent = `$${cartTotal.toFixed(2)}`;
-			}
+								// Cập nhật tổng giá trị giỏ hàng
+								totalPriceElement.textContent = `$${cartTotal.toFixed(2)}`;
+							}
 
-			// Cập nhật giá trị price ban đầu
-			priceElements.forEach(function(priceElement) {
-				const price = parseFloat(priceElement
-						.getAttribute('data-price'));
-				const discount = parseFloat(priceElement
-						.getAttribute('data-discount')) || 0;
+							// Cập nhật giá trị price ban đầu
+							priceElements
+									.forEach(function(priceElement) {
+										const price = parseFloat(priceElement
+												.getAttribute('data-price'));
+										const discount = parseFloat(priceElement
+												.getAttribute('data-discount')) || 0;
 
-				let finalPrice = price;
-				if (discount > 0) {
-					finalPrice = (price * (100 - discount)) / 100;
-				}
+										let finalPrice = price;
+										if (discount > 0) {
+											finalPrice = (price * (100 - discount)) / 100;
+										}
 
-				priceElement.textContent = `$${finalPrice.toFixed(2)}`;
-			});
+										priceElement.textContent = `$${finalPrice.toFixed(2)}`;
+									});
 
-			// Lắng nghe sự kiện thay đổi số lượng
-			quantityInputs.forEach(function(input) {
-				input.addEventListener('input', function() {
-					const newQuantity = parseInt(input.value, 10) || 1;
-					input.value = newQuantity; // Đảm bảo giá trị không rỗng hoặc âm
+							// Lắng nghe sự kiện thay đổi số lượng
+							quantityInputs
+									.forEach(function(input) {
+										input
+												.addEventListener(
+														'input',
+														function() {
+															const newQuantity = parseInt(
+																	input.value,
+																	10) || 1;
+															input.value = newQuantity; // Đảm bảo giá trị không rỗng hoặc âm
 
-					const totalPriceElement = input.closest('tr')
-							.querySelector('.total-price');
-					totalPriceElement
-							.setAttribute('data-quantity', newQuantity);
+															const totalPriceElement = input
+																	.closest(
+																			'tr')
+																	.querySelector(
+																			'.total-price');
+															totalPriceElement
+																	.setAttribute(
+																			'data-quantity',
+																			newQuantity);
 
-					// Cập nhật tổng số lượng và giỏ hàng
-					updateTotals();
-				});
-			});
+															// Cập nhật các input ẩn trong form thanh toán
+															const hiddenInput = document
+																	.querySelector(`input[name="quantities[${input.name.split('[')[1].split(']')[0]}]"]`);
+															if (hiddenInput) {
+																hiddenInput.value = newQuantity; // Cập nhật giá trị của input ẩn
+															}
 
-			// Cập nhật tổng ban đầu
-			updateTotals();
-		});
+															// Cập nhật tổng số lượng và giỏ hàng
+															updateTotals();
+														});
+									});
+
+							// Cập nhật tổng ban đầu
+							updateTotals();
+						});
 	</script>
 </body>
 </html>

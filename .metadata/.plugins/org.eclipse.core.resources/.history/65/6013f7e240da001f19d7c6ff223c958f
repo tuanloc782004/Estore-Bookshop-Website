@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout/head::head}"></head>
+<body>
+	<div class="wrapper">
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Users</h4>
+								</div>
+								<div class="content">
+									<h4 th:text="${userCount}"></h4>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Books</h4>
+								</div>
+								<div class="content">
+									<h4 th:text="${bookCount}"></h4>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Orders</h4>
+								</div>
+								<div class="content">
+									<h4 th:text="${orderCount}"></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Revenue by Month</h4>
+									<form th:action="@{/admin/dashboard}" method="post">
+										<label for="year">Choose Year:</label> <select name="year"
+											id="year">
+											<option th:selected="*{selectedYear == 2023}" value="2023">2023</option>
+											<option th:selected="*{selectedYear == 2024}" value="2024">2024</option>
+										</select>
+										<button type="submit">Update</button>
+									</form>
+								</div>
+								<div class="content">
+									<canvas id="revenueChart"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script th:inline="javascript">
+        var ctx = document.getElementById('revenueChart').getContext('2d');
+        var revenueData = [[${revenueData}]];  // Thêm dữ liệu doanh thu
+
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: revenueData.map(data => data.month),  // Tháng
+                datasets: [{
+                    label: 'Revenue',
+                    data: revenueData.map(data => data.totalRevenue),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

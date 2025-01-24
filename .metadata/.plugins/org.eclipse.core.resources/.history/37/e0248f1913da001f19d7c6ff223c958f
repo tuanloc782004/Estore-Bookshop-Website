@@ -1,0 +1,10 @@
+package com.estorebookshop.service;
+
+public interface DashboardService {
+
+	public Long getCompletedOrdersCount();
+	
+	public Long getBooksSoldCount() ;
+	
+	public Long getActiveUsersCount();
+}

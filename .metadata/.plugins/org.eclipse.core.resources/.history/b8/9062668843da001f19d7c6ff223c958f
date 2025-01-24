@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout/head::head}"></head>
+<body>
+	<div class="wrapper">
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<!-- Card Users -->
+						<div class="col-md-4">
+							<div class="card"
+								style="background-color: #f44336; color: white; height: 300px;">
+								<div class="card-header text-center">
+									<h4 class="card-title"
+										style="font-family: 'Arial', sans-serif; font-size: 22px;">Users</h4>
+								</div>
+								<div class="card-body text-center">
+									<h4 th:text="${userCount}"
+										style="font-size: 40px; font-weight: bold;"></h4>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card Books -->
+						<div class="col-md-4">
+							<div class="card"
+								style="background-color: #4caf50; color: white; height: 300px;">
+								<div class="card-header text-center">
+									<h4 class="card-title"
+										style="font-family: 'Arial', sans-serif; font-size: 50px;">Books</h4>
+								</div>
+								<div class="card-body text-center">
+									<h4 th:text="${bookCount}"
+										style="font-size: 40px; font-weight: bold;"></h4>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card Orders -->
+						<div class="col-md-4">
+							<div class="card"
+								style="background-color: #ff9800; color: black; height: 300px;">
+								<div class="card-header text-center">
+									<h4 class="card-title"
+										style="font-family: 'Arial', sans-serif; font-size: 22px;">Orders</h4>
+								</div>
+								<div class="card-body text-center">
+									<h4 th:text="${orderCount}"
+										style="font-size: 40px; font-weight: bold;"></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
+</body>
+</html>

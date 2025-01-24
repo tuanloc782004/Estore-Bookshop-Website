@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout/head::head}">
+<style>
+/* Định dạng cho các card */
+.card {
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+}
+
+.header {
+	background-color: #f4f4f4;
+	padding: 10px;
+	border-radius: 8px 8px 0 0;
+}
+
+.title {
+	font-family: 'Arial', sans-serif;
+	font-size: 18px;
+	color: #333;
+	text-align: center;
+}
+
+.content {
+	padding: 20px;
+	text-align: center;
+}
+
+/* Các màu sắc cho từng ô */
+.card:nth-child(1) .content {
+	background-color: #ffcccc; /* Màu cho ô Users */
+	font-size: 22px;
+	color: #d9534f;
+}
+
+.card:nth-child(2) .content {
+	background-color: #ccffcc; /* Màu cho ô Books */
+	font-size: 22px;
+	color: #5bc0de;
+}
+
+.card:nth-child(3) .content {
+	background-color: #ffffcc; /* Màu cho ô Orders */
+	font-size: 22px;
+	color: #f0ad4e;
+}
+
+/* Điều chỉnh kiểu chữ cho tiêu đề */
+.title {
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Users</h4>
+								</div>
+								<div class="content">
+									<h4 th:text="${userCount}"></h4>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Books</h4>
+								</div>
+								<div class="content">
+									<h4 th:text="${bookCount}"></h4>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Orders</h4>
+								</div>
+								<div class="content">
+									<h4 th:text="${orderCount}"></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
+</body>
+</html>

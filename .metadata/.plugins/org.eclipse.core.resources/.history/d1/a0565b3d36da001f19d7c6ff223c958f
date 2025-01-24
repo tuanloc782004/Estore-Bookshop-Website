@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head th:replace="~{user/layout/head::head}"></head>
+
+<body>
+	<div th:replace="~{user/layout/preloader-start::preloader-start}"></div>
+	<header th:replace="~{user/layout/header::header}"></header>
+
+	<main>
+		<div class="slider-area">
+			<div class="single-slider slider-height2 d-flex align-items-center"
+				th:attr="data-background=@{/assets/img/hero/category.jpg}"></div>
+		</div>
+
+		<div th:if="${message}" class="alert alert-success">
+			<span th:text="${message}"></span>
+		</div>
+		<div th:if="${error}" class="alert alert-danger">
+			<span th:text="${error}"></span>
+		</div>
+
+		<section class="cart_area section_padding">
+			<div class="container">
+				<div class="cart_inner">
+					<h4 class="font-weight-bold text-dark"
+						th:text="${'Order ID: ' + order.id + ' - ' + order.status}">
+					</h4>
+					<h5 class="text-muted"
+						th:text="${'Payment Method: ' + order.paymentMethod + ' / ' + order.createdAt.toString().substring(0, 10)}"></h5>
+					<div class="table-responsive">
+						<form th:action="@{/user/cart/update}" method="post">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Book</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Total</th>
+										<th scope="col" th:if="${order.status == 'Completed'}">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="orderDetail, iterStat : ${orderDetails}">
+										<td>
+											<div class="media">
+												<div class="d-flex">
+													<img
+														th:src="${orderDetail.book.bookImages?.size() > 0 ? orderDetail.book.bookImages.iterator().next().imageUrl : '/upload-dir/default-image/book-image.jfif'}"
+														alt="" />
+												</div>
+												<div class="media-body">
+													<p th:text="${orderDetail.book.title}"></p>
+												</div>
+											</div>
+										</td>
+										<td>
+											<div class="media-body">
+												<p th:text="${orderDetail.quantity}"></p>
+											</div>
+										</td>
+										<td><p th:text="${orderDetail.price}"></p></td>
+										<td th:if="${order.status == 'Completed'}"><a class="btn btn-info btn-sm"
+											th:href="@{'/user/order/review/' + ${orderDetail.book.id}}">Review</a></td>
+									</tr>
+									<tr class="bottom_button">
+										<td>
+											<h5>Total</h5>
+										</td>
+										<td></td>
+										<td><p th:text="${order.totalPrice}"></p></td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+						<div class="checkout_address_area mt-5">
+							<h4 class="mb-4">Shipping Address</h4>
+							<div class="address_list">
+								<div class="form-check mb-3">
+									<span th:text="${order.address.address}"></span>, <span
+										th:text="${order.address.city}"></span>, <span
+										th:text="${order.address.zipCode}"></span>, <span
+										th:text="${order.address.country}"></span>
+								</div>
+							</div>
+							<div class="form-group mt-4">
+								<h4 class="mb-4">Order Note</h4>
+								<textarea class="form-control" id="note" name="note" rows="4"
+									placeholder="Enter any additional instructions for your order"
+									th:text="${order.note}" readonly></textarea>
+							</div>
+						</div>
+						<hr>
+						<div class="checkout_btn_inner float-right">
+							<span th:if="${order.status == 'Pending'}"> <a
+								class="btn btn-danger btn-sm"
+								th:href="@{'/user/order/cancel/' + ${order.id}}">Cancel</a>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer th:replace="~{user/layout/footer::footer}"></footer>
+	<div th:replace="~{user/layout/script::script}"></div>
+</body>
+</html>

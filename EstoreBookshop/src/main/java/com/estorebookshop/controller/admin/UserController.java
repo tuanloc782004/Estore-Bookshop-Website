@@ -50,6 +50,9 @@ public class UserController {
 		model.addAttribute("currentPage", pageNo);
 
 		model.addAttribute("users", list);
+		
+		model.addAttribute("current", "user");
+
 		return "admin/user/user";
 	}
 
@@ -57,6 +60,8 @@ public class UserController {
 	public String edit(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
 		User user = this.userService.findById(id);
 		model.addAttribute("user", user);
+		model.addAttribute("current", "user");
+
 		return "admin/user/user-form";
 	}
 

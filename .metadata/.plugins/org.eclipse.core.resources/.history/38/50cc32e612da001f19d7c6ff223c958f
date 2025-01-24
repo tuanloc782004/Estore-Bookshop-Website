@@ -1,0 +1,5 @@
+package com.estorebookshop.dto;
+
+public class RevenueData {
+
+}

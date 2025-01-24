@@ -1,0 +1,20 @@
+package com.estorebookshop.dto;
+
+public class SoldData {
+
+	private Integer month;
+	private Long quantity;
+
+	public SoldData(Integer month, Long quantity) {
+		this.month = month;
+		this.quantity = quantity;
+	}
+
+	public Integer getMonth() {
+		return month;
+	}
+
+	public Long getQuantity() {
+		return quantity;
+	}
+}

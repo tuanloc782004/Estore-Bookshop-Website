@@ -105,4 +105,10 @@ public class BookServiceImpl implements BookService {
 		return new PageImpl<Book>(list, pageable, this.findForSearch(keyword, sort).size());
 	}
 
+	@Override
+	public long countBooks() {
+		// TODO Auto-generated method stub
+		return this.bookRepository.count();
+	}
+
 }

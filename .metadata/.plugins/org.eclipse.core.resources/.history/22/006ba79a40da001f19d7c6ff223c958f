@@ -1,0 +1,30 @@
+package com.estorebookshop.dto;
+
+import java.math.BigDecimal;
+
+public class RevenueDTO {
+
+	private int month;
+	private BigDecimal totalRevenue;
+
+	public RevenueDTO(int month, BigDecimal totalRevenue) {
+		this.month = month;
+		this.totalRevenue = totalRevenue;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public BigDecimal getTotalRevenue() {
+		return totalRevenue;
+	}
+
+	public void setTotalRevenue(BigDecimal totalRevenue) {
+		this.totalRevenue = totalRevenue;
+	}
+}

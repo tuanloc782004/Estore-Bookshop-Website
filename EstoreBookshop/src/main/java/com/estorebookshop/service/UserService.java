@@ -20,4 +20,10 @@ public interface UserService {
 
 	public Page<User> findByKeyword(String keyword, Integer pageNo);
 	
+	User findByEmail(String email); 
+	
+	User findByPhoneNumber(String phoneNumber); 
+	
+	public long countUsers();
+	
 }

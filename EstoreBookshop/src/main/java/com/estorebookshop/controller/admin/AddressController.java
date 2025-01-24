@@ -37,6 +37,8 @@ public class AddressController {
 		model.addAttribute("totalPage", list.getTotalPages());
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("addresses", list);
+		
+		model.addAttribute("current", "address");
 
 		return "admin/address/address";
 	}
@@ -45,6 +47,9 @@ public class AddressController {
 	public String edit(Model model, @PathVariable("id") Long id) {
 		Address address = this.addressService.findById(id);
 		model.addAttribute("address1", address);
+		
+		model.addAttribute("current", "address");
+		
 		return "admin/address/address-form";
 	}
 

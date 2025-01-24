@@ -1,0 +1,37 @@
+package com.estorebookshop.controller.admin;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.estorebookshop.service.DashboardService;
+
+@Controller
+@RequestMapping("/admin/dashboard")
+public class DashboardController {
+
+	@Autowired
+	private DashboardService dashboardService;
+
+	@GetMapping
+	public String getDashboard(Model model) {
+	    List<Map<String, Object>> booksByCategory = dashboardService.getBooksByCategory();
+	    List<Map<String, Object>> revenueByMonth = dashboardService.getRevenueByMonth();
+	    List<Map<String, Object>> booksSoldByMonth = dashboardService.getBooksSoldByMonth();
+
+	    System.out.println("Books By Category: " + booksByCategory);  // Kiểm tra dữ liệu trả về
+	    System.out.println("Revenue By Month: " + revenueByMonth);    // Kiểm tra dữ liệu trả về
+	    System.out.println("Books Sold By Month: " + booksSoldByMonth);  // Kiểm tra dữ liệu trả về
+
+	    model.addAttribute("booksByCategory", booksByCategory);
+	    model.addAttribute("revenueByMonth", revenueByMonth);
+	    model.addAttribute("booksSoldByMonth", booksSoldByMonth);
+	    return "admin/dashboard";
+	}
+
+}

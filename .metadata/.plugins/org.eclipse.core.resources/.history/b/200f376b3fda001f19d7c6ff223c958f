@@ -1,0 +1,33 @@
+package com.estorebookshop.service.implement;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.estorebookshop.dto.CategoryData;
+import com.estorebookshop.dto.RevenueData;
+import com.estorebookshop.dto.SoldData;
+import com.estorebookshop.repository.BookRepository;
+import com.estorebookshop.service.DashboardService;
+
+@Service
+public class DashboardServiceImpl implements DashboardService {
+
+	@Autowired
+	private BookRepository bookRepository;
+
+	public List<CategoryData> getBooksByCategory() {
+		return bookRepository.findBooksByCategory();
+	}
+
+	public List<RevenueData> getRevenueByMonth(LocalDateTime startDate, LocalDateTime endDate) {
+		return bookRepository.findRevenueByMonth(startDate, endDate);
+	}
+
+	public List<SoldData> getBooksSoldByMonth() {
+		return bookRepository.findBooksSoldByMonth();
+	}
+
+}

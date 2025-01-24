@@ -19,6 +19,7 @@ import com.estorebookshop.model.Book;
 import com.estorebookshop.model.Order;
 import com.estorebookshop.model.OrderDetail;
 import com.estorebookshop.model.User;
+import com.estorebookshop.service.BookService;
 import com.estorebookshop.service.OrderService;
 
 @Controller
@@ -27,6 +28,9 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private BookService bookService;
 
 	@Autowired
 	private EmailService emailService;
@@ -61,6 +65,8 @@ public class OrderController {
 		model.addAttribute("totalPage", list.getTotalPages());
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("orders", list);
+		
+		model.addAttribute("current", "order");
 
 		return "admin/order/order";
 	}
@@ -79,12 +85,39 @@ public class OrderController {
 			if ("Pending".equals(oldStatus) && "Processing".equals(status)) {
 				for (OrderDetail od : order.getOrderDetails()) {
 					Book book = od.getBook();
-					book.setQuantity(book.getQuantity() - od.getQuantity());
+					Long requestedQuantity = od.getQuantity();
+
+					// Kiểm tra nếu không đủ số lượng sách
+					if (book.getQuantity() < requestedQuantity) {
+						redirectAttributes.addFlashAttribute("error",
+								"Not enough stock for the book: " + book.getTitle());
+						return "redirect:/admin/order";
+					}
+
+					// Trừ số lượng sách
+					book.setQuantity(book.getQuantity() - requestedQuantity);
+					
+					if (book.getQuantity() == 0 && book.isEnabled()) {
+						book.setEnabled(false);
+					}
+					
+					book.setSoldQuantity(book.getSoldQuantity() + requestedQuantity);
+					this.bookService.save(book);
 				}
 			} else if (("Processing".equals(oldStatus) || "Shipped".equals(oldStatus)) && "Cancelled".equals(status)) {
 				for (OrderDetail od : order.getOrderDetails()) {
 					Book book = od.getBook();
-					book.setQuantity(book.getQuantity() + od.getQuantity());
+					Long returnedQuantity = od.getQuantity();
+
+					// Hoàn lại số lượng sách khi đơn hàng bị hủy
+					book.setQuantity(book.getQuantity() + returnedQuantity);
+					
+					if (book.getQuantity() > 0 && !book.isEnabled()) {
+						book.setEnabled(true);
+					}
+					
+					book.setSoldQuantity(book.getSoldQuantity() - returnedQuantity);
+					this.bookService.save(book);
 				}
 			}
 

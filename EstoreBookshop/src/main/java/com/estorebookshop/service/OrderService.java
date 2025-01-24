@@ -24,4 +24,5 @@ public interface OrderService {
     
     public Order save (Order order);
     
+    public long countOrders();
 }

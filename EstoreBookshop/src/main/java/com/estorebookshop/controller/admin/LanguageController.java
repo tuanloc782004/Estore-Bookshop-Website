@@ -31,6 +31,7 @@ public class LanguageController {
         } catch (Exception e) {
             model.addAttribute("error", "Error occurred while fetching languages: " + e.getMessage());
         }
+        model.addAttribute("current", "language");
         return "admin/language/language";
     }
 
@@ -38,6 +39,7 @@ public class LanguageController {
     public String add(Model model) {
         Language language = new Language();
         model.addAttribute("language", language);
+        model.addAttribute("current", "language");
         return "admin/language/language-form";
     }
 
@@ -56,6 +58,7 @@ public class LanguageController {
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Long id) {
         Language language = null;
+        model.addAttribute("current", "language");
         try {
             language = this.languageService.findById(id);
             model.addAttribute("language", language);

@@ -42,7 +42,7 @@ public class PublisherController {
 		} catch (Exception e) {
 			model.addAttribute("error", "Error occurred while fetching publishers: " + e.getMessage());
 		}
-
+		model.addAttribute("current", "publisher");
 		return "admin/publisher/publisher";
 	}
 
@@ -50,6 +50,7 @@ public class PublisherController {
 	public String add(Model model) {
 		Publisher publisher = new Publisher();
 		model.addAttribute("publisher", publisher);
+		model.addAttribute("current", "publisher");
 		return "admin/publisher/publisher-form";
 	}
 
@@ -68,6 +69,7 @@ public class PublisherController {
 	@GetMapping("/edit/{id}")
 	public String edit(Model model, @PathVariable("id") Long id) {
 		Publisher publisher = null;
+		model.addAttribute("current", "publisher");
 		try {
 			publisher = this.publisherService.findById(id);
 			model.addAttribute("publisher", publisher);

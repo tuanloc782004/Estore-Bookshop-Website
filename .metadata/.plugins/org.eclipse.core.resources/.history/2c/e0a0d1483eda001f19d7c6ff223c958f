@@ -1,0 +1,20 @@
+package com.estorebookshop.dto;
+
+public class CategoryData {
+
+	private String category;
+	private Long count;
+
+	public CategoryData(String category, Long count) {
+		this.category = category;
+		this.count = count;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public Long getCount() {
+		return count;
+	}
+}

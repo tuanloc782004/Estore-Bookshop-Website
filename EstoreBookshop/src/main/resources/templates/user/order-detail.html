@@ -37,6 +37,7 @@
 										<th scope="col">Book</th>
 										<th scope="col">Quantity</th>
 										<th scope="col">Total</th>
+										<th scope="col" th:if="${order.status == 'Completed'}">Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -59,11 +60,23 @@
 											</div>
 										</td>
 										<td><p th:text="${orderDetail.price}"></p></td>
+										<td th:if="${order.status == 'Completed'}"><a
+											class="btn btn-info btn-sm"
+											th:href="@{'/user/order/review/' + ${orderDetail.book.id}}">Review</a></td>
 									</tr>
-									<tr class="bottom_button">
+									<tr class="bottom_button" th:if="${order.status != 'Completed'}">
 										<td>
 											<h5>Total</h5>
 										</td>
+										<td></td>
+										<td><p th:text="${order.totalPrice}"></p></td>
+									</tr>
+									<tr class="bottom_button"
+										th:if="${order.status == 'Completed'}">
+										<td>
+											<h5>Total</h5>
+										</td>
+										<td></td>
 										<td></td>
 										<td><p th:text="${order.totalPrice}"></p></td>
 									</tr>

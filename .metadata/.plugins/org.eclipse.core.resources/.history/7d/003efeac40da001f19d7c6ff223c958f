@@ -1,0 +1,11 @@
+package com.estorebookshop.service;
+
+import java.util.List;
+
+import com.estorebookshop.dto.RevenueDTO;
+
+public interface RevenueService {
+
+	public List<RevenueDTO> getMonthlyRevenue(int year);
+	
+}

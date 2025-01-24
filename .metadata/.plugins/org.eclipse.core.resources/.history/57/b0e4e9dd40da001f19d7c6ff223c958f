@@ -1,0 +1,64 @@
+package com.estorebookshop.controller.admin;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.estorebookshop.dto.RevenueDTO;
+import com.estorebookshop.service.BookService;
+import com.estorebookshop.service.OrderService;
+import com.estorebookshop.service.RevenueService;
+import com.estorebookshop.service.UserService;
+
+@Controller
+@RequestMapping("/admin/dashboard")
+public class DashboardController {
+
+	@Autowired
+    private UserService userService;
+
+    @Autowired
+    private BookService bookService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private RevenueService revenueService;
+
+    @GetMapping("/")
+    public String showDashboard(Model model) {
+        // Đếm số lượng user, book, order
+        long userCount = userService.countUsers();
+        long bookCount = bookService.countBooks();
+        long orderCount = orderService.countOrders();
+
+        // Biểu đồ doanh thu theo tháng
+        List<RevenueDTO> revenueData = revenueService.getMonthlyRevenue(LocalDate.now().getYear());
+
+        model.addAttribute("userCount", userCount);
+        model.addAttribute("bookCount", bookCount);
+        model.addAttribute("orderCount", orderCount);
+        model.addAttribute("revenueData", revenueData);
+
+        return "admin/dashboard";
+    }
+
+    @PostMapping("/")
+    public String updateDashboard(@RequestParam("year") int year, Model model) {
+        // Lấy dữ liệu doanh thu theo năm được chọn
+        List<RevenueDTO> revenueData = revenueService.getMonthlyRevenue(year);
+
+        model.addAttribute("revenueData", revenueData);
+
+        return "admin/dashboard";
+    }
+
+}

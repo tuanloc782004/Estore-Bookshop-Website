@@ -1,0 +1,24 @@
+package com.estorebookshop.service.implement;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.estorebookshop.dto.RevenueDTO;
+import com.estorebookshop.repository.RevenueRepository;
+import com.estorebookshop.service.RevenueService;
+
+@Service 
+public class RevenueServiceImpl implements RevenueService{
+
+	@Autowired
+    private RevenueRepository revenueRepository;
+	
+	@Override
+	public List<RevenueDTO> getMonthlyRevenue(int year) {
+		// TODO Auto-generated method stub
+		 return revenueRepository.getMonthlyRevenue(year);
+	}
+
+}

@@ -1,0 +1,45 @@
+package com.estorebookshop.service.implement;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.estorebookshop.repository.BookRepository;
+import com.estorebookshop.repository.OrderRepository;
+import com.estorebookshop.repository.UserRepository;
+import com.estorebookshop.service.DashboardService;
+
+@Service
+public class DashboardServiceImpl implements DashboardService{
+
+	@Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+	@Override
+	public Long getCompletedOrdersCount() {
+		// TODO Auto-generated method stub
+        return orderRepository.countCompletedOrders();
+	}
+
+	@Override
+	public Long getBooksSoldCount() {
+		// TODO Auto-generated method stub
+        return bookRepository.countBooksSold();
+	}
+
+	@Override
+	public Long getActiveUsersCount() {
+		// TODO Auto-generated method stub
+        return userRepository.countActiveUsers();
+	}
+
+	
+	
+}

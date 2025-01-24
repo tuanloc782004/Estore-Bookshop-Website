@@ -1,0 +1,62 @@
+package com.estorebookshop.service.implement;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.estorebookshop.repository.BookRepository;
+import com.estorebookshop.service.DashboardService;
+
+@Service
+public class DashboardServiceImpl implements DashboardService{
+
+	@Autowired
+    private BookRepository bookRepository;
+	
+	@Override
+	public List<Map<String, Object>> getBooksByCategory() {
+		// TODO Auto-generated method stub
+		List<Object[]> result = bookRepository.countBooksByCategory();
+        List<Map<String, Object>> response = new ArrayList<>();
+        for (Object[] row : result) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("category", row[0]);
+            map.put("count", row[1]);
+            response.add(map);
+        }
+        return response;
+	}
+
+	@Override
+	public List<Map<String, Object>> getRevenueByMonth() {
+		// TODO Auto-generated method stub
+		List<Object[]> result = bookRepository.getRevenueByMonth();
+        List<Map<String, Object>> response = new ArrayList<>();
+        for (Object[] row : result) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("month", row[0]);
+            map.put("revenue", row[1]);
+            response.add(map);
+        }
+        return response;
+	}
+
+	@Override
+	public List<Map<String, Object>> getBooksSoldByMonth() {
+		// TODO Auto-generated method stub
+		List<Object[]> result = bookRepository.getBooksSoldByMonth();
+        List<Map<String, Object>> response = new ArrayList<>();
+        for (Object[] row : result) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("month", row[0]);
+            map.put("quantity", row[1]);
+            response.add(map);
+        }
+        return response;
+	}
+
+}

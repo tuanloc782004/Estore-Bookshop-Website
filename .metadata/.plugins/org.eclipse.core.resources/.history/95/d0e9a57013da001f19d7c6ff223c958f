@@ -1,0 +1,30 @@
+package com.estorebookshop.controller.admin;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.estorebookshop.service.DashboardService;
+
+@Controller
+@RequestMapping("/admin/dashboard")
+public class DashboardController {
+
+	@Autowired
+	private DashboardService dashboardService;
+
+	@RequestMapping("")
+	public String getDashboard(Model model) {
+		Long completedOrders = dashboardService.getCompletedOrdersCount();
+        Long booksSold = dashboardService.getBooksSoldCount();
+        Long activeUsers = dashboardService.getActiveUsersCount();
+
+        model.addAttribute("completedOrders", completedOrders);
+        model.addAttribute("booksSold", booksSold);
+        model.addAttribute("activeUsers", activeUsers);
+
+        return "admin/dashboard";
+	}
+
+}

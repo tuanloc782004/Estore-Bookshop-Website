@@ -78,4 +78,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return this.reviewRepository.findByBookIdSortByCreatedAt(bookId);
 	}
 
+	@Override
+	public Review save(Review review) {
+		// TODO Auto-generated method stub
+		return this.reviewRepository.save(review);
+	}
+
 }

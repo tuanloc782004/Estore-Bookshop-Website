@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link th:href="@{/fe/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/fe/css/animate.min.css}" rel="stylesheet">
+<link th:href="@{/fe/css/light-bootstrap-dashboard.css?v=1.4.0}"
+	rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<h1>Admin Dashboard</h1>
+
+		<div class="row">
+			<!-- Total Completed Orders -->
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-header">
+						<h4>Total Completed Orders</h4>
+					</div>
+					<div class="card-body">
+						<h3 th:text="${completedOrders}">0</h3>
+					</div>
+				</div>
+			</div>
+
+			<!-- Total Books Sold -->
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-header">
+						<h4>Total Books Sold</h4>
+					</div>
+					<div class="card-body">
+						<h3 th:text="${booksSold}">0</h3>
+					</div>
+				</div>
+			</div>
+
+			<!-- Total Active Users -->
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-header">
+						<h4>Total Active Users</h4>
+					</div>
+					<div class="card-body">
+						<h3 th:text="${activeUsers}">0</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Add more charts here (e.g., Pie Chart, Bar Chart) -->
+	</div>
+
+	<!-- Include your chart libraries -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+		// Example: Create a bar chart to show statistics
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+			type : 'bar',
+			data : {
+				labels : [ 'Completed Orders', 'Books Sold', 'Active Users' ],
+				datasets : [ {
+					label : '# of Items',
+					data : [/* Data from Thymeleaf variables */],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)' ],
+					borderWidth : 1
+				} ]
+			},
+			options : {
+				scales : {
+					y : {
+						beginAtZero : true
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

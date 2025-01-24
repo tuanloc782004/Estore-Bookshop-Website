@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout/head::head}"></head>
+<body>
+	<div class="wrapper">
+		<div th:replace="~{admin/layout/sidebar::sidebar}"></div>
+
+		<div class="main-panel">
+			<div th:replace="~{admin/layout/navbar::navbar}"></div>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Users</h4>
+								</div>
+								<div class="content">
+									<h4 th:text="${userCount}"></h4>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Books</h4>
+								</div>
+								<div class="content">
+									<h4 th:text="${bookCount}"></h4>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Orders</h4>
+								</div>
+								<div class="content">
+									<h4 th:text="${orderCount}"></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="~{admin/layout/script::script}"></div>
+</body>
+</html>

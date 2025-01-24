@@ -1,0 +1,17 @@
+package com.estorebookshop.service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.estorebookshop.dto.CategoryData;
+import com.estorebookshop.dto.RevenueData;
+import com.estorebookshop.dto.SoldData;
+
+public interface DashboardService {
+
+	public List<CategoryData> getBooksByCategory();
+	
+	public List<RevenueData> getRevenueByMonth(LocalDateTime startDate, LocalDateTime endDate);
+	
+	public List<SoldData> getBooksSoldByMonth();
+}
